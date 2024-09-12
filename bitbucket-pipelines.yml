@@ -1,0 +1,24 @@
+image: php:7.4
+
+pipelines:
+  branches:
+    wp-org:
+      - step:
+          name: Deploy to WordPress.org SVN
+          deployment: production
+          caches:
+            - composer
+          script:
+            - apt-get update && apt-get install -y subversion rsync
+            - svn --non-interactive --trust-server-cert checkout https://plugins.svn.wordpress.org/user-switcher/ /tmp/wordpress-svn
+            - rsync -av --exclude=".svn" --exclude=".git" --exclude="bitbucket-pipelines.yml" ./ /tmp/wordpress-svn/trunk/
+            - cd /tmp/wordpress-svn
+            - svn add * --force
+            - unversioned_files=$(svn status | grep '^?' | awk '{print $2}')
+            - if [ -n "$unversioned_files" ]; then svn add $unversioned_files; fi
+            - deleted_files=$(svn status | grep '^!' | awk '{print $2}')
+            - for file in $deleted_files; do svn delete "$file"; done
+            - svn commit --message "Deploy v0.9 from Bitbucket" --username $WP_ORG_USERNAME --password $WP_ORG_PASSWORD
+            - cd /tmp
+            - rm -rf /tmp/wordpress-svn/.git
+            - svn copy https://plugins.svn.wordpress.org/user-switcher/trunk https://plugins.svn.wordpress.org/user-switcher/tags/0.9 -m "Create new tag 0.9" --username $WP_ORG_USERNAME --password $WP_ORG_PASSWORD

@@ -1,0 +1,16 @@
+#user-switcher-modal {
+    position: fixed;
+    background: #c8c8c859;
+    top: 0;
+    border: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#user-switcher-modal-loader {
+    position: absolute;
+}

@@ -1,0 +1,23 @@
+{
+    "name": "pluggable/plugin",
+    "type": "library",
+    "description": "License management toolkit for Pluggable plugins",
+    "version": "0.98.1",
+    "keywords": ["plugin","pluggable"],
+    "homepage": "https://bitbucket.org/pluggableio/plugin/",
+    "license": "GPL-3.0-or-later",
+    "authors": [
+        {
+            "name": "Pluggable",
+            "email": "hi@pluggable.io",
+            "homepage": "https://pluggable.io",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=7.2.0"
+    },
+    "autoload": {
+        "classmap": ["src/"]
+    }
+}

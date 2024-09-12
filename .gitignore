@@ -1,0 +1,5 @@
+/spa/*/node_modules
+/spa/*/build
+/spa/*/package-lock.json
+composer.lock
+package-lock.json

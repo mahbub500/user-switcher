@@ -1,0 +1,21 @@
+{
+    "authors": [
+        {
+            "name": "Codexpert",
+            "email": "hi@codexpert.io"
+        }
+    ],
+    "require": {
+        "codexpert/plugin": "dev-master",
+        "pluggable/plugin": "dev-master",
+        "pluggable/marketing": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "Codexpert\\User_Switcher\\" : "classes/",
+            "Codexpert\\User_Switcher\\App\\" : "app/",
+            "Codexpert\\User_Switcher\\API\\" : "api/"
+        },
+        "files": []
+    }
+}

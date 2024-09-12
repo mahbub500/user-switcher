@@ -1,0 +1,159 @@
+{
+    "packages": [
+        {
+            "name": "codexpert/plugin",
+            "version": "dev-master",
+            "version_normalized": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/codexpertio/plugin.git",
+                "reference": "70ff2a318bbde3b22b3cc8a1ef6f2f65a20d953b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/codexpertio/plugin/zipball/70ff2a318bbde3b22b3cc8a1ef6f2f65a20d953b",
+                "reference": "70ff2a318bbde3b22b3cc8a1ef6f2f65a20d953b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "time": "2024-06-09T09:21:41+00:00",
+            "default-branch": true,
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Codexpert",
+                    "email": "hello@codexpert.io",
+                    "homepage": "https://codexpert.io",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Plugin tools for Codexpert",
+            "homepage": "https://bitbucket.org/codexpertio/codexpert-plugin",
+            "keywords": [
+                "codexpert",
+                "plugin"
+            ],
+            "support": {
+                "issues": "https://github.com/codexpertio/plugin/issues",
+                "source": "https://github.com/codexpertio/plugin/tree/master"
+            },
+            "install-path": "../codexpert/plugin"
+        },
+        {
+            "name": "pluggable/marketing",
+            "version": "dev-master",
+            "version_normalized": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pluggableio/marketing.git",
+                "reference": "e8fac0773b29907f0320b09ac625315479631c85"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pluggableio/marketing/zipball/e8fac0773b29907f0320b09ac625315479631c85",
+                "reference": "e8fac0773b29907f0320b09ac625315479631c85",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2.0"
+            },
+            "time": "2024-06-04T09:16:47+00:00",
+            "default-branch": true,
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Pluggable",
+                    "email": "hi@pluggable.io",
+                    "homepage": "https://pluggable.io",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Marketing toolkit for Pluggable plugins",
+            "homepage": "https://bitbucket.org/pluggableio/marketing/",
+            "keywords": [
+                "marketing",
+                "pluggable"
+            ],
+            "support": {
+                "issues": "https://github.com/pluggableio/marketing/issues",
+                "source": "https://github.com/pluggableio/marketing/tree/master"
+            },
+            "install-path": "../pluggable/marketing"
+        },
+        {
+            "name": "pluggable/plugin",
+            "version": "dev-master",
+            "version_normalized": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pluggableio/plugin.git",
+                "reference": "61e6b32e32678b374c493e02dce4ce56eefb3c8b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pluggableio/plugin/zipball/61e6b32e32678b374c493e02dce4ce56eefb3c8b",
+                "reference": "61e6b32e32678b374c493e02dce4ce56eefb3c8b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2.0"
+            },
+            "time": "2024-01-21T06:49:42+00:00",
+            "default-branch": true,
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Pluggable",
+                    "email": "hi@pluggable.io",
+                    "homepage": "https://pluggable.io",
+                    "role": "Developer"
+                }
+            ],
+            "description": "License management toolkit for Pluggable plugins",
+            "homepage": "https://bitbucket.org/pluggableio/plugin/",
+            "keywords": [
+                "pluggable",
+                "plugin"
+            ],
+            "support": {
+                "issues": "https://github.com/pluggableio/plugin/issues",
+                "source": "https://github.com/pluggableio/plugin/tree/master"
+            },
+            "install-path": "../pluggable/plugin"
+        }
+    ],
+    "dev": true,
+    "dev-package-names": []
+}
