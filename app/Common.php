@@ -34,4 +34,20 @@ class Common extends Base {
 		$this->name		= $this->plugin['Name'];
 		$this->version	= $this->plugin['Version'];
 	}
+
+	public function filter_user_row_actions( $actions, $user ){
+		$link = 'te';
+
+		// if ( ! $link ) {
+		// 	return $actions;
+		// }
+
+		$actions['switch_to_user'] = sprintf(
+			'<a href="%s">%s</a>',
+			esc_url( $link ),
+			esc_html__( 'Switch&nbsp;To', 'user-switching' )
+		);
+
+		return $actions;
+	}
 }

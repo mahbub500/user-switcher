@@ -279,6 +279,7 @@ final class Plugin {
 		 * Executes on both the admin area and front area
 		 */
 		$common = new App\Common();
+		$common->filter( 'user_row_actions', 'filter_user_row_actions', 10, 2 );
 
 		/**
 		 * AJAX related hooks
