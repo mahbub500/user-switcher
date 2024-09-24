@@ -137,12 +137,6 @@ final class Plugin {
 		$this->plugin['doc_id']			= 1960;
 		$this->plugin['server']			= 'https://my.pluggable.io';
 		$this->plugin['icon']			= USER_SWITCHER_ASSETS . '/img/icon.png';
-		$this->plugin['depends']		= [ 'woocommerce/woocommerce.php' => __( 'WooCommerce', 'user-switcher' ) ];
-		
-		/**
-		 * The license
-		 */
-		$this->plugin['license']		= new License( USER_SWITCHER_FILE );
 
 		/**
 		 * Set plugin data instance
