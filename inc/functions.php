@@ -166,3 +166,140 @@ if ( ! function_exists( 'user_switching_set_olduser_cookie' ) ) {
     }
 }
 
+/**
+ * Returns whether the current logged in user is being remembered in the form of a persistent browser cookie
+ * (ie. they checked the 'Remember Me' check box when they logged in). This is used to persist the 'remember me'
+ * value when the user switches to another user.
+ *
+ * @return bool Whether the current user is being 'remembered'.
+ */
+if ( ! function_exists( 'remember' ) ) {
+
+
+    function remember() {
+        /** This filter is documented in wp-includes/pluggable.php */
+        $cookie_life = apply_filters( 'auth_cookie_expiration', 172800, get_current_user_id(), false );
+        $current = wp_parse_auth_cookie( '', 'logged_in' );
+
+        if ( ! $current ) {
+            return false;
+        }
+
+        // Here we calculate the expiration length of the current auth cookie and compare it to the default expiration.
+        // If it's greater than this, then we know the user checked 'Remember Me' when they logged in.
+        return ( intval( $current['expiration'] ) - time() > $cookie_life );
+    }
+}
+
+/**
+ * Returns whether the current logged in user is being remembered in the form of a persistent browser cookie
+ * (ie. they checked the 'Remember Me' check box when they logged in). This is used to persist the 'remember me'
+ * value when the user switches to another user.
+ *
+ * @return bool Whether the current user is being 'remembered'.
+ */
+if ( ! function_exists( 'get_redirect' ) ) {
+
+
+    /**
+     * Fetches the URL to redirect to for a given user (used after switching).
+     *
+     * @param  WP_User $new_user Optional. The new user's WP_User object.
+     * @param  WP_User $old_user Optional. The old user's WP_User object.
+     * @return string The URL to redirect to.
+     */
+    function get_redirect( ?WP_User $new_user = null, ?WP_User $old_user = null ) {
+        $redirect_to = '';
+        $requested_redirect_to = '';
+        $redirect_type = REDIRECT_TYPE_NONE;
+
+        if ( ! empty( $_REQUEST['redirect_to'] ) ) {
+            // URL
+            $redirect_to = remove_query_args( wp_unslash( $_REQUEST['redirect_to'] ) );
+            $requested_redirect_to = wp_unslash( $_REQUEST['redirect_to'] );
+            $redirect_type = REDIRECT_TYPE_URL;
+        } elseif ( ! empty( $_GET['redirect_to_post'] ) ) {
+            // Post
+            $post_id = absint( $_GET['redirect_to_post'] );
+            $redirect_type = REDIRECT_TYPE_POST;
+
+            if ( is_post_publicly_viewable( $post_id ) ) {
+                $link = get_permalink( $post_id );
+
+                if ( is_string( $link ) ) {
+                    $redirect_to = $link;
+                    $requested_redirect_to = $link;
+                }
+            }
+        } elseif ( ! empty( $_GET['redirect_to_term'] ) ) {
+            // Term
+            $term = get_term( absint( $_GET['redirect_to_term'] ) );
+            $redirect_type = REDIRECT_TYPE_TERM;
+
+            if ( ( $term instanceof WP_Term ) && is_taxonomy_viewable( $term->taxonomy ) ) {
+                $link = get_term_link( $term );
+
+                if ( is_string( $link ) ) {
+                    $redirect_to = $link;
+                    $requested_redirect_to = $link;
+                }
+            }
+        } elseif ( ! empty( $_GET['redirect_to_user'] ) ) {
+            // User
+            $user = get_userdata( absint( $_GET['redirect_to_user'] ) );
+            $redirect_type = REDIRECT_TYPE_USER;
+
+            if ( $user instanceof WP_User ) {
+                $link = get_author_posts_url( $user->ID );
+
+                if ( is_string( $link ) ) {
+                    $redirect_to = $link;
+                    $requested_redirect_to = $link;
+                }
+            }
+        } elseif ( ! empty( $_GET['redirect_to_comment'] ) ) {
+            // Comment
+            $comment = get_comment( absint( $_GET['redirect_to_comment'] ) );
+            $redirect_type = REDIRECT_TYPE_COMMENT;
+
+            if ( $comment instanceof WP_Comment ) {
+                if ( 'approved' === wp_get_comment_status( $comment ) ) {
+                    $link = get_comment_link( $comment );
+
+                    if ( is_string( $link ) ) {
+                        $redirect_to = $link;
+                        $requested_redirect_to = $link;
+                    }
+                } elseif ( is_post_publicly_viewable( (int) $comment->comment_post_ID ) ) {
+                    $link = get_permalink( (int) $comment->comment_post_ID );
+
+                    if ( is_string( $link ) ) {
+                        $redirect_to = $link;
+                        $requested_redirect_to = $link;
+                    }
+                }
+            }
+        }
+
+        if ( ! $new_user ) {
+            /** This filter is documented in wp-login.php */
+            $redirect_to = apply_filters( 'logout_redirect', $redirect_to, $requested_redirect_to, $old_user );
+        } else {
+            /** This filter is documented in wp-login.php */
+            $redirect_to = apply_filters( 'login_redirect', $redirect_to, $requested_redirect_to, $new_user );
+        }
+
+        /**
+         * Filters the redirect location after a user switches to another account or switches off.
+         *
+         * @since 1.7.0
+         *
+         * @param string       $redirect_to   The target redirect location, or an empty string if none is specified.
+         * @param string|null  $redirect_type The redirect type, see the `user_switching::REDIRECT_*` constants.
+         * @param WP_User|null $new_user      The user being switched to, or null if there is none.
+         * @param WP_User|null $old_user      The user being switched from, or null if there is none.
+         */
+        return apply_filters( 'user_switching_redirect_to', $redirect_to, $redirect_type, $new_user, $old_user );
+    }
+}
+

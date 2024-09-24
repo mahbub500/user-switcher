@@ -239,7 +239,12 @@ final class Plugin {
 		$common = new App\Common();
 		$common->action( 'plugins_loaded', 'action_plugins_loaded' );
 		$common->filter( 'user_has_cap', 'filter_user_has_cap', 10, 4 );
+		$common->filter( 'map_meta_cap', 'filter_map_meta_cap', 10, 4 );
 		$common->filter( 'user_row_actions', 'filter_user_row_actions', 10, 2 );
+		$common->action( 'init', 'action_init' );
+		$common->action( 'all_admin_notices', 'action_admin_notices' );
+		$common->action( 'wp_logout', 'user_switching_clear_olduser_cookie' );
+		$common->action( 'wp_login', 'user_switching_clear_olduser_cookie' );
 
 		/**
 		 * AJAX related hooks
