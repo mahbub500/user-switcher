@@ -49,7 +49,19 @@ class Front extends Base {
 		] );
 	}
 
-	public function head() {}
+	public function head() {
+		// $old_user = get_old_user();
+		// $cookie = user_switching_get_olduser_cookie();
+        // if ( ! empty( $cookie ) ) {
+        //     $old_user_id = wp_validate_auth_cookie( $cookie, 'logged_in' );
+
+        //     if ( $old_user_id ) {
+        //         return get_userdata( $old_user_id );
+        //     }
+        // }
+
+		// Helper::pri( $cookie  );
+	}
 	
 	/**
 	 * Enqueue JavaScripts and stylesheets

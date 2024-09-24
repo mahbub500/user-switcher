@@ -197,33 +197,10 @@ final class Plugin {
 			$settings = new App\Settings();
 			$settings->action( 'plugins_loaded', 'init_menu' );
 
-			/**
-			 * Blog posts from Codexpert blog
-			 * 
-			 * @package Codexpert\Plugin
-			 * 
-			 * @author Codexpert <hi@codexpert.io>
-			 */
-			$widget = new Widget();
+		
 
-			/**
-			 * Renders different notices
-			 * 
-			 * @package Codexpert\Plugin
-			 * 
-			 * @author Codexpert <hi@codexpert.io>
-			 */
-			$notice = new Notice( $this->plugin );
-
-			/**
-			 * Asks to participate in a survey
-			 * 
-			 * @package Pluggable\Marketing
-			 * 
-			 * @author Pluggable <hi@pluggable.io>
-			 */
-			$survey = new Survey( USER_SWITCHER_FILE );
-
+		
+			
 			/**
 			 * Shows a popup window asking why a user is deactivating the plugin
 			 * 
@@ -232,15 +209,6 @@ final class Plugin {
 			 * @author Pluggable <hi@pluggable.io>
 			 */
 			$deactivator = new Deactivator( USER_SWITCHER_FILE );
-
-			/**
-			 * Alters featured plugins
-			 * 
-			 * @package Pluggable\Marketing
-			 * 
-			 * @author Pluggable <hi@pluggable.io>
-			 */
-			$feature = new Feature( USER_SWITCHER_FILE );
 
 		else : // ! is_admin() ?
 
@@ -259,11 +227,7 @@ final class Plugin {
 			$shortcode = new App\Shortcode();
 			$shortcode->register( 'my-shortcode', 'my_shortcode' );
 
-			/**
-			 * Custom REST API related hooks
-			 */
-			$api = new App\API();
-			$api->action( 'rest_api_init', 'register_endpoints' );
+		
 
 		endif;
 
@@ -274,6 +238,7 @@ final class Plugin {
 		 */
 		$common = new App\Common();
 		$common->filter( 'user_row_actions', 'filter_user_row_actions', 10, 2 );
+		$common->action( 'plugins_loaded', 'action_plugins_loaded' );
 
 		/**
 		 * AJAX related hooks

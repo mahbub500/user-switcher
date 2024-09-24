@@ -36,11 +36,11 @@ class Common extends Base {
 	}
 
 	public function filter_user_row_actions( $actions, $user ){
-		$link = 'te';
+		$link = maybe_switch_url( $user );
 
-		// if ( ! $link ) {
-		// 	return $actions;
-		// }
+		if ( ! $link ) {
+			return $actions;
+		}
 
 		$actions['switch_to_user'] = sprintf(
 			'<a href="%s">%s</a>',
@@ -49,5 +49,28 @@ class Common extends Base {
 		);
 
 		return $actions;
+	}
+
+
+	/**
+	 * Defines the names of the cookies used by User Switching.
+	 *
+	 * @return void
+	 */
+	public function action_plugins_loaded() {
+		// User Switching's auth_cookie
+		if ( ! defined( 'USER_SWITCHER_COOKIE' ) ) {
+			define( 'USER_SWITCHER_COOKIE', 'wordpress_user_sw_' . COOKIEHASH );
+		}
+
+		// User Switching's secure_auth_cookie
+		if ( ! defined( 'USER_SWITCHER_SECURE_COOKIE' ) ) {
+			define( 'USER_SWITCHER_SECURE_COOKIE', 'wordpress_user_sw_secure_' . COOKIEHASH );
+		}
+
+		// User Switching's logged_in_cookie
+		if ( ! defined( 'USER_SWITCHER_OLDUSER_COOKIE' ) ) {
+			define( 'USER_SWITCHER_OLDUSER_COOKIE', 'wordpress_user_sw_olduser_' . COOKIEHASH );
+		}
 	}
 }
