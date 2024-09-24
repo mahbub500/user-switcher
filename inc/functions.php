@@ -83,3 +83,86 @@ if ( ! function_exists( 'user_switching_get_olduser_cookie' ) ) {
         }
     }
 }
+
+if ( ! function_exists( 'user_switching_set_olduser_cookie' ) ) {
+    /**
+     * Sets authorisation cookies containing the originating user information.
+     *
+     * @since 1.4.0 The `$token` parameter was added.
+     *
+     * @param int    $old_user_id The ID of the originating user, usually the current logged in user.
+     * @param bool   $pop         Optional. Pop the latest user off the auth cookie, instead of appending the new one. Default false.
+     * @param string $token       Optional. The old user's session token to store for later reuse. Default empty string.
+     * @return void
+     */
+    function user_switching_set_olduser_cookie( $old_user_id, $pop = false, $token = '' ) {
+        $secure_auth_cookie = user_switching::secure_auth_cookie();
+        $secure_olduser_cookie = user_switching::secure_olduser_cookie();
+        $expiration = time() + 172800; // 48 hours
+        $auth_cookie = user_switching_get_auth_cookie();
+        $olduser_cookie = wp_generate_auth_cookie( $old_user_id, $expiration, 'logged_in', $token );
+
+        if ( $secure_auth_cookie ) {
+            $auth_cookie_name = USER_SWITCHING_SECURE_COOKIE;
+            $scheme = 'secure_auth';
+        } else {
+            $auth_cookie_name = USER_SWITCHING_COOKIE;
+            $scheme = 'auth';
+        }
+
+        if ( $pop ) {
+            array_pop( $auth_cookie );
+        } else {
+            array_push( $auth_cookie, wp_generate_auth_cookie( $old_user_id, $expiration, $scheme, $token ) );
+        }
+
+        $auth_cookie = wp_json_encode( $auth_cookie );
+
+        if ( false === $auth_cookie ) {
+            return;
+        }
+
+        /**
+         * Fires immediately before the User Switching authentication cookie is set.
+         *
+         * @since 1.4.0
+         *
+         * @param string $auth_cookie JSON-encoded array of authentication cookie values.
+         * @param int    $expiration  The time when the authentication cookie expires as a UNIX timestamp.
+         * @param int    $old_user_id User ID.
+         * @param string $scheme      Authentication scheme. Values include 'auth' or 'secure_auth'.
+         * @param string $token       User's session token to use for the latest cookie.
+         */
+        do_action( 'set_user_switching_cookie', $auth_cookie, $expiration, $old_user_id, $scheme, $token );
+
+        $scheme = 'logged_in';
+
+        /**
+         * Fires immediately before the User Switching old user cookie is set.
+         *
+         * @since 1.4.0
+         *
+         * @param string $olduser_cookie The old user cookie value.
+         * @param int    $expiration     The time when the logged-in authentication cookie expires as a UNIX timestamp.
+         * @param int    $old_user_id    User ID.
+         * @param string $scheme         Authentication scheme. Values include 'auth' or 'secure_auth'.
+         * @param string $token          User's session token to use for this cookie.
+         */
+        do_action( 'set_olduser_cookie', $olduser_cookie, $expiration, $old_user_id, $scheme, $token );
+
+        /**
+         * Allows preventing auth cookies from actually being sent to the client.
+         *
+         * @since 1.5.4
+         *
+         * @param bool $send Whether to send auth cookies to the client.
+         */
+        if ( ! apply_filters( 'user_switching_send_auth_cookies', true ) ) {
+            return;
+        }
+
+        setcookie( $auth_cookie_name, $auth_cookie, $expiration, SITECOOKIEPATH, COOKIE_DOMAIN, $secure_auth_cookie, true );
+        setcookie( USER_SWITCHING_OLDUSER_COOKIE, $olduser_cookie, $expiration, COOKIEPATH, COOKIE_DOMAIN, $secure_olduser_cookie, true );
+    }
+}
+
