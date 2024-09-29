@@ -125,6 +125,15 @@ final class Plugin {
 		define( 'USER_SWITCHER_ASSETS', plugins_url( 'assets', USER_SWITCHER_FILE ) );
 		define( 'USER_SWITCHER_DEBUG', apply_filters( 'user-switcher_debug', true ) );
 
+
+		define( 'REDIRECT_TYPE_NONE', null );
+		define( 'REDIRECT_TYPE_URL', 'url' );
+		define( 'REDIRECT_TYPE_POST', 'post' );
+		define( 'REDIRECT_TYPE_TERM', 'term' );
+		define( 'REDIRECT_TYPE_USER', 'user' );
+		define( 'REDIRECT_TYPE_COMMENT', 'comment' );
+		
+
 		/**
 		 * The plugin data
 		 * 

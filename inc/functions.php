@@ -96,17 +96,17 @@ if ( ! function_exists( 'user_switching_set_olduser_cookie' ) ) {
      * @return void
      */
     function user_switching_set_olduser_cookie( $old_user_id, $pop = false, $token = '' ) {
-        $secure_auth_cookie = user_switching::secure_auth_cookie();
-        $secure_olduser_cookie = user_switching::secure_olduser_cookie();
+        $secure_auth_cookie = secure_auth_cookie();
+        $secure_olduser_cookie = secure_olduser_cookie();
         $expiration = time() + 172800; // 48 hours
         $auth_cookie = user_switching_get_auth_cookie();
         $olduser_cookie = wp_generate_auth_cookie( $old_user_id, $expiration, 'logged_in', $token );
 
         if ( $secure_auth_cookie ) {
-            $auth_cookie_name = USER_SWITCHING_SECURE_COOKIE;
+            $auth_cookie_name = USER_SWITCHER_SECURE_COOKIE;
             $scheme = 'secure_auth';
         } else {
-            $auth_cookie_name = USER_SWITCHING_COOKIE;
+            $auth_cookie_name = USER_SWITCHER_COOKIE;
             $scheme = 'auth';
         }
 
@@ -162,7 +162,7 @@ if ( ! function_exists( 'user_switching_set_olduser_cookie' ) ) {
         }
 
         setcookie( $auth_cookie_name, $auth_cookie, $expiration, SITECOOKIEPATH, COOKIE_DOMAIN, $secure_auth_cookie, true );
-        setcookie( USER_SWITCHING_OLDUSER_COOKIE, $olduser_cookie, $expiration, COOKIEPATH, COOKIE_DOMAIN, $secure_olduser_cookie, true );
+        setcookie( USER_SWITCHER_OLDUSER_COOKIE, $olduser_cookie, $expiration, COOKIEPATH, COOKIE_DOMAIN, $secure_olduser_cookie, true );
     }
 }
 
@@ -303,3 +303,155 @@ if ( ! function_exists( 'get_redirect' ) ) {
     }
 }
 
+/**
+ * Returns the nonce-secured URL needed to switch back to the originating user.
+ *
+ * @param  WP_User $user The old user.
+ * @return string        The required URL.
+ */
+function switch_back_url( WP_User $user ) {
+    return wp_nonce_url( add_query_arg( [
+        'action' => 'switch_to_olduser',
+        'nr' => 1,
+    ], wp_login_url() ), "switch_to_olduser_{$user->ID}" );
+}
+
+if ( ! function_exists( 'switch_to_user' ) ) {
+    /**
+     * Switches the current logged in user to the specified user.
+     *
+     * @param  int  $user_id      The ID of the user to switch to.
+     * @param  bool $remember     Optional. Whether to 'remember' the user in the form of a persistent browser cookie. Default false.
+     * @param  bool $set_old_user Optional. Whether to set the old user cookie. Default true.
+     * @return false|WP_User WP_User object on success, false on failure.
+     */
+    function switch_to_user( $user_id, $remember = false, $set_old_user = true ) {
+        $user = get_userdata( $user_id );
+
+        if ( ! $user ) {
+            return false;
+        }
+
+        $old_user_id = ( is_user_logged_in() ) ? get_current_user_id() : false;
+        $old_token = wp_get_session_token();
+        $auth_cookies = user_switching_get_auth_cookie();
+        $auth_cookie = end( $auth_cookies );
+        $cookie_parts = $auth_cookie ? wp_parse_auth_cookie( $auth_cookie ) : false;
+
+        if ( $set_old_user && $old_user_id ) {
+            // Switching to another user
+            $new_token = '';
+            user_switching_set_olduser_cookie( $old_user_id, false, $old_token );
+        } else {
+            // Switching back, either after being switched off or after being switched to another user
+            $new_token = $cookie_parts['token'] ?? '';
+            user_switching_clear_olduser_cookie( false );
+        }
+
+        /**
+         * Attaches the original user ID and session token to the new session when a user switches to another user.
+         *
+         * @param array<string, mixed> $session Array of extra data.
+         * @return array<string, mixed> Array of extra data.
+         */
+        $session_filter = function ( array $session ) use ( $old_user_id, $old_token ) {
+            $session['switched_from_id'] = $old_user_id;
+            $session['switched_from_session'] = $old_token;
+            return $session;
+        };
+
+        add_filter( 'attach_session_information', $session_filter, 99 );
+
+        wp_clear_auth_cookie();
+        wp_set_auth_cookie( $user_id, $remember, '', $new_token );
+        wp_set_current_user( $user_id );
+
+        remove_filter( 'attach_session_information', $session_filter, 99 );
+
+        if ( $set_old_user && $old_user_id ) {
+            /**
+             * Fires when a user switches to another user account.
+             *
+             * @since 0.6.0
+             * @since 1.4.0 The `$new_token` and `$old_token` parameters were added.
+             *
+             * @param int    $user_id     The ID of the user being switched to.
+             * @param int    $old_user_id The ID of the user being switched from.
+             * @param string $new_token   The token of the session of the user being switched to. Can be an empty string
+             *                            or a token for a session that may or may not still be valid.
+             * @param string $old_token   The token of the session of the user being switched from.
+             */
+            do_action( 'switch_to_user', $user_id, $old_user_id, $new_token, $old_token );
+        } else {
+            /**
+             * Fires when a user switches back to their originating account.
+             *
+             * @since 0.6.0
+             * @since 1.4.0 The `$new_token` and `$old_token` parameters were added.
+             *
+             * @param int       $user_id     The ID of the user being switched back to.
+             * @param int|false $old_user_id The ID of the user being switched from, or false if the user is switching back
+             *                               after having been switched off.
+             * @param string    $new_token   The token of the session of the user being switched to. Can be an empty string
+             *                               or a token for a session that may or may not still be valid.
+             * @param string    $old_token   The token of the session of the user being switched from.
+             */
+            do_action( 'switch_back_user', $user_id, $old_user_id, $new_token, $old_token );
+        }
+
+        if ( $old_token && $old_user_id && ! $set_old_user ) {
+            // When switching back, destroy the session for the old user
+            $manager = WP_Session_Tokens::get_instance( $old_user_id );
+            $manager->destroy( $old_token );
+        }
+
+        return $user;
+    }
+}
+
+if ( ! function_exists( 'user_switching_get_auth_cookie' ) ) {
+    /**
+     * Gets the value of the auth cookie containing the list of originating users.
+     *
+     * @return array<int,string> Array of originating user authentication cookie values. Empty array if there are none.
+     */
+    function user_switching_get_auth_cookie() {
+        if ( secure_auth_cookie() ) {
+            $auth_cookie_name = USER_SWITCHER_SECURE_COOKIE;
+        } else {
+            $auth_cookie_name = USER_SWITCHER_COOKIE;
+        }
+
+        if ( isset( $_COOKIE[ $auth_cookie_name ] ) && is_string( $_COOKIE[ $auth_cookie_name ] ) ) {
+            $cookie = json_decode( wp_unslash( $_COOKIE[ $auth_cookie_name ] ) );
+        }
+        if ( ! isset( $cookie ) || ! is_array( $cookie ) ) {
+            $cookie = [];
+        }
+        return $cookie;
+    }
+}
+
+/**
+ * Returns whether User Switching's equivalent of the 'auth' cookie should be secure.
+ *
+ * This is used to determine whether to set a secure auth cookie.
+ *
+ * @return bool Whether the auth cookie should be secure.
+ */
+function secure_auth_cookie() {
+    return ( is_ssl() && ( 'https' === wp_parse_url( wp_login_url(), PHP_URL_SCHEME ) ) );
+}
+
+/**
+ * Returns whether User Switching's equivalent of the 'logged_in' cookie should be secure.
+ *
+ * This is used to set the 'secure' flag on the old user cookie, for enhanced security.
+ *
+ * @link https://core.trac.wordpress.org/ticket/15330
+ *
+ * @return bool Should the old user cookie be secure?
+ */
+function secure_olduser_cookie() {
+    return ( is_ssl() && ( 'https' === wp_parse_url( home_url(), PHP_URL_SCHEME ) ) );
+}

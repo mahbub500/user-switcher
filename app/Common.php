@@ -138,7 +138,7 @@ class Common extends Base {
 				// Switch user:
 				$user = switch_to_user( $user_id, remember() );
 				if ( $user ) {
-					$redirect_to = self::get_redirect( $user, $current_user );
+					$redirect_to = get_redirect( $user, $current_user );
 
 					// Redirect to the dashboard or the home URL depending on capabilities:
 					$args = [
@@ -146,11 +146,11 @@ class Common extends Base {
 					];
 
 					if ( $redirect_to ) {
-						wp_safe_redirect( add_query_arg( $args, $redirect_to ), 302, self::$application );
+						wp_safe_redirect( add_query_arg( $args, $redirect_to ), 302, $application );
 					} elseif ( ! current_user_can( 'read' ) ) {
-						wp_safe_redirect( add_query_arg( $args, home_url() ), 302, self::$application );
+						wp_safe_redirect( add_query_arg( $args, home_url() ), 302, $application );
 					} else {
-						wp_safe_redirect( add_query_arg( $args, admin_url() ), 302, self::$application );
+						wp_safe_redirect( add_query_arg( $args, admin_url() ), 302, $application );
 					}
 					exit;
 				} else {
@@ -161,13 +161,13 @@ class Common extends Base {
 			// We're attempting to switch back to the originating user:
 			case 'switch_to_olduser':
 				// Fetch the originating user data:
-				$old_user = self::get_old_user();
+				$old_user = get_old_user();
 				if ( ! $old_user ) {
 					wp_die( esc_html__( 'Could not switch users.', 'user-switching' ), 400 );
 				}
 
 				// Check authentication:
-				if ( ! self::authenticate_old_user( $old_user ) ) {
+				if ( ! authenticate_old_user( $old_user ) ) {
 					wp_die( esc_html__( 'Could not switch users.', 'user-switching' ), 403 );
 				}
 
@@ -175,7 +175,7 @@ class Common extends Base {
 				check_admin_referer( "switch_to_olduser_{$old_user->ID}" );
 
 				// Switch user:
-				if ( switch_to_user( $old_user->ID, self::remember(), false ) ) {
+				if ( switch_to_user( $old_user->ID, remember(), false ) ) {
 
 					if ( ! empty( $_REQUEST['interim-login'] ) && function_exists( 'login_header' ) ) {
 						$GLOBALS['interim_login'] = 'success'; // @codingStandardsIgnoreLine
@@ -183,16 +183,16 @@ class Common extends Base {
 						exit;
 					}
 
-					$redirect_to = self::get_redirect( $old_user, $current_user );
+					$redirect_to = get_redirect( $old_user, $current_user );
 					$args = [
 						'user_switched' => 'true',
 						'switched_back' => 'true',
 					];
 
 					if ( $redirect_to ) {
-						wp_safe_redirect( add_query_arg( $args, $redirect_to ), 302, self::$application );
+						wp_safe_redirect( add_query_arg( $args, $redirect_to ), 302, $application );
 					} else {
-						wp_safe_redirect( add_query_arg( $args, admin_url( 'users.php' ) ), 302, self::$application );
+						wp_safe_redirect( add_query_arg( $args, admin_url( 'users.php' ) ), 302, $application );
 					}
 					exit;
 				} else {
@@ -213,15 +213,15 @@ class Common extends Base {
 
 				// Switch off:
 				if ( switch_off_user() ) {
-					$redirect_to = self::get_redirect( null, $current_user );
+					$redirect_to = get_redirect( null, $current_user );
 					$args = [
 						'switched_off' => 'true',
 					];
 
 					if ( $redirect_to ) {
-						wp_safe_redirect( add_query_arg( $args, $redirect_to ), 302, self::$application );
+						wp_safe_redirect( add_query_arg( $args, $redirect_to ), 302, $application );
 					} else {
-						wp_safe_redirect( add_query_arg( $args, home_url() ), 302, self::$application );
+						wp_safe_redirect( add_query_arg( $args, home_url() ), 302, $application );
 					}
 					exit;
 				} else {
@@ -266,16 +266,16 @@ class Common extends Base {
 				$message = '';
 				$just_switched = isset( $_GET['user_switched'] );
 				if ( $just_switched ) {
-					$message = esc_html( self::switched_to_message( $user ) );
+					$message = esc_html( switched_to_message( $user ) );
 				}
 				$switch_back_url = add_query_arg( [
-					'redirect_to' => rawurlencode( self::current_url() ),
-				], self::switch_back_url( $old_user ) );
+					'redirect_to' => rawurlencode( current_url() ),
+				], switch_back_url( $old_user ) );
 
 				$message .= sprintf(
 					' <a href="%s">%s</a>.',
 					esc_url( $switch_back_url ),
-					esc_html( self::switch_back_message( $old_user ) )
+					esc_html( switch_back_message( $old_user ) )
 				);
 
 				/**
@@ -309,9 +309,9 @@ class Common extends Base {
 				<p>
 				<?php
 				if ( isset( $_GET['switched_back'] ) ) {
-					echo esc_html( self::switched_back_message( $user ) );
+					echo esc_html( switched_back_message( $user ) );
 				} else {
-					echo esc_html( self::switched_to_message( $user ) );
+					echo esc_html( switched_to_message( $user ) );
 				}
 				?>
 				</p>
@@ -345,11 +345,11 @@ class Common extends Base {
 			}
 
 			$expire = time() - 31536000;
-			setcookie( USER_SWITCHING_COOKIE,         ' ', $expire, SITECOOKIEPATH, COOKIE_DOMAIN );
-			setcookie( USER_SWITCHING_SECURE_COOKIE,  ' ', $expire, SITECOOKIEPATH, COOKIE_DOMAIN );
-			setcookie( USER_SWITCHING_OLDUSER_COOKIE, ' ', $expire, COOKIEPATH, COOKIE_DOMAIN );
+			setcookie( USER_SWITCHER_COOKIE,         ' ', $expire, SITECOOKIEPATH, COOKIE_DOMAIN );
+			setcookie( USER_SWITCHER_SECURE_COOKIE,  ' ', $expire, SITECOOKIEPATH, COOKIE_DOMAIN );
+			setcookie( USER_SWITCHER_OLDUSER_COOKIE, ' ', $expire, COOKIEPATH, COOKIE_DOMAIN );
 		} else {
-			if ( user_switching::secure_auth_cookie() ) {
+			if ( secure_auth_cookie() ) {
 				$scheme = 'secure_auth';
 			} else {
 				$scheme = 'auth';
