@@ -1,6 +1,8 @@
 <?php
+/**
+ * All common functions to load in both admin and front
+ */
 namespace Codexpert\User_Switcher\App;
-
 use Codexpert\Plugin\Base;
 
 /**
@@ -18,36 +20,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Common extends Base {
 
 	public $plugin;
-	
-	public $slug;
-
-	public $name;
-
-	public $version;
 
 	/**
 	 * Constructor function
 	 */
-	public function __construct() {
-		$this->plugin	= USER_SWITCHER;
+	public function __construct( $plugin ) {
+		$this->plugin	= $plugin;
 		$this->slug		= $this->plugin['TextDomain'];
 		$this->name		= $this->plugin['Name'];
 		$this->version	= $this->plugin['Version'];
-	}
-
-	public function filter_user_row_actions( $actions, $user ){
-		$link = 'te';
-
-		// if ( ! $link ) {
-		// 	return $actions;
-		// }
-
-		$actions['switch_to_user'] = sprintf(
-			'<a href="%s">%s</a>',
-			esc_url( $link ),
-			esc_html__( 'Switch&nbsp;To', 'user-switching' )
-		);
-
-		return $actions;
 	}
 }

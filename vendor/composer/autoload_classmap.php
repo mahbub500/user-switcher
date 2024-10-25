@@ -15,9 +15,4 @@ return array(
     'Codexpert\\Plugin\\Table' => $vendorDir . '/codexpert/plugin/src/Table.php',
     'Codexpert\\Plugin\\Widget' => $vendorDir . '/codexpert/plugin/src/Widget.php',
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
-    'Pluggable\\Marketing\\Deactivator' => $vendorDir . '/pluggable/marketing/src/Deactivator.php',
-    'Pluggable\\Marketing\\Feature' => $vendorDir . '/pluggable/marketing/src/Feature.php',
-    'Pluggable\\Marketing\\Survey' => $vendorDir . '/pluggable/marketing/src/Survey.php',
-    'Pluggable\\Plugin\\License' => $vendorDir . '/pluggable/plugin/src/License.php',
-    'Pluggable\\Plugin\\Update' => $vendorDir . '/pluggable/plugin/src/Update.php',
 );

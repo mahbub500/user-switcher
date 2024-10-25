@@ -1,6 +1,8 @@
 <?php
+/**
+ * All settings related functions
+ */
 namespace Codexpert\User_Switcher\App;
-
 use Codexpert\User_Switcher\Helper;
 use Codexpert\Plugin\Base;
 use Codexpert\Plugin\Settings as Settings_API;
@@ -13,28 +15,21 @@ use Codexpert\Plugin\Settings as Settings_API;
 class Settings extends Base {
 
 	public $plugin;
-	
-	public $slug;
-
-	public $name;
-
-	public $version;
 
 	/**
 	 * Constructor function
 	 */
-	public function __construct() {
-		$this->plugin	= USER_SWITCHER;
+	public function __construct( $plugin ) {
+		$this->plugin	= $plugin;
 		$this->slug		= $this->plugin['TextDomain'];
 		$this->name		= $this->plugin['Name'];
 		$this->version	= $this->plugin['Version'];
 	}
 	
 	public function init_menu() {
-
+		
 		$site_config = [
 			'PHP Version'				=> PHP_VERSION,
-			'MySQL Version'				=> $GLOBALS['wpdb']->db_version(),
 			'WordPress Version' 		=> get_bloginfo( 'version' ),
 			'WooCommerce Version'		=> is_plugin_active( 'woocommerce/woocommerce.php' ) ? get_option( 'woocommerce_version' ) : 'Not Active',
 			'Memory Limit'				=> defined( 'WP_MEMORY_LIMIT' ) && WP_MEMORY_LIMIT ? WP_MEMORY_LIMIT : 'Not Defined',
@@ -286,21 +281,6 @@ class Settings extends Base {
 					// 'color'		=> '#d30c5c',
 					'sticky'	=> false,
 					'fields'    => [
-						'sample_select_disabled' => [
-							'id'		=> 'sample_select_disabled',
-							'label'     => __( 'Select with disabled', 'user-switcher' ),
-							'type'      => 'select',
-							'options'   => [
-								'option_1'	=> __( 'Option 1', 'user-switcher' ),
-								'option_2'	=> __( 'Option 2', 'user-switcher' ),
-								'option_3'	=> __( 'Option 3', 'user-switcher' ),
-								'option_4'	=> __( 'Option 4', 'user-switcher' ),
-							],
-							'default'   => 'option_3',
-							'disabled'  => [ 'option_2', 'option_4' ], // true|false
-							'multiple'  => false, // true|false
-							'chosen'    => true
-						],
 						'sample_select3' => [
 							'id'      => 'sample_select3',
 							'label'     => __( 'Select with Chosen', 'user-switcher' ),

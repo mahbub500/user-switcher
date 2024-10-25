@@ -4,8 +4,12 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit98765075d8a3780bbe2e42fef4a95068
+class ComposerStaticInit21b89a43c687d5e990903e6b4c5fdf88
 {
+    public static $files = array (
+        '3643df700757a247351b378bc7c3ac76' => __DIR__ . '/../..' . '/inc/functions.php',
+    );
+
     public static $prefixLengthsPsr4 = array (
         'C' => 
         array (
@@ -40,19 +44,14 @@ class ComposerStaticInit98765075d8a3780bbe2e42fef4a95068
         'Codexpert\\Plugin\\Table' => __DIR__ . '/..' . '/codexpert/plugin/src/Table.php',
         'Codexpert\\Plugin\\Widget' => __DIR__ . '/..' . '/codexpert/plugin/src/Widget.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
-        'Pluggable\\Marketing\\Deactivator' => __DIR__ . '/..' . '/pluggable/marketing/src/Deactivator.php',
-        'Pluggable\\Marketing\\Feature' => __DIR__ . '/..' . '/pluggable/marketing/src/Feature.php',
-        'Pluggable\\Marketing\\Survey' => __DIR__ . '/..' . '/pluggable/marketing/src/Survey.php',
-        'Pluggable\\Plugin\\License' => __DIR__ . '/..' . '/pluggable/plugin/src/License.php',
-        'Pluggable\\Plugin\\Update' => __DIR__ . '/..' . '/pluggable/plugin/src/Update.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit98765075d8a3780bbe2e42fef4a95068::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit98765075d8a3780bbe2e42fef4a95068::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit98765075d8a3780bbe2e42fef4a95068::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit21b89a43c687d5e990903e6b4c5fdf88::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit21b89a43c687d5e990903e6b4c5fdf88::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit21b89a43c687d5e990903e6b4c5fdf88::$classMap;
 
         }, null, ClassLoader::class);
     }

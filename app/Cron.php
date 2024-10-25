@@ -1,6 +1,8 @@
 <?php
+/**
+ * All cron related functions
+ */
 namespace Codexpert\User_Switcher\App;
-
 use Codexpert\Plugin\Base;
 
 /**
@@ -12,26 +14,21 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * @package Plugin
- * @subpackage Installer
+ * @subpackage Cron
  * @author Codexpert <hi@codexpert.io>
  */
-class Installer extends Base {
+class Cron extends Base {
 
 	public $plugin;
-	
-	public $slug;
-
-	public $name;
-
-	public $version;
 
 	/**
 	 * Constructor function
 	 */
-	public function __construct() {
-		$this->plugin	= USER_SWITCHER;
+	public function __construct( $plugin ) {
+		$this->plugin	= $plugin;
 		$this->slug		= $this->plugin['TextDomain'];
 		$this->name		= $this->plugin['Name'];
+		$this->server	= $this->plugin['server'];
 		$this->version	= $this->plugin['Version'];
 	}
 
@@ -41,12 +38,11 @@ class Installer extends Base {
 	 * @since 1.0
 	 */
 	public function install() {
-
 		/**
-		 * Schedule an event
+		 * Schedule an event to sync help docs
 		 */
 		if ( ! wp_next_scheduled( 'codexpert-daily' ) ) {
-		    wp_schedule_event( date_i18n( 'U' ), 'daily', 'codexpert-daily' );
+		    wp_schedule_event( time(), 'daily', 'codexpert-daily' );
 		}
 	}
 
@@ -56,22 +52,9 @@ class Installer extends Base {
 	 * @since 1.0
 	 */
 	public function uninstall() {
-		
 		/**
 		 * Remove scheduled hooks
 		 */
 		wp_clear_scheduled_hook( 'codexpert-daily' );
-	}
-
-	public function update() {
-		$new_version = $this->version;
-		$old_version = get_option( "{$this->slug}_db-version" );
-
-		if( $new_version == $old_version ) return;
-
-		update_option( "{$this->slug}_db-version", $this->version, false );
-
-		// upgrader actions
-		do_action( "{$this->slug}_version-updated", $new_version, $old_version );
 	}
 }

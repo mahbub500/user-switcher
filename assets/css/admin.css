@@ -1,57 +1,3 @@
-#user-switcher_tabs {
-}
-#user-switcher_tabs ul {
-    display: inline-flex;
-    gap: 20px;
-}
-#user-switcher_tabs ul li {
-    border-bottom: 2px solid #ccc;
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-bottom: 10px;
-}
-#user-switcher_tabs ul li.active {
-    border-bottom: 2px solid #448bff;
-}
-#user-switcher_tabs a {
-    text-decoration: none;
-}
-#user-switcher_help .user-switcher-help-tab {
-    display: grid;
-    grid-template-columns: 5fr 1fr;
-    background: #fff;
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-.user-switcher-documentation {
-    padding-left: 20px;
-    padding-right: 20px;
-}
-.user-switcher-help-heading a {
-    text-decoration: none;
-}
-.user-switcher-help-heading a .dashicons {
-    margin-right: 5px;
-}
-#user-switcher_help .user-switcher-help-link {
-    display: block;
-    text-decoration: none;
-    background: #fff;
-    text-align: center;
-    width: 200px;
-    margin: 10px 0;
-    padding: 17px;
-    border-radius: 5px;
-    font-size: 17px;
-    color: #4256b2;
-    border: 1px solid #4256b2;
-    margin-bottom: 20px;
-    transition: .4s;
-}
-#user-switcher_help .user-switcher-help-link:hover {
-    background: #4256b2;
-    color: #fff;
-}
 #user-switcher-modal {
     position: fixed;
     background: #c8c8c859;
@@ -67,20 +13,4 @@
 }
 #user-switcher-modal-loader {
     position: absolute;
-}
-#cx-row-user-switcher_tools-report .cx-field-wrap {
-	position: relative;
-}
-#user-switcher_report-copy {
-    position: absolute;
-    padding: 3px;
-    line-height: 0px;
-    right: 10px;
-    bottom: 20px;
-}
-#cx-posts {
-    list-style: inside;
-}
-.user-switcher_loader {
-    text-align: center;
 }
