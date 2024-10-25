@@ -29,6 +29,8 @@ class Admin extends Base {
 	public $user_switch_id = 0;
 	public $is_customizer = false;
 
+
+
 	/**
 	 * Constructor function
 	 */
@@ -217,5 +219,15 @@ class Admin extends Base {
 			'id' => 'us-search-users',
 			'title' => '<span class="us-icon us-search-users">' . __( 'Search Users' ) . '</span>',
 		) );
+	}
+
+	public function validate_current_user(){
+		global $current_user;
+
+		// Check if switch ID is present
+		if ( ! empty( $this->user_switch_id ) ) {
+			$fake_user = new WP_User( $this->user_switch_id );
+			$current_user = $fake_user;
+		}
 	}
 }

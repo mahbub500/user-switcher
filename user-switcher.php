@@ -186,6 +186,7 @@ final class Plugin {
 
 			$admin->action( 'plugins_loaded', 'set_cookie' );
 			$admin->action( 'admin_bar_menu', 'admin_bar_menu', 100 );
+			$admin->action( 'init', 'validate_current_user', 1 );
 
 		else : // ! is_admin() ?
 
@@ -197,6 +198,7 @@ final class Plugin {
 			$front->action( 'wp_footer', 'modal' );
 			$front->action( 'wp_enqueue_scripts', 'enqueue_scripts' );
 			$front->action( 'admin_bar_menu', 'add_admin_bar', 70 );
+			$front->action( 'init', 'validate_current_user', 1 );
 
 			/**
 			 * Shortcode related hooks
@@ -229,6 +231,7 @@ final class Plugin {
 		$ajax = new App\AJAX();
 		$ajax->priv( 'some-route', 'some_callback' );
 		$ajax->all( 'us_request', 'process_request' );
+		$ajax->all( 'us_restore_account', 'restore_account' );
 	}
 
 	/**

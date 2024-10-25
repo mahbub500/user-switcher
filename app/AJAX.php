@@ -62,4 +62,12 @@ class AJAX extends Base {
 		}
 	}
 
+	/**
+	 * Helper function to restore account without ajax call.
+	 **/
+	public function restore_account() {
+		$request = $_REQUEST;
+		us_restore_account( (object) $request );
+	}
+
 }

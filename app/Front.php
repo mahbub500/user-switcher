@@ -27,6 +27,8 @@ class Front extends Base {
 	public $version;
 	public $is_customizer;
 
+
+
 	/**
 	 * Constructor function
 	 */
@@ -48,6 +50,16 @@ class Front extends Base {
 				'title' => $this->name,            
 			],
 		] );
+	}
+
+	public function validate_current_user(){
+		global $current_user;
+
+		// Check if switch ID is present
+		if ( ! empty( $this->user_switch_id ) ) {
+			$fake_user = new WP_User( $this->user_switch_id );
+			$current_user = $fake_user;
+		}
 	}
 
 	public function head() {}
