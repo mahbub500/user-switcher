@@ -25,6 +25,10 @@ class Common extends Base {
 
 	public $version;
 
+	public $current_switcher_id = 0;
+
+	public $user_switch_id = 0;
+
 	/**
 	 * Constructor function
 	 */
@@ -68,7 +72,29 @@ class Common extends Base {
 	    	'asseturl'		=> USER_SWITCHER_ASSETS,
 	    	'ajaxurl'		=> admin_url( 'admin-ajax.php' ),
 	    	'_wpnonce'		=> wp_create_nonce(),
-	    	
+	    	'switcher' 		=> $this->current_switcher_id,
+			'switch_to' 	=> $this->user_switch_id,
+			'is_admin' 		=> is_admin(),
+			'admin_bar' 	=> is_admin_bar_showing(),
+			'l8n' => array(
+				'title' => __( 'User Switcher' ),
+				'description' => __( 'Search users by name, display name, or email.' ),
+				'search_placeholder' => __( 'Search ...' ),
+				'submit_button' => __( 'Go' ),
+				'notice' => array(
+					'char_limit' => __( 'Enter at least 3 characters!' ),
+				),
+				'server_error' => __( 'Something went wrong while processing your request. Please contact your administrator.' ),
+				'guest_notice_info' => __( 'You are currently switch to guest user!' ),
+				'switch_back' => __( 'Switch Back' ),
+				'search_users' => __( 'Search Users' ),
+				'closed' => __( 'Closed' ),
+				'name' => __( 'User Switcher' ),
+				'us_is_on' => __( 'User Switcher Is On' ),
+				'switch_to_guest' => __( 'Switch to Guest User' ),
+				'prev' => __( 'Previous' ),
+				'next' => __( 'Next' ),
+			),
 	    ];
 	    
 	    wp_localize_script( $this->slug, 'USER_SWITCHER_COMMON', apply_filters( "{$this->slug}-localized", $localized ) );

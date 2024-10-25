@@ -26,7 +26,8 @@ class Admin extends Base {
 
 	public $version;
 
-	private $user_switch_id = 0;
+	public $user_switch_id = 0;
+	public $is_customizer = false;
 
 	/**
 	 * Constructor function
@@ -127,10 +128,49 @@ class Admin extends Base {
 		wp_cache_delete( "us_{$post->post_type}", 'us' );
 	}
 
-	public function footer_text( $text ) {
-		if( get_current_screen()->parent_base != $this->slug ) return $text;
-
-		return sprintf( __( 'If you like <strong>%1$s</strong>, please <a href="%2$s" target="_blank">leave us a %3$s rating</a> on WordPress.org! It\'d motivate and inspire us to make the plugin even better!', 'user-switcher' ), $this->name, "https://wordpress.org/support/plugin/{$this->slug}/reviews/?filter=5#new-post", '⭐⭐⭐⭐⭐' );
+	public function footer_text( ) {
+		
+		if ( $this->is_customizer ) {
+			return; // If in customizer, don't show the switcher
+		}
+		?>
+		<script type="text/template" id="user-switcher-window">
+		<div class="user-switcher-content">
+			<h2><%=userSwitcher.l8n.title%></h2>
+			<a class="us-close-icon" title="<%=userSwitcher.l8n.closed%>"></a>
+			<p class="description"><%=userSwitcher.l8n.description%></p>
+			<form method="post">
+				<input type="text" class="us-search-key" name="key" placeholder="<%=userSwitcher.l8n.search_placeholder%>" />
+				<button type="submit" class="us-search-submit"><%=userSwitcher.l8n.submit_button%></button>
+			</form>
+			<div id="us-notice-box"></div>
+			<div id="us-search-results"></div>
+			<div id="us-navs">
+				<button type="button" class="us-prev-button">&laquo; <%=userSwitcher.l8n.prev%></button>
+				<button type="button" class="us-next-button"><%=userSwitcher.l8n.next%> &raquo;</button>
+			</div>
+		</div>
+		</script>
+		<script type="text/template" id="user-no-admin-bar">
+		<div class="us-no-admin-content">
+			<p class="description"><%=userSwitcher.l8n.guest_notice_info%></p>
+			<a class="us-back">&larr; <%=userSwitcher.l8n.switch_back%></a>
+			<a class="us-right us-search"><%=userSwitcher.l8n.search_users%> &rarr;</a>
+			</div>
+		</script>
+		<script type="text/template" id="user-no-admin-bar-admin">
+			<div class="us-no-admin-content us-no-admin">
+				<% if( 'guest' !== userSwitcher.switch_to ) { %>
+				<p class="us-guest-user"><%=userSwitcher.l8n.switch_to_guest%></p>
+				<% } %>
+				<% if ( '0' !== userSwitcher.switch_to ) { %>
+				<p class="us-switch-back"><%=userSwitcher.l8n.switch_back%></p>
+				<% } %>
+				<p class="us-search-user"><%=userSwitcher.l8n.search_users%></p>
+				<p class="description"><%=userSwitcher.l8n.name%></p>
+			</div>
+		</script>
+		<?php
 	}
 
 	public function modal() {

@@ -25,6 +25,7 @@ class Front extends Base {
 	public $name;
 
 	public $version;
+	public $is_customizer;
 
 	/**
 	 * Constructor function
@@ -73,21 +74,45 @@ class Front extends Base {
 	}
 
 	public function modal() {
-		echo '
-		<div id="user-switcher-modal" style="display: none">
-			<img id="user-switcher-modal-loader" src="' . esc_attr( USER_SWITCHER_ASSETS . '/img/loader.gif' ) . '" />
-		</div>';
-
+		if ( $this->is_customizer ) {
+			return; // If in customizer, don't show the switcher
+		}
 		?>
-		<script>
-		  (function (src) {
-		    var script = document.createElement('script');
-		    script.type = 'text/javascript';
-		    script.async = true;
-		    script.src = src;
-		    var firstScript = document.getElementsByTagName('script')[0];
-		    firstScript.parentNode.insertBefore(script, firstScript);
-		  })('https://static.pluggable.io/js/sdk.js');
+		<script type="text/template" id="user-switcher-window">
+		<div class="user-switcher-content">
+			<h2><%=userSwitcher.l8n.title%></h2>
+			<a class="us-close-icon" title="<%=userSwitcher.l8n.closed%>"></a>
+			<p class="description"><%=userSwitcher.l8n.description%></p>
+			<form method="post">
+				<input type="text" class="us-search-key" name="key" placeholder="<%=userSwitcher.l8n.search_placeholder%>" />
+				<button type="submit" class="us-search-submit"><%=userSwitcher.l8n.submit_button%></button>
+			</form>
+			<div id="us-notice-box"></div>
+			<div id="us-search-results"></div>
+			<div id="us-navs">
+				<button type="button" class="us-prev-button">&laquo; <%=userSwitcher.l8n.prev%></button>
+				<button type="button" class="us-next-button"><%=userSwitcher.l8n.next%> &raquo;</button>
+			</div>
+		</div>
+		</script>
+		<script type="text/template" id="user-no-admin-bar">
+		<div class="us-no-admin-content">
+			<p class="description"><%=userSwitcher.l8n.guest_notice_info%></p>
+			<a class="us-back">&larr; <%=userSwitcher.l8n.switch_back%></a>
+			<a class="us-right us-search"><%=userSwitcher.l8n.search_users%> &rarr;</a>
+			</div>
+		</script>
+		<script type="text/template" id="user-no-admin-bar-admin">
+			<div class="us-no-admin-content us-no-admin">
+				<% if( 'guest' !== userSwitcher.switch_to ) { %>
+				<p class="us-guest-user"><%=userSwitcher.l8n.switch_to_guest%></p>
+				<% } %>
+				<% if ( '0' !== userSwitcher.switch_to ) { %>
+				<p class="us-switch-back"><%=userSwitcher.l8n.switch_back%></p>
+				<% } %>
+				<p class="us-search-user"><%=userSwitcher.l8n.search_users%></p>
+				<p class="description"><%=userSwitcher.l8n.name%></p>
+			</div>
 		</script>
 		<?php
 	}
