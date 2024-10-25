@@ -221,6 +221,7 @@ final class Plugin {
 		$common->filter( 'user_row_actions', 'filter_user_row_actions', 10, 2 );
 		$common->action( 'admin_enqueue_scripts', 'common_assets' );
 		$common->action( 'wp_enqueue_scripts', 'common_assets' );
+		$common->action( 'wp_die_handler', 'wp_die', 99, 3 );
 
 		/**
 		 * AJAX related hooks

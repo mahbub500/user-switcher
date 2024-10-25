@@ -99,4 +99,18 @@ class Common extends Base {
 	    
 	    wp_localize_script( $this->slug, 'USER_SWITCHER_COMMON', apply_filters( "{$this->slug}-localized", $localized ) );
 	}
+
+	public function wp_die( $message, $title, $args = array() ) {
+		if ( ! empty( $this->user_switch_id ) ) {
+			$switch_back_url = add_query_arg( array(
+				'action' => 'us_restore_account',
+				'return_url' => admin_url(), // Always return to /dashboard
+			), admin_url( 'admin-ajax.php' ) );
+
+			$back = sprintf( '<a style="font-weight:700;text-decoration:none;text-transform:uppercase;" href="%s">&larr; %s</a>', $switch_back_url, __( 'Switch Back' ) );
+			$msg = sprintf( '<p>%s %s</p>', __( 'You are currently switch to a user with no admin access!' ), $back );
+			$message = $msg . $message;
+		}
+		_default_wp_die_handler( $message, $title, $args );
+	}
 }
