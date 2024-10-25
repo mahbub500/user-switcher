@@ -26,6 +26,8 @@ class Admin extends Base {
 
 	public $version;
 
+	private $user_switch_id = 0;
+
 	/**
 	 * Constructor function
 	 */
@@ -136,5 +138,44 @@ class Admin extends Base {
 		<div id="user-switcher-modal" style="display: none">
 			<img id="user-switcher-modal-loader" src="' . esc_attr( USER_SWITCHER_ASSETS . '/img/loader.gif' ) . '" />
 		</div>';
+	}
+
+	public function set_cookie(){
+		$cookie = $_COOKIE;
+		$cookie_name = 'user_switcher_' . COOKIEHASH;
+
+		if ( ! empty( $cookie[ $cookie_name ] ) ) {
+			$this->user_switch_id = $cookie[ $cookie_name ];
+		}
+	}
+
+	/**
+	 * Add menus to admin bar
+	 **/
+	public function admin_bar_menu( $admin_bar_menu ) {
+		$admin_bar_menu->add_menu( array(
+			'id' => 'us-switcher-menu',
+			 'title' => '<span class="us-icon us-main-menu">' . __( 'User Switcher' ) . '</span>',
+		) );
+
+		$admin_bar_menu->add_menu( array(
+			'parent' => 'us-switcher-menu',
+			'id' => 'us-to-guest',
+			'title' => '<span class="us-icon us-guest-user">' . __( 'Switch to Guest User' ) . '</span>',
+		) );
+
+		if ( ! empty( $this->user_switch_id ) ) {
+			$admin_bar_menu->add_menu( array(
+				'parent' => 'us-switcher-menu',
+				'id' => 'us-switch-back',
+				'title' => '<span class="us-icon us-switch-back">' . __( 'Switch Back' ) . '</span>',
+			) );
+		}
+
+		$admin_bar_menu->add_menu( array(
+			'parent' => 'us-switcher-menu',
+			'id' => 'us-search-users',
+			'title' => '<span class="us-icon us-search-users">' . __( 'Search Users' ) . '</span>',
+		) );
 	}
 }

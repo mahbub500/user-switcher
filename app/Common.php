@@ -50,4 +50,27 @@ class Common extends Base {
 
 		return $actions;
 	}
+
+
+	/**
+	 * Enqueue JavaScripts and stylesheets
+	 */
+	public function common_assets() {
+		$min = defined( 'USER_SWITCHER_DEBUG' ) && USER_SWITCHER_DEBUG ? '' : '.min';
+		
+		wp_enqueue_style( $this->slug, plugins_url( "/assets/css/common{$min}.css", USER_SWITCHER_FILE ), 'dashicons', $this->version, 'all' );
+		wp_enqueue_script( $this->slug, plugins_url( "/assets/js/common{$min}.js", USER_SWITCHER_FILE ), [ 'jquery', 'backbone', 'underscore' ], $this->version, true );
+
+
+	    $localized = [
+	    	'homeurl'		=> get_bloginfo( 'url' ),
+	    	'adminurl'		=> admin_url(),
+	    	'asseturl'		=> USER_SWITCHER_ASSETS,
+	    	'ajaxurl'		=> admin_url( 'admin-ajax.php' ),
+	    	'_wpnonce'		=> wp_create_nonce(),
+	    	
+	    ];
+	    
+	    wp_localize_script( $this->slug, 'USER_SWITCHER_COMMON', apply_filters( "{$this->slug}-localized", $localized ) );
+	}
 }

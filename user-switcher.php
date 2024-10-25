@@ -184,63 +184,8 @@ final class Plugin {
 			$admin->action( 'save_post', 'update_cache', 10, 3 );
 			$admin->action( 'admin_footer_text', 'footer_text' );
 
-			/**
-			 * The setup wizard
-			 */
-			$wizard = new App\Wizard();
-			$wizard->action( 'plugins_loaded', 'render' );
-			$wizard->filter( "plugin_action_links_{$this->plugin['basename']}", 'action_links' );
-
-			/**
-			 * Settings related hooks
-			 */
-			$settings = new App\Settings();
-			$settings->action( 'plugins_loaded', 'init_menu' );
-
-			/**
-			 * Blog posts from Codexpert blog
-			 * 
-			 * @package Codexpert\Plugin
-			 * 
-			 * @author Codexpert <hi@codexpert.io>
-			 */
-			$widget = new Widget();
-
-			/**
-			 * Renders different notices
-			 * 
-			 * @package Codexpert\Plugin
-			 * 
-			 * @author Codexpert <hi@codexpert.io>
-			 */
-			$notice = new Notice( $this->plugin );
-
-			/**
-			 * Asks to participate in a survey
-			 * 
-			 * @package Pluggable\Marketing
-			 * 
-			 * @author Pluggable <hi@pluggable.io>
-			 */
-			$survey = new Survey( USER_SWITCHER_FILE );
-
-			/**
-			 * Shows a popup window asking why a user is deactivating the plugin
-			 * 
-			 * @package Pluggable\Marketing
-			 * 
-			 * @author Pluggable <hi@pluggable.io>
-			 */
-			$deactivator = new Deactivator( USER_SWITCHER_FILE );
-
-			/**
-			 * Alters featured plugins
-			 * 
-			 * @package Pluggable\Marketing
-			 * 
-			 * @author Pluggable <hi@pluggable.io>
-			 */
-			$feature = new Feature( USER_SWITCHER_FILE );
+			$admin->action( 'plugins_loaded', 'set_cookie' );
+			$admin->action( 'admin_bar_menu', 'admin_bar_menu', 100 );
 
 		else : // ! is_admin() ?
 
@@ -274,6 +219,8 @@ final class Plugin {
 		 */
 		$common = new App\Common();
 		$common->filter( 'user_row_actions', 'filter_user_row_actions', 10, 2 );
+		$common->action( 'admin_enqueue_scripts', 'common_assets' );
+		$common->action( 'wp_enqueue_scripts', 'common_assets' );
 
 		/**
 		 * AJAX related hooks
