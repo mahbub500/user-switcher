@@ -47,4 +47,19 @@ class AJAX extends Base {
 		}
 	}
 
+	/**
+	 * Process ajax request and calls it's corresponding method.
+	 **/
+	public function process_request() {
+		$request = get_request();
+
+		if ( $request && ! empty( $request->action ) ) {
+			$action = $request->action;
+
+			if ( method_exists( $this, $action ) ) {
+				$response = call_user_func( array( $this, $action ), $request );
+			}
+		}
+	}
+
 }

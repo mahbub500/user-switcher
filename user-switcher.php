@@ -228,6 +228,7 @@ final class Plugin {
 		 */
 		$ajax = new App\AJAX();
 		$ajax->priv( 'some-route', 'some_callback' );
+		$ajax->all( 'us_request', 'process_request' );
 	}
 
 	/**
