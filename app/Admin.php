@@ -72,41 +72,6 @@ class Admin extends Base {
 	    wp_localize_script( $this->slug, 'USER_SWITCHER', apply_filters( "{$this->slug}-localized", $localized ) );
 	}
 
-	public function admin_menu() {
-
-		add_menu_page(
-			__( 'User Switcher', 'user-switcher' ),
-			__( 'User Switcher', 'user-switcher' ),
-			'manage_options',
-			'user-switcher',
-			function(){},
-			'dashicons-wordpress',
-			25
-		);
-
-		add_submenu_page(
-			'user-switcher',
-			__( 'Help', 'user-switcher' ),
-			__( 'Help', 'user-switcher' ),
-			'manage_options',
-			'user-switcher-help',
-			function() {
-				printf( '<div id="user-switcher_help"><p>%s</p></div>', __( 'Loading..', 'user-switcher' ) );
-			}
-		);
-
-		add_submenu_page(
-			'user-switcher',
-			__( 'License', 'user-switcher' ),
-			__( 'License', 'user-switcher' ),
-			'manage_options',
-			'user-switcher-license',
-			function() {
-				printf( '<div id="user-switcher_license"><p>%s</p></div>', __( 'Loading..', 'user-switcher' ) );
-			}
-		);
-	}
-
 	public function action_links( $links ) {
 		$this->admin_url = admin_url( 'admin.php' );
 

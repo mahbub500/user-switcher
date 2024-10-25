@@ -177,7 +177,6 @@ final class Plugin {
 			$admin = new App\Admin();
 			$admin->action( 'admin_footer', 'modal' );
 			$admin->action( 'plugins_loaded', 'i18n' );
-			$admin->action( 'admin_menu', 'admin_menu' );
 			$admin->action( 'admin_enqueue_scripts', 'enqueue_scripts' );
 			$admin->filter( "plugin_action_links_{$this->plugin['basename']}", 'action_links' );
 			$admin->filter( 'plugin_row_meta', 'plugin_row_meta', 10, 2 );
@@ -200,17 +199,9 @@ final class Plugin {
 			$front->action( 'admin_bar_menu', 'add_admin_bar', 70 );
 			$front->action( 'init', 'validate_current_user', 1 );
 
-			/**
-			 * Shortcode related hooks
-			 */
-			$shortcode = new App\Shortcode();
-			$shortcode->register( 'my-shortcode', 'my_shortcode' );
+			
 
-			/**
-			 * Custom REST API related hooks
-			 */
-			$api = new App\API();
-			$api->action( 'rest_api_init', 'register_endpoints' );
+			
 
 		endif;
 
