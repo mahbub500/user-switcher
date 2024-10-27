@@ -40,12 +40,11 @@ class AJAX extends Base {
 	        'search' => '*' . esc_attr($search_term) . '*',
 	        'search_columns' => ['user_login', 'user_email', 'display_name'],
 	        'fields' => ['ID', 'display_name'],
-	        'number' => -1, // Retrieve all matching users
+	        'number' => -1, 
 	    ];
 
 	    $users = get_users($args);
 
-	    // Generate the HTML for user results
 	    if ($users) {
 	        foreach ($users as $user) {
 	            $switch_url = wp_nonce_url(add_query_arg('user_id', $user->ID, admin_url('index.php')), 'switch_to_user_' . $user->ID);

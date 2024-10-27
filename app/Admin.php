@@ -82,19 +82,12 @@ class Admin extends Base {
 		 ?>
 	     <div id="us-switcher-modal" style="display: none;">
 	        <div class="us-switcher-modal-content">
-	            <span class="us-switcher-close">&times;</span>
-	            
-	            <!-- Title and Description -->
+	            <span class="us-switcher-close">&times;</span>	            
 	            <h2><?php echo esc_html(__('User Switcher')); ?></h2>
 	            <p><?php echo esc_html(__('Search users by name, display name, or email.')); ?></p>
-
-	            <!-- Search Input -->
 	            <form id="us-switcher-form">
 	                <input type="text" id="us-switcher-name" name="us-switcher-name" placeholder="<?php echo esc_attr(__('Search ...')); ?>">
-	                <button type="submit"><?php echo esc_html(__('Go')); ?></button>
 	            </form>
-	            
-	            <!-- User Results -->
 	            <div id="us-switcher-results"></div>
 	        </div>
 	    </div>
