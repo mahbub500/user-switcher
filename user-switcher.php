@@ -137,6 +137,7 @@ final class Plugin {
 			$admin->action( 'plugins_loaded', 'i18n' );
 			$admin->action( 'admin_enqueue_scripts', 'enqueue_scripts' );
 			$admin->action( 'admin_footer_text', 'footer_text' );
+			$admin->action( 'admin_bar_menu', 'admin_bar_menu', 100 );
 
 			/**
 			 * Settings related hooks
@@ -189,6 +190,7 @@ final class Plugin {
 		 * AJAX related hooks
 		 */
 		$ajax = new App\AJAX( $this->plugin );
+		$ajax->all( 'search_users', 'search_users' );
 	}
 
 	/**

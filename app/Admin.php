@@ -78,5 +78,47 @@ class Admin extends Base {
 		<div id="user-switcher-modal" style="display: none">
 			<img id="user-switcher-modal-loader" src="' . esc_attr( USER_SWITCHER_ASSET . '/img/loader.gif' ) . '" />
 		</div>';
+
+		 ?>
+	     <div id="us-switcher-modal" style="display: none;">
+	        <div class="us-switcher-modal-content">
+	            <span class="us-switcher-close">&times;</span>
+	            
+	            <!-- Title and Description -->
+	            <h2><?php echo esc_html(__('User Switcher')); ?></h2>
+	            <p><?php echo esc_html(__('Search users by name, display name, or email.')); ?></p>
+
+	            <!-- Search Input -->
+	            <form id="us-switcher-form">
+	                <input type="text" id="us-switcher-name" name="us-switcher-name" placeholder="<?php echo esc_attr(__('Search ...')); ?>">
+	                <button type="submit"><?php echo esc_html(__('Go')); ?></button>
+	            </form>
+	            
+	            <!-- User Results -->
+	            <div id="us-switcher-results"></div>
+	        </div>
+	    </div>
+    <?php
 	}
+	/**
+	 * Add menus to admin bar.
+	 *
+	 * @param WP_Admin_Bar $wp_admin_bar The WP_Admin_Bar instance, passed by reference.
+	 */
+	public function admin_bar_menu( $wp_admin_bar ) {
+	    $wp_admin_bar->add_menu( array(
+	        'id'    => 'us-switcher-menu',
+	        'title' => '<span class="us-icon us-main-menu">' . __( 'User Switcher' ) . '</span>',
+	    ) );
+
+	    $wp_admin_bar->add_menu(array(
+	        'parent' => 'us-switcher-menu',
+	        'id'     => 'us-to-guest',
+	        'title'  => '<button id="switch-to-guest-button"><span class="us-icon us-guest-user">' . __('Switch to Guest User') . '</span></button>',
+	        'meta'   => array(
+	            'html' => '',
+	        ),
+	    ));
+	}
+
 }

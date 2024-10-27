@@ -17,3 +17,23 @@ function us_site_url() {
 	return $url;
 }
 endif;
+
+/**
+ * Get all users with their names and IDs.
+ *
+ * @return array Array of users with 'ID' and 'display_name'.
+ */
+function get_all_users_with_names_and_ids() {
+    
+    $users 		= get_users();
+    $user_data 	= array();
+    
+    foreach ($users as $user) {
+        $user_data[] = array(
+            'ID' => $user->ID,
+            'display_name' => $user->display_name,
+        );
+    }
+    
+    return $user_data;
+}
