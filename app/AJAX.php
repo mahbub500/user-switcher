@@ -43,15 +43,21 @@ class AJAX extends Base {
 
 	    $users = get_users( $args );
 
-	    if ( $users ) {
+	   if ( $users ) {
 		    foreach ( $users as $user ) {
 		        $switch_url = wp_nonce_url(add_query_arg('user_id', $user->ID, admin_url('index.php')), 'switch_to_user_' . $user->ID);
-		        
-		        echo 'Name: ' . esc_html($user->display_name) . ' ID: ' . esc_html($user->ID) . ' <a href="' . esc_url($switch_url) . '">Go</a><br>';
+		        ?>
+		        <p>
+		            <?php echo esc_html( $user->display_name ); ?> <?php echo esc_html( $user->ID ); ?> 
+		            <a href="<?php echo esc_url($switch_url); ?>">Go</a>
+		        </p>
+		        <?php 
 		    }
 		} else {
 		    echo __('No users found.');
 		}
+
+
 
 	    wp_die(); 
 	}

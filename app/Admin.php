@@ -107,7 +107,7 @@ class Admin extends Base {
 	    $wp_admin_bar->add_menu(array(
 	        'parent' => 'us-switcher-menu',
 	        'id'     => 'us-to-guest',
-	        'title'  => '<button id="switch-to-guest-button"><span class="us-icon us-guest-user">' . __('Switch to Guest User') . '</span></button>',
+	        'title'  => '<button id="switch-to-guest-button"><span class="us-icon us-guest-user">' . __('Switch to User') . '</span></button>',
 	        'meta'   => array(
 	            'html' => '',
 	        ),
