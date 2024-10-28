@@ -22,22 +22,38 @@ jQuery(document).ready(function($) {
         }
     });
 
-    $('#us-switcher-name').on('blur', function(e) {
-        e.preventDefault(); 
-        var searchValue = $('#us-switcher-name').val();
-
-        $.ajax({
-            url: ajaxurl, 
-            type: 'POST',
-            data: {
-                action: 'search_users',
-                search: searchValue
+    $(document).ready(function() {
+        $('.us-user-name').select2({
+            width: '100%',
+            ajax: {
+                url: USER_SWITCHER.ajaxurl,
+                dataType: 'json',
+                delay: 250, 
+                data: function (params) {
+                    return {
+                        keyword: params.term, 
+                        action: 'search_users',
+                        _wpnonce: USER_SWITCHER._wpnonce,
+                    };
+                },
+                processResults: function(data) {
+                    var options = [];
+                    $.each(data, function(index, title) { 
+                        options.push({ 
+                            id: index,
+                            text: title,
+                        });
+                    });
+                    return {
+                        results: options
+                    };
+                },
             },
-            success: function(response) {
-                $('#us-switcher-results').html(response);
-            }
+            minimumInputLength: 3 
         });
     });
+
+   
 });
 
 

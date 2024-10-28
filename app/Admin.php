@@ -65,6 +65,15 @@ class Admin extends Base {
 		wp_enqueue_style( $this->slug, plugins_url( "/assets/css/admin{$min}.css", USER_SWITCHER ), '', $this->version, 'all' );
 
 		wp_enqueue_script( $this->slug, plugins_url( "/assets/js/admin{$min}.js", USER_SWITCHER ), [ 'jquery' ], $this->version, true );
+
+		wp_enqueue_script( 'select2', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.min.js', [ 'jquery' ], null, true );
+		wp_enqueue_style( 'select2', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css' );
+
+		$localized = [
+			'ajaxurl'	=> admin_url( 'admin-ajax.php' ),
+			'_wpnonce'	=> wp_create_nonce(),
+		];
+		wp_localize_script( $this->slug, 'USER_SWITCHER', apply_filters( "{$this->slug}-localized", $localized ) );	
 	}
 
 	public function footer_text( $text ) {
@@ -86,8 +95,10 @@ class Admin extends Base {
 	            <h2><?php echo esc_html(__('User Switcher')); ?></h2>
 	            <p><?php echo esc_html(__('Search users by name, display name, or email.')); ?></p>
 	            <form id="us-switcher-form">
-	                <input type="text" id="us-switcher-name" name="us-switcher-name" placeholder="<?php echo esc_attr(__('Search ...')); ?>">
-	            </form>
+	            	<label for="user-info"><?php _e( 'Input Name Or Eamil', 'user-switcher' ); ?></label>
+	                <select class="us-user-name qlfv-user-onchange" id="user-info">
+                        </select>
+				</form>
 	            <div id="us-switcher-results"></div>
 	        </div>
 	    </div>

@@ -32,34 +32,36 @@ class AJAX extends Base {
 	}
 
 	function search_users() {
-	    $search_term = isset($_POST['search']) ? sanitize_text_field($_POST['search']) : '';
+	    if ( ! isset( $_GET['_wpnonce'] ) || ! wp_verify_nonce( $_GET['_wpnonce'], 'user_switcher_nonce' ) ) {
+	        wp_send_json_error( [ 'message' => __( 'Unauthorized', 'User Switcher' ) ], 401 );
+	    }
+
+	    $keyword = isset( $_GET['keyword'] ) ? sanitize_text_field( $_GET['keyword'] ) : '';
 
 	    $args = [
-	        'search' => '*' . esc_attr( $search_term ) . '*',
-	        'search_columns' => ['user_login', 'user_email', 'display_name'],
-	        'fields' => ['ID', 'display_name'],
-	        'number' => -1, 
+	        'search'         => '*' . esc_attr( $keyword ) . '*',
+	        'search_columns' => ['user_login', 'user_nicename', 'display_name', 'user_email'],
 	    ];
 
-	    $users = get_users( $args );
+	    $user_query = new WP_User_Query( $args );
+	    $users = $user_query->get_results();
 
-	   if ( $users ) {
-		    foreach ( $users as $user ) {
-		        $switch_url = wp_nonce_url(add_query_arg('user_id', $user->ID, admin_url('index.php')), 'switch_to_user_' . $user->ID);
-		        ?>
-		        <p>
-		            <?php echo esc_html( $user->display_name ); ?> <?php echo esc_html( $user->ID ); ?> 
-		            <a href="<?php echo esc_url($switch_url); ?>">Go</a>
-		        </p>
-		        <?php 
-		    }
-		} else {
-		    echo __('No users found.');
-		}
-
-
-
-	    wp_die(); 
+	    if ( ! empty( $users ) ) {
+	        $user_data = [];
+	        foreach ( $users as $user ) {
+	            $user_data[] = [
+	                'ID'            => $user->ID,
+	                'user_login'    => $user->user_login,
+	                'user_nicename' => $user->user_nicename,
+	                'display_name'  => $user->display_name,
+	                'user_email'    => $user->user_email,
+	            ];
+	        }
+	        wp_send_json_success( $user_data );
+	    } else {
+	        wp_send_json_error( [ 'message' => __( 'No users found', 'User Switcher' ) ] );
+	    }
 	}
+
 
 }
