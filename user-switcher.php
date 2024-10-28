@@ -101,11 +101,9 @@ final class Plugin {
 		$this->plugin					= get_plugin_data( USER_SWITCHER );
 		$this->plugin['basename']		= plugin_basename( USER_SWITCHER );
 		$this->plugin['file']			= USER_SWITCHER;
-		$this->plugin['server']			= apply_filters( 'user-switcher_server', 'https://codexpert.io/dashboard' );
 		$this->plugin['min_php']		= '5.6';
 		$this->plugin['min_wp']			= '4.0';
 		$this->plugin['icon']			= USER_SWITCHER_ASSET . '/img/icon.png';
-		$this->plugin['depends']		= [ 'woocommerce/woocommerce.php' => 'WooCommerce' ];
 		
 	}
 
