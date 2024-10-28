@@ -104,6 +104,8 @@ final class Plugin {
 		$this->plugin['min_php']		= '5.6';
 		$this->plugin['min_wp']			= '4.0';
 		$this->plugin['icon']			= USER_SWITCHER_ASSET . '/img/icon.png';
+		$this->plugin['server']			= apply_filters( 'user-switcher_server', 'https://codexpert.io/dashboard' );
+		$this->plugin['user_switch_id']	= 0;
 		
 	}
 
@@ -136,6 +138,7 @@ final class Plugin {
 			$admin->action( 'admin_enqueue_scripts', 'enqueue_scripts' );
 			$admin->action( 'admin_footer_text', 'footer_text' );
 			$admin->action( 'admin_bar_menu', 'admin_bar_menu', 100 );
+			$admin->action( 'wp_login', 'clear_cookies' );
 
 			/**
 			 * Settings related hooks
@@ -162,6 +165,7 @@ final class Plugin {
 			$front->action( 'wp_footer', 'modal' );
 			$front->action( 'wp_enqueue_scripts', 'enqueue_scripts' );
 			$front->action( 'admin_bar_menu', 'admin_bar_menu', 100 );
+			$front->action( 'wp_login', 'clear_cookies' );
 
 			/**
 			 * Shortcode related hooks

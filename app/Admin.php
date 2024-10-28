@@ -22,6 +22,8 @@ class Admin extends Base {
 
 	public $plugin;
 
+	// private $user_switch_id = 0;
+
 	/**
 	 * Constructor function
 	 */
@@ -29,8 +31,8 @@ class Admin extends Base {
 		$this->plugin	= $plugin;
 		$this->slug		= $this->plugin['TextDomain'];
 		$this->name		= $this->plugin['Name'];
-		$this->server	= $this->plugin['server'];
 		$this->version	= $this->plugin['Version'];
+		$this->user_switch_id	= $this->plugin['user_switch_id'];
 	}
 
 	/**
@@ -38,7 +40,15 @@ class Admin extends Base {
 	 */
 	public function i18n() {
 		load_plugin_textdomain( 'user-switcher', false, USER_SWITCHER_DIR . '/languages/' );
+
+		$cookie = $_COOKIE;
+		$cookie_name = 'user_switcher_' . COOKIEHASH;
+
+		if ( ! empty( $cookie[ $cookie_name ] ) ) {
+			$this->user_switch_id = $cookie[ $cookie_name ];
+		}
 	}
+
 
 	/**
 	 * Installer. Runs once when the plugin in activated.
@@ -125,6 +135,15 @@ class Admin extends Base {
 	            'html' => '',
 	        ),
 	    ));
+	}
+
+	/**
+	 * Clear switcher cookies whenever the user login.
+	 **/
+	public function clear_cookies() {
+		$cookie_name = 'user_switcher_' . COOKIEHASH;
+		$secure = ( 'https' === parse_url( home_url(), PHP_URL_SCHEME ) );
+		setcookie( $cookie_name, null, -1, COOKIEPATH, COOKIE_DOMAIN, $secure );
 	}
 
 }
