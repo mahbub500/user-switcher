@@ -88,7 +88,7 @@ class Admin extends Base {
 			<img id="user-switcher-modal-loader" src="' . esc_attr( USER_SWITCHER_ASSET . '/img/loader.gif' ) . '" />
 		</div>';
 
-		 ?>
+		?>
 	     <div id="us-switcher-modal" style="display: none;">
 	        <div class="us-switcher-modal-content">
 	            <span class="us-switcher-close">&times;</span>	            
@@ -104,7 +104,7 @@ class Admin extends Base {
 	            <div id="us-switcher-results"></div>
 	        </div>
 	    </div>
-    <?php
+	    <?php
 	}
 	/**
 	 * Add menus to admin bar.

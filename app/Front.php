@@ -42,6 +42,9 @@ class Front extends Base {
 		wp_enqueue_style( $this->slug, plugins_url( "/assets/css/front{$min}.css", USER_SWITCHER ), '', $this->version, 'all' );
 
 		wp_enqueue_script( $this->slug, plugins_url( "/assets/js/front{$min}.js", USER_SWITCHER ), [ 'jquery' ], $this->version, true );
+
+		wp_enqueue_script( 'select2', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.min.js', [ 'jquery' ], null, true );
+		wp_enqueue_style( 'select2', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css' );
 		
 		$localized = [
 			'ajaxurl'	=> admin_url( 'admin-ajax.php' ),
@@ -55,5 +58,43 @@ class Front extends Base {
 		<div id="user-switcher-modal" style="display: none">
 			<img id="user-switcher-modal-loader" src="' . esc_attr( USER_SWITCHER_ASSET . '/img/loader.gif' ) . '" />
 		</div>';
+		?>
+	     <div id="us-switcher-modal" style="display: none;">
+	        <div class="us-switcher-modal-content">
+	            <span class="us-switcher-close">&times;</span>	            
+	            <h2><?php echo esc_html(__('User Switcher')); ?></h2>
+	            <p><?php echo esc_html(__('Search users by name, display name, or email.')); ?></p>
+	            <form id="us-switcher-form">
+	                <select class="us-user-name qlfv-user-onchange" id="user-info">
+                        </select>
+					<p>
+						<input type="submit" id="us-switcher-button" value="<?php _e( 'Go', 'user-switcher' ); ?>" class="button button-primary " />
+                    </p>
+				</form>
+	            <div id="us-switcher-results"></div>
+	        </div>
+	    </div>
+	    <?php
+	}
+
+	/**
+	 * Add menus to admin bar.
+	 *
+	 * @param WP_Admin_Bar $wp_admin_bar The WP_Admin_Bar instance, passed by reference.
+	 */
+	public function admin_bar_menu( $wp_admin_bar ) {
+	    $wp_admin_bar->add_menu( array(
+	        'id'    => 'us-switcher-menu',
+	        'title' => '<span class="us-icon us-main-menu">' . __( 'User Switcher' ) . '</span>',
+	    ) );
+
+	    $wp_admin_bar->add_menu(array(
+	        'parent' => 'us-switcher-menu',
+	        'id'     => 'us-to-guest',
+	        'title'  => '<button id="switch-to-guest-button"><span class="us-icon us-guest-user">' . __('Switch to User') . '</span></button>',
+	        'meta'   => array(
+	            'html' => '',
+	        ),
+	    ));
 	}
 }
