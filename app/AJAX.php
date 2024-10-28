@@ -32,7 +32,7 @@ class AJAX extends Base {
 	}
 
 	function search_users() {
-	    if ( ! isset( $_GET['_wpnonce'] ) || ! wp_verify_nonce( $_GET['_wpnonce'], 'user_switcher_nonce' ) ) {
+	    if ( ! isset( $_GET['_wpnonce'] ) || ! wp_verify_nonce( $_GET['_wpnonce'] ) ) {
 	        wp_send_json_error( [ 'message' => __( 'Unauthorized', 'User Switcher' ) ], 401 );
 	    }
 
@@ -43,21 +43,14 @@ class AJAX extends Base {
 	        'search_columns' => ['user_login', 'user_nicename', 'display_name', 'user_email'],
 	    ];
 
-	    $user_query = new WP_User_Query( $args );
-	    $users = $user_query->get_results();
-
+	    $user_query = new \WP_User_Query( $args );
+	    $users 		= $user_query->get_results();
 	    if ( ! empty( $users ) ) {
-	        $user_data = [];
+	        $user_array = [];
 	        foreach ( $users as $user ) {
-	            $user_data[] = [
-	                'ID'            => $user->ID,
-	                'user_login'    => $user->user_login,
-	                'user_nicename' => $user->user_nicename,
-	                'display_name'  => $user->display_name,
-	                'user_email'    => $user->user_email,
-	            ];
+	            $user_array[$user->ID] = $user->user_login;
 	        }
-	        wp_send_json_success( $user_data );
+	        wp_send_json_success( $user_array );
 	    } else {
 	        wp_send_json_error( [ 'message' => __( 'No users found', 'User Switcher' ) ] );
 	    }

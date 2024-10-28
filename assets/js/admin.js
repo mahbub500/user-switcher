@@ -38,7 +38,7 @@ jQuery(document).ready(function($) {
                 },
                 processResults: function(data) {
                     var options = [];
-                    $.each(data, function(index, title) { 
+                    $.each(data.data, function(index, title) { 
                         options.push({ 
                             id: index,
                             text: title,
@@ -52,6 +52,9 @@ jQuery(document).ready(function($) {
             minimumInputLength: 3 
         });
     });
+
+
+
 
    
 });
