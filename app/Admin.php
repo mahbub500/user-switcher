@@ -95,9 +95,11 @@ class Admin extends Base {
 	            <h2><?php echo esc_html(__('User Switcher')); ?></h2>
 	            <p><?php echo esc_html(__('Search users by name, display name, or email.')); ?></p>
 	            <form id="us-switcher-form">
-	            	<label for="user-info"><?php _e( 'Input Name Or Eamil', 'user-switcher' ); ?></label>
 	                <select class="us-user-name qlfv-user-onchange" id="user-info">
                         </select>
+					<p>
+						<input type="submit" id="us-switcher-button" value="<?php _e( 'Go', 'user-switcher' ); ?>" class="button button-primary " />
+                    </p>
 				</form>
 	            <div id="us-switcher-results"></div>
 	        </div>

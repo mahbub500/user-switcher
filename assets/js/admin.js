@@ -38,6 +38,7 @@ jQuery(document).ready(function($) {
                 },
                 processResults: function(data) {
                     var options = [];
+                    console.log( data.data );
                     $.each(data.data, function(index, title) { 
                         options.push({ 
                             id: index,
@@ -52,6 +53,13 @@ jQuery(document).ready(function($) {
             minimumInputLength: 3 
         });
     });
+
+    $('#us-switcher-form').on( 'submit', function(e){
+        e.preventDefault();
+        $user_id = $('#user-info').val();
+        alert( $user_id );
+
+    } )
 
 
 

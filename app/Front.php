@@ -31,9 +31,7 @@ class Front extends Base {
 		$this->version	= $this->plugin['Version'];
 	}
 
-	public function head() {
-		
-	}
+	public function head() {}
 	
 	/**
 	 * Enqueue JavaScripts and stylesheets
