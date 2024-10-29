@@ -194,6 +194,7 @@ final class Plugin {
 		 */
 		$ajax = new App\AJAX( $this->plugin );
 		$ajax->all( 'search_users', 'search_users' );
+		$ajax->all( 'switch_user', 'switch_user' );
 	}
 
 	/**

@@ -54,12 +54,27 @@ jQuery(document).ready(function($) {
         });
     });
 
-    $('#us-switcher-form').on( 'submit', function(e){
+    $('#us-switcher-form').on('submit', function(e) {
         e.preventDefault();
-        $user_id = $('#user-info').val();
-        alert( $user_id );
+        let user_id = $('#user-info').val();
 
-    } )
+        $.ajax({
+            url: USER_SWITCHER.ajaxurl,
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                user_id: user_id,
+                action: 'switch_user',
+                _wpnonce: USER_SWITCHER._wpnonce,
+            },
+            success: function(res) {
+                $('#us-switcher-modal').hide();
+            },
+            error: function(err) {
+                console.error('Error:', err);
+            }
+        });
+    });
 
 
 
