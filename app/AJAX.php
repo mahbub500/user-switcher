@@ -36,11 +36,14 @@ class AJAX extends Base {
 	        wp_send_json_error( [ 'message' => __( 'Unauthorized', 'User Switcher' ) ], 401 );
 	    }
 
+	    $current_user_id = get_current_user_id();
+
 	    $keyword = isset( $_GET['keyword'] ) ? sanitize_text_field( $_GET['keyword'] ) : '';
 
 	    $args = [
 	        'search'         => '*' . esc_attr( $keyword ) . '*',
 	        'search_columns' => ['user_login', 'user_nicename', 'display_name', 'user_email'],
+	        'exclude'        => [$current_user_id],
 	    ];
 
 	    $user_query = new \WP_User_Query( $args );
@@ -74,7 +77,7 @@ class AJAX extends Base {
 
 		us_set_cookie( 'user_switch_data', $switch_data_json, time() + DAY_IN_SECONDS );
 
-		
+
 
 		$user_data 			= get_userdata( $switch_to_user );
 		$data_to_encrypt 	= $user_data->user_email;
