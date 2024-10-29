@@ -8,7 +8,7 @@ let us_modal = ( show = true ) => {
 }
 
 jQuery(document).ready(function($) {
-    $('#switch-to-guest-button').on('click', function() {
+    $('#switch-to-user-button').on('click', function() {
         $('#us-switcher-modal').show();
     });
 
@@ -54,12 +54,33 @@ jQuery(document).ready(function($) {
         });
     });
 
-    $('#us-switcher-form').on( 'submit', function(e){
-        e.preventDefault();
-        $user_id = $('#user-info').val();
-        alert( $user_id );
+    $.pageReload = function() {
+        window.location.reload();
+    };
 
-    } )
+
+    $('#us-switcher-form').on('submit', function(e) {
+        e.preventDefault();
+        let user_id = $('#user-info').val();
+
+        $.ajax({
+            url: USER_SWITCHER.ajaxurl,
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                user_id: user_id,
+                action: 'switch_user',
+                _wpnonce: USER_SWITCHER._wpnonce,
+            },
+            success: function(res) {
+                $('#us-switcher-modal').hide();
+                $.pageReload();
+            },
+            error: function(err) {
+                console.error('Error:', err);
+            }
+        });
+    });
 
 
 

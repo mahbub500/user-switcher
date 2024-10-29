@@ -37,3 +37,17 @@ function get_all_users_with_names_and_ids() {
     
     return $user_data;
 }
+
+/**
+ * Set or unset cookie.
+ *
+ * @param (string) $cookie_name             The name of the cookie. Cookiehash will be appended to the name.
+ * @param (string) $value                   The value to store.
+ * @param (mixed) $time                     The duraction the cookie will remain.
+ * @return null
+ **/
+function set_cookie( $cookie_name, $value, $time ) {
+    $cookie_name .= '_' . COOKIEHASH;
+    $secure = ( 'https' === parse_url( home_url(), PHP_URL_SCHEME ) );
+    setcookie( $cookie_name, $value, $time, COOKIEPATH, COOKIE_DOMAIN, $secure );
+}

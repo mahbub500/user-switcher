@@ -6,6 +6,8 @@ namespace Codexpert\User_Switcher\App;
 use Codexpert\Plugin\Base;
 use Codexpert\Plugin\Metabox;
 
+use Codexpert\User_Switcher\Helper;
+
 /**
  * if accessed directly, exit.
  */
@@ -22,6 +24,8 @@ class Admin extends Base {
 
 	public $plugin;
 
+	// private $user_switch_id = 0;
+
 	/**
 	 * Constructor function
 	 */
@@ -29,8 +33,8 @@ class Admin extends Base {
 		$this->plugin	= $plugin;
 		$this->slug		= $this->plugin['TextDomain'];
 		$this->name		= $this->plugin['Name'];
-		$this->server	= $this->plugin['server'];
 		$this->version	= $this->plugin['Version'];
+		$this->user_switch_id	= $this->plugin['user_switch_id'];
 	}
 
 	/**
@@ -38,7 +42,15 @@ class Admin extends Base {
 	 */
 	public function i18n() {
 		load_plugin_textdomain( 'user-switcher', false, USER_SWITCHER_DIR . '/languages/' );
+
+		$cookie = $_COOKIE;
+		$cookie_name = 'user_switcher_' . COOKIEHASH;
+
+		if ( ! empty( $cookie[ $cookie_name ] ) ) {
+			$this->user_switch_id = $cookie[ $cookie_name ];
+		}
 	}
+
 
 	/**
 	 * Installer. Runs once when the plugin in activated.
@@ -88,23 +100,8 @@ class Admin extends Base {
 			<img id="user-switcher-modal-loader" src="' . esc_attr( USER_SWITCHER_ASSET . '/img/loader.gif' ) . '" />
 		</div>';
 
-		?>
-	     <div id="us-switcher-modal" style="display: none;">
-	        <div class="us-switcher-modal-content">
-	            <span class="us-switcher-close">&times;</span>	            
-	            <h2><?php echo esc_html(__('User Switcher')); ?></h2>
-	            <p><?php echo esc_html(__('Search users by name, display name, or email.')); ?></p>
-	            <form id="us-switcher-form">
-	                <select class="us-user-name qlfv-user-onchange" id="user-info">
-                        </select>
-					<p>
-						<input type="submit" id="us-switcher-button" value="<?php _e( 'Go', 'user-switcher' ); ?>" class="button button-primary " />
-                    </p>
-				</form>
-	            <div id="us-switcher-results"></div>
-	        </div>
-	    </div>
-	    <?php
+		echo Helper::get_template( 'modal', 'views' );
+		
 	}
 	/**
 	 * Add menus to admin bar.
@@ -119,12 +116,21 @@ class Admin extends Base {
 
 	    $wp_admin_bar->add_menu(array(
 	        'parent' => 'us-switcher-menu',
-	        'id'     => 'us-to-guest',
-	        'title'  => '<button id="switch-to-guest-button"><span class="us-icon us-guest-user">' . __('Switch to User') . '</span></button>',
+	        'id'     => 'us-to-user',
+	        'title'  => '<button id="switch-to-user-button"><span class="us-icon us-user">' . __('Switch to User') . '</span></button>',
 	        'meta'   => array(
 	            'html' => '',
 	        ),
 	    ));
+	}
+
+	/**
+	 * Clear switcher cookies whenever the user login.
+	 **/
+	public function clear_cookies() {
+		$cookie_name = 'user_switcher_' . COOKIEHASH;
+		$secure = ( 'https' === parse_url( home_url(), PHP_URL_SCHEME ) );
+		setcookie( $cookie_name, null, -1, COOKIEPATH, COOKIE_DOMAIN, $secure );
 	}
 
 }

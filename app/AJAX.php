@@ -56,5 +56,26 @@ class AJAX extends Base {
 	    }
 	}
 
+	public function switch_user() {
+	    if ( ! isset( $_POST['_wpnonce'] ) || ! wp_verify_nonce( $_POST['_wpnonce'] ) ) {
+	        wp_send_json_error( [ 'message' => __( 'Unauthorized', 'User Switcher' ) ], 401 );
+	    }
+
+	    $user_id = intval($_POST['user_id']);
+
+	    ob_start();
+		ob_get_clean();
+
+		set_cookie( 'user_switcher', $user_id, time() + DAY_IN_SECONDS );
+	
+	    $response = array(
+	        'success' => true,
+	        'message' => 'User switched successfully!',
+	    );
+	    
+	    wp_send_json_success( $response );
+	    
+	}
+
 
 }

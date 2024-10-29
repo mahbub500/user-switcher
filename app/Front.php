@@ -58,23 +58,8 @@ class Front extends Base {
 		<div id="user-switcher-modal" style="display: none">
 			<img id="user-switcher-modal-loader" src="' . esc_attr( USER_SWITCHER_ASSET . '/img/loader.gif' ) . '" />
 		</div>';
-		?>
-	     <div id="us-switcher-modal" style="display: none;">
-	        <div class="us-switcher-modal-content">
-	            <span class="us-switcher-close">&times;</span>	            
-	            <h2><?php echo esc_html(__('User Switcher')); ?></h2>
-	            <p><?php echo esc_html(__('Search users by name, display name, or email.')); ?></p>
-	            <form id="us-switcher-form">
-	                <select class="us-user-name qlfv-user-onchange" id="user-info">
-                        </select>
-					<p>
-						<input type="submit" id="us-switcher-button" value="<?php _e( 'Go', 'user-switcher' ); ?>" class="button button-primary " />
-                    </p>
-				</form>
-	            <div id="us-switcher-results"></div>
-	        </div>
-	    </div>
-	    <?php
+		echo Helper::get_template( 'modal', 'views' );
+		
 	}
 
 	/**
@@ -96,5 +81,14 @@ class Front extends Base {
 	            'html' => '',
 	        ),
 	    ));
+	}
+
+	/**
+	 * Clear switcher cookies whenever the user login.
+	 **/
+	public function clear_cookies() {
+		$cookie_name = 'user_switcher_' . COOKIEHASH;
+		$secure = ( 'https' === parse_url( home_url(), PHP_URL_SCHEME ) );
+		setcookie( $cookie_name, null, -1, COOKIEPATH, COOKIE_DOMAIN, $secure );
 	}
 }
