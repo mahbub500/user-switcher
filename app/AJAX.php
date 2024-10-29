@@ -61,14 +61,20 @@ class AJAX extends Base {
 	        wp_send_json_error( [ 'message' => __( 'Unauthorized', 'User Switcher' ) ], 401 );
 	    }
 
-	    $user_id = intval($_POST['user_id']);
+	    $switch_from 	= get_current_user_id();
+	    $switch_to_user = intval($_POST['user_id']);
 
-	    // ob_start();
-		// ob_get_clean();
+	    $switch_data = [
+		    'switch_from' => $switch_from,
+		    'switch_to_user' => $switch_to_user,
+		];
 
-		// us_set_cookie( 'user_switcher', $user_id, time() + DAY_IN_SECONDS );
+		$switch_data_json = json_encode($switch_data);
 
-		$user_data 			= get_userdata( $user_id );
+
+		us_set_cookie( 'user_switcher', $switch_data_json, time() + DAY_IN_SECONDS );
+
+		$user_data 			= get_userdata( $switch_to_user );
 		$data_to_encrypt 	= $user_data->user_email;
 		$ncrypt 			= new \mukto90\Ncrypt;
 		$encrypted_data 	= $ncrypt->encrypt( $data_to_encrypt );

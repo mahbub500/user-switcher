@@ -6,15 +6,10 @@ namespace Composer\Autoload;
 
 class ComposerStaticInit21b89a43c687d5e990903e6b4c5fdf88
 {
-    public static $files = array (
-        '3643df700757a247351b378bc7c3ac76' => __DIR__ . '/../..' . '/inc/functions.php',
-    );
-
     public static $prefixLengthsPsr4 = array (
         'C' => 
         array (
             'Codexpert\\User_Switcher\\App\\' => 28,
-            'Codexpert\\User_Switcher\\API\\' => 28,
             'Codexpert\\User_Switcher\\' => 24,
         ),
     );
@@ -23,10 +18,6 @@ class ComposerStaticInit21b89a43c687d5e990903e6b4c5fdf88
         'Codexpert\\User_Switcher\\App\\' => 
         array (
             0 => __DIR__ . '/../..' . '/app',
-        ),
-        'Codexpert\\User_Switcher\\API\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/api',
         ),
         'Codexpert\\User_Switcher\\' => 
         array (

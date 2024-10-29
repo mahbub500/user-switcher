@@ -7,6 +7,5 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Codexpert\\User_Switcher\\App\\' => array($baseDir . '/app'),
-    'Codexpert\\User_Switcher\\API\\' => array($baseDir . '/api'),
     'Codexpert\\User_Switcher\\' => array($baseDir . '/classes'),
 );

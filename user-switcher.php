@@ -70,6 +70,7 @@ final class Plugin {
 	 */
 	private function include() {
 		require_once( dirname( __FILE__ ) . '/vendor/autoload.php' );
+		require_once( dirname( __FILE__ ) . '/inc/functions.php' );
 	}
 
 	/**
@@ -165,7 +166,7 @@ final class Plugin {
 			$front->action( 'wp_footer', 'modal' );
 			$front->action( 'wp_enqueue_scripts', 'enqueue_scripts' );
 			$front->action( 'admin_bar_menu', 'admin_bar_menu', 100 );
-			$front->action( 'wp_login', 'clear_cookies' );
+			// $front->action( 'wp_login', 'clear_cookies' );
 
 			/**
 			 * Shortcode related hooks

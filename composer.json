@@ -12,9 +12,7 @@
     "autoload": {
         "psr-4": {
             "Codexpert\\User_Switcher\\" : "classes/",
-            "Codexpert\\User_Switcher\\App\\" : "app/",
-            "Codexpert\\User_Switcher\\API\\" : "api/"
-        },
-        "files": [ "inc/functions.php" ]
+            "Codexpert\\User_Switcher\\App\\" : "app/"
+        }
     }
 }
