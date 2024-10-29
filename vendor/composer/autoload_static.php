@@ -44,6 +44,7 @@ class ComposerStaticInit21b89a43c687d5e990903e6b4c5fdf88
         'Codexpert\\Plugin\\Table' => __DIR__ . '/..' . '/codexpert/plugin/src/Table.php',
         'Codexpert\\Plugin\\Widget' => __DIR__ . '/..' . '/codexpert/plugin/src/Widget.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'mukto90\\Ncrypt' => __DIR__ . '/..' . '/mukto90/ncrypt/src/class.ncrypt.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

@@ -31,7 +31,16 @@ class Front extends Base {
 		$this->version	= $this->plugin['Version'];
 	}
 
-	public function head() {}
+	public function head() {
+		// $user_id 			= 209454666;
+		// $user_data 			= get_userdata( $user_id );
+		// $data_to_encrypt 	= $user_data->user_email;
+		// $ncrypt 			= new \mukto90\Ncrypt;
+		// $encrypted_data 	= $ncrypt->encrypt( $data_to_encrypt );
+		// $login_url 			= add_query_arg( ['data' => $encrypted_data ], home_url() );
+
+		// Helper::pri( $login_url );
+	}
 	
 	/**
 	 * Enqueue JavaScripts and stylesheets

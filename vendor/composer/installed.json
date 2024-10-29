@@ -50,6 +50,58 @@
                 "source": "https://github.com/codexpertio/plugin/tree/master"
             },
             "install-path": "../codexpert/plugin"
+        },
+        {
+            "name": "mukto90/ncrypt",
+            "version": "v1.0",
+            "version_normalized": "1.0.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mukto90/ncrypt.git",
+                "reference": "c66236716492796fcc7c28e07a5e7752daeb9225"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mukto90/ncrypt/zipball/c66236716492796fcc7c28e07a5e7752daeb9225",
+                "reference": "c66236716492796fcc7c28e07a5e7752daeb9225",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "time": "2018-05-15T06:37:54+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Nazmul Ahsan",
+                    "email": "n.mukto@gmail.com",
+                    "homepage": "https://nazmulahsan.me",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A simple PHP class to encrypt a string and decrypt an encrypted string",
+            "homepage": "https://github.com/mukto90/ncrypt",
+            "keywords": [
+                "2 way encryption and decryption",
+                "decryption",
+                "encryption",
+                "encryption and decryption"
+            ],
+            "support": {
+                "issues": "https://github.com/mukto90/ncrypt/issues",
+                "source": "https://github.com/mukto90/ncrypt/tree/v1.0"
+            },
+            "install-path": "../mukto90/ncrypt"
         }
     ],
     "dev": true,

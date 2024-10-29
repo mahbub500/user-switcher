@@ -6,7 +6,8 @@
         }
     ],
     "require": {
-        "codexpert/plugin": "dev-master"
+        "codexpert/plugin": "dev-master",
+        "mukto90/ncrypt": "^1.0"
     },
     "autoload": {
         "psr-4": {

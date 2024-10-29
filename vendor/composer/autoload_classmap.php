@@ -15,4 +15,5 @@ return array(
     'Codexpert\\Plugin\\Table' => $vendorDir . '/codexpert/plugin/src/Table.php',
     'Codexpert\\Plugin\\Widget' => $vendorDir . '/codexpert/plugin/src/Widget.php',
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
+    'mukto90\\Ncrypt' => $vendorDir . '/mukto90/ncrypt/src/class.ncrypt.php',
 );

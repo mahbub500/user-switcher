@@ -3,7 +3,7 @@
         'name' => '__root__',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => 'a65205865ed6cd04aebc67a0cdf0c7597e545c17',
+        'reference' => '17e0e57af22e743f85ce7bb55cf81f0b0c2808bf',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         '__root__' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => 'a65205865ed6cd04aebc67a0cdf0c7597e545c17',
+            'reference' => '17e0e57af22e743f85ce7bb55cf81f0b0c2808bf',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -28,6 +28,15 @@
             'aliases' => array(
                 0 => '9999999-dev',
             ),
+            'dev_requirement' => false,
+        ),
+        'mukto90/ncrypt' => array(
+            'pretty_version' => 'v1.0',
+            'version' => '1.0.0.0',
+            'reference' => 'c66236716492796fcc7c28e07a5e7752daeb9225',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../mukto90/ncrypt',
+            'aliases' => array(),
             'dev_requirement' => false,
         ),
     ),
