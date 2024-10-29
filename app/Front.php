@@ -33,6 +33,13 @@ class Front extends Base {
 
 	public function head() {
 
+		// $switch_to_user_id = get_user_switch_data( 'switch_to_user' );
+		$switch_to_user_id 	= get_user_switch_data( 'switch_to_user' );
+
+		$user_name 			= get_username_by_id( $switch_to_user_id );
+
+		Helper::pri( $user_name );
+
 		 
 		// $user_id 	= get_current_user_id(); // Or specify a user ID
 		// $show_toolbar = get_user_meta( $user_id, 'show_admin_bar_front', true );

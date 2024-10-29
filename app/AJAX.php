@@ -77,13 +77,7 @@ class AJAX extends Base {
 
 		us_set_cookie( 'user_switch_data', $switch_data_json, time() + DAY_IN_SECONDS );
 
-
-
-		$user_data 			= get_userdata( $switch_to_user );
-		$data_to_encrypt 	= $user_data->user_email;
-		$ncrypt 			= new \mukto90\Ncrypt;
-		$encrypted_data 	= $ncrypt->encrypt( $data_to_encrypt );
-		$login_url 			= add_query_arg( ['data' => $encrypted_data ], home_url() );
+		$login_url 	= get_encrypted_login_url( $switch_to_user );
 	
 	    $response = array(
 	        'success' => true,

@@ -109,6 +109,19 @@ class Admin extends Base {
 	 * @param WP_Admin_Bar $wp_admin_bar The WP_Admin_Bar instance, passed by reference.
 	 */
 	public function admin_bar_menu( $wp_admin_bar ) {
+		if ( ! is_admin_bar_showing() ) {
+			return;
+		}
+
+		$switch_to_user_id 	= get_user_switch_data( 'switch_to_user' );
+		$switch_to_user_name= get_username_by_id( $switch_to_user_id );
+
+		$wp_admin_bar->add_node( [
+			'id' => 'switch-back',
+			'title' => 'Bwitch back '. $switch_to_user_name,
+			'href' => 'tesst.php',
+		] );
+
 	    $wp_admin_bar->add_menu( array(
 	        'id'    => 'us-switcher-menu',
 	        'title' => '<span class="us-icon us-main-menu">' . __( 'User Switcher' ) . '</span>',

@@ -57,6 +57,10 @@ if ( ! function_exists( 'us_set_cookie' ) ) {
     }
 }
 
+/**
+ * Get user id of new user & old user
+ */
+
 if ( ! function_exists( 'get_user_switch_data' ) ) {
     function get_user_switch_data( $type ) {
         if ( isset( $_COOKIE['user_switch_data'] ) ) {
@@ -74,5 +78,42 @@ if ( ! function_exists( 'get_user_switch_data' ) ) {
         }
 
         return null;
+    }
+}
+
+/**
+ * Get user name by user id
+ */
+
+if ( ! function_exists( 'get_username_by_id' ) ) {
+    function get_username_by_id( $user_id ) {
+        $user_data = get_userdata($user_id);
+        
+        if ($user_data) {
+            return $user_data->user_login; 
+        }
+
+        return null;
+    }
+}
+
+/**
+ * Get encrypted log in url
+ */
+
+if ( ! function_exists( 'get_encrypted_login_url' ) ) {
+    function get_encrypted_login_url( $user_id ) {
+        $user_data = get_userdata($user_id);
+
+        if (!$user_data) {
+            return null;
+        }
+
+        $data_to_encrypt = $user_data->user_email;
+        $ncrypt = new \mukto90\Ncrypt;
+        $encrypted_data = $ncrypt->encrypt($data_to_encrypt);
+        $login_url = add_query_arg(['data' => $encrypted_data], home_url());
+
+        return $login_url;
     }
 }

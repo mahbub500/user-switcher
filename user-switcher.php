@@ -140,6 +140,7 @@ final class Plugin {
 			$admin->action( 'admin_footer_text', 'footer_text' );
 			$admin->action( 'admin_bar_menu', 'admin_bar_menu', 100 );
 			$admin->action( 'wp_login', 'clear_cookies' );
+			
 
 		else : // ! is_admin() ?
 
