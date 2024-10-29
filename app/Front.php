@@ -38,7 +38,7 @@ class Front extends Base {
 
 		$user_name 			= get_username_by_id( $switch_to_user_id );
 
-		Helper::pri( $user_name );
+		// Helper::pri( $user_name );
 
 		 
 		// $user_id 	= get_current_user_id(); // Or specify a user ID
