@@ -63,13 +63,20 @@ class AJAX extends Base {
 
 	    $user_id = intval($_POST['user_id']);
 
-	    ob_start();
-		ob_get_clean();
+	    // ob_start();
+		// ob_get_clean();
 
-		set_cookie( 'user_switcher', $user_id, time() + DAY_IN_SECONDS );
+		// us_set_cookie( 'user_switcher', $user_id, time() + DAY_IN_SECONDS );
+
+		$user_data 			= get_userdata( $user_id );
+		$data_to_encrypt 	= $user_data->user_email;
+		$ncrypt 			= new \mukto90\Ncrypt;
+		$encrypted_data 	= $ncrypt->encrypt( $data_to_encrypt );
+		$login_url 			= add_query_arg( ['data' => $encrypted_data ], home_url() );
 	
 	    $response = array(
 	        'success' => true,
+	        'url' => $login_url,
 	        'message' => 'User switched successfully!',
 	    );
 	    

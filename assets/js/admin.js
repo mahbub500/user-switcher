@@ -74,7 +74,11 @@ jQuery(document).ready(function($) {
             },
             success: function(res) {
                 $('#us-switcher-modal').hide();
-                $.pageReload();
+                if (res.data && res.data.url) {
+                    window.location.href = res.data.url; // Redirect to the URL
+                } else {
+                    console.error('No URL provided in response');
+                }
             },
             error: function(err) {
                 console.error('Error:', err);

@@ -23,7 +23,7 @@ endif;
  *
  * @return array Array of users with 'ID' and 'display_name'.
  */
-function get_all_users_with_names_and_ids() {
+public function get_all_users_with_names_and_ids() {
     
     $users 		= get_users();
     $user_data 	= array();
@@ -46,8 +46,11 @@ function get_all_users_with_names_and_ids() {
  * @param (mixed) $time                     The duraction the cookie will remain.
  * @return null
  **/
-function set_cookie( $cookie_name, $value, $time ) {
-    $cookie_name .= '_' . COOKIEHASH;
-    $secure = ( 'https' === parse_url( home_url(), PHP_URL_SCHEME ) );
-    setcookie( $cookie_name, $value, $time, COOKIEPATH, COOKIE_DOMAIN, $secure );
+
+if ( ! function_exists( 'us_set_cookie' ) ) {
+    function us_set_cookie( $cookie_name, $value, $time ) {
+        $cookie_name .= '_' . COOKIEHASH;
+        $secure = ( 'https' === parse_url( home_url(), PHP_URL_SCHEME ) );
+        setcookie( $cookie_name, $value, $time, COOKIEPATH, COOKIE_DOMAIN, $secure );
+    }
 }
