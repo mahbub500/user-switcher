@@ -56,3 +56,23 @@ if ( ! function_exists( 'us_set_cookie' ) ) {
         setcookie( $cookie_name, $value, $time, COOKIEPATH, COOKIE_DOMAIN, $secure );
     }
 }
+
+if ( ! function_exists( 'get_user_switch_data' ) ) {
+    function get_user_switch_data( $type ) {
+        if ( isset( $_COOKIE['user_switch_data'] ) ) {
+            $switch_data_json = stripslashes( $_COOKIE['user_switch_data'] );
+            $switch_data = json_decode( $switch_data_json, true );
+            
+            $switch_from = $switch_data['switch_from'] ?? null;
+            $switch_to_user = $switch_data['switch_to_user'] ?? null;
+
+            if ( $type === 'switch_from' ) {
+                return $switch_from; 
+            } elseif ( $type === 'switch_to_user' ) {
+                return $switch_to_user; 
+            }
+        }
+
+        return null;
+    }
+}

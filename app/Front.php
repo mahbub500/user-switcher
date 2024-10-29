@@ -31,7 +31,18 @@ class Front extends Base {
 		$this->version	= $this->plugin['Version'];
 	}
 
-	public function head() {}
+	public function head() {
+
+		 
+		// $user_id 	= get_current_user_id(); // Or specify a user ID
+		// $show_toolbar = get_user_meta( $user_id, 'show_admin_bar_front', true );
+
+		// if ( $show_toolbar === 'true' ) {
+		//     echo "User has enabled Show Toolbar when viewing site.";
+		// } else {
+		//     echo "User has not enabled Show Toolbar when viewing site.";
+		// }
+	}
 	
 	/**
 	 * Enqueue JavaScripts and stylesheets
