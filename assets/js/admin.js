@@ -8,7 +8,7 @@ let us_modal = ( show = true ) => {
 }
 
 jQuery(document).ready(function($) {
-    $('#switch-to-guest-button').on('click', function() {
+    $('#switch-to-user-button').on('click', function() {
         $('#us-switcher-modal').show();
     });
 

@@ -6,6 +6,8 @@ namespace Codexpert\User_Switcher\App;
 use Codexpert\Plugin\Base;
 use Codexpert\Plugin\Metabox;
 
+use Codexpert\User_Switcher\Helper;
+
 /**
  * if accessed directly, exit.
  */
@@ -98,23 +100,8 @@ class Admin extends Base {
 			<img id="user-switcher-modal-loader" src="' . esc_attr( USER_SWITCHER_ASSET . '/img/loader.gif' ) . '" />
 		</div>';
 
-		?>
-	     <div id="us-switcher-modal" style="display: none;">
-	        <div class="us-switcher-modal-content">
-	            <span class="us-switcher-close">&times;</span>	            
-	            <h2><?php echo esc_html(__('User Switcher')); ?></h2>
-	            <p><?php echo esc_html(__('Search users by name, display name, or email.')); ?></p>
-	            <form id="us-switcher-form">
-	                <select class="us-user-name qlfv-user-onchange" id="user-info">
-                        </select>
-					<p>
-						<input type="submit" id="us-switcher-button" value="<?php _e( 'Go', 'user-switcher' ); ?>" class="button button-primary " />
-                    </p>
-				</form>
-	            <div id="us-switcher-results"></div>
-	        </div>
-	    </div>
-	    <?php
+		echo Helper::get_template( 'modal', 'views' );
+		
 	}
 	/**
 	 * Add menus to admin bar.
@@ -129,8 +116,8 @@ class Admin extends Base {
 
 	    $wp_admin_bar->add_menu(array(
 	        'parent' => 'us-switcher-menu',
-	        'id'     => 'us-to-guest',
-	        'title'  => '<button id="switch-to-guest-button"><span class="us-icon us-guest-user">' . __('Switch to User') . '</span></button>',
+	        'id'     => 'us-to-user',
+	        'title'  => '<button id="switch-to-user-button"><span class="us-icon us-user">' . __('Switch to User') . '</span></button>',
 	        'meta'   => array(
 	            'html' => '',
 	        ),
