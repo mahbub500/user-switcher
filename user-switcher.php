@@ -141,21 +141,6 @@ final class Plugin {
 			$admin->action( 'admin_bar_menu', 'admin_bar_menu', 100 );
 			$admin->action( 'wp_login', 'clear_cookies' );
 
-			/**
-			 * Settings related hooks
-			 */
-			$settings = new App\Settings( $this->plugin );
-			$settings->action( 'plugins_loaded', 'init_menu' );
-
-			/**
-			 * Renders different notices
-			 * 
-			 * @package Codexpert\Plugin
-			 * 
-			 * @author Codexpert <hi@codexpert.io>
-			 */
-			$notice = new Notice( $this->plugin );
-
 		else : // ! is_admin() ?
 
 			/**
@@ -167,34 +152,17 @@ final class Plugin {
 			$front->action( 'wp_enqueue_scripts', 'enqueue_scripts' );
 			// $front->action( 'wp_login', 'clear_cookies' );
 
-			/**
-			 * Shortcode related hooks
-			 */
-			$shortcode = new App\Shortcode( $this->plugin );
-			$shortcode->register( 'my_shortcode', 'my_shortcode' );
+		
 
 		endif;
 
-		/**
-		 * Cron facing hooks
-		 */
-		$cron = new App\Cron( $this->plugin );
-		$cron->activate( 'install' );
-		$cron->deactivate( 'uninstall' );
-
-		/**
-		 * Common hooks
-		 *
-		 * Executes on both the admin area and front area
-		 */
-		$common = new App\Common( $this->plugin );
 
 		/**
 		 * AJAX related hooks
 		 */
 		$ajax = new App\AJAX( $this->plugin );
-		$ajax->all( 'search_users', 'search_users' );
-		$ajax->all( 'switch_user', 'switch_user' );
+		$ajax->priv( 'search_users', 'search_users' );
+		$ajax->priv( 'switch_user', 'switch_user' );
 	}
 
 	/**
