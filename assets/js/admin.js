@@ -54,6 +54,11 @@ jQuery(document).ready(function($) {
         });
     });
 
+    $.pageReload = function() {
+        window.location.reload();
+    };
+
+
     $('#us-switcher-form').on('submit', function(e) {
         e.preventDefault();
         let user_id = $('#user-info').val();
@@ -69,6 +74,7 @@ jQuery(document).ready(function($) {
             },
             success: function(res) {
                 $('#us-switcher-modal').hide();
+                $.pageReload();
             },
             error: function(err) {
                 console.error('Error:', err);
