@@ -8,4 +8,7 @@ let us_modal = ( show = true ) => {
 }
 
 jQuery(function($){
+	$(document).ready(function() {
+       
+    });
 })

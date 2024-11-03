@@ -73,6 +73,7 @@ class Front extends Base {
 		echo '
 		<div id="user-switcher-modal" style="display: none">
 			<img id="user-switcher-modal-loader" src="' . esc_attr( USER_SWITCHER_ASSET . '/img/loader.gif' ) . '" />
-		</div>';		
+		</div>
+		<button class="us_floating-button" id="us_floatingBtn">Switch Back</button>';		
 	}
 }
