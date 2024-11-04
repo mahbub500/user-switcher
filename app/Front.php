@@ -34,11 +34,9 @@ class Front extends Base {
 	public function head() {
 
 		// $switch_to_user_id = get_user_switch_data( 'switch_to_user' );
-		$switch_to_user_id 	= get_user_switch_data( 'switch_to_user' );
 
-		$user_name 			= get_username_by_id( $switch_to_user_id );
 
-		// Helper::pri( $user_name );
+		
 
 		 
 		// $user_id 	= get_current_user_id(); // Or specify a user ID
@@ -74,6 +72,18 @@ class Front extends Base {
 		<div id="user-switcher-modal" style="display: none">
 			<img id="user-switcher-modal-loader" src="' . esc_attr( USER_SWITCHER_ASSET . '/img/loader.gif' ) . '" />
 		</div>
-		<button class="us_floating-button" id="us_floatingBtn">Switch Back</button>';		
+		';
+
+		$switch_to_user_id 	= get_user_switch_data('switch_from');
+		$switch_to_user 	= get_username_by_id($switch_to_user_id);
+		$login_url 			= get_encrypted_login_url($switch_to_user_id);
+
+		if ($switch_to_user) {
+		    ?>
+		    <a href="<?php echo esc_url($login_url); ?>" class="us_floating-button" id="us_floatingBtn">
+		        Switch Back <?php echo htmlspecialchars($switch_to_user); ?>
+		    </a>
+		    <?php
+		}		
 	}
 }
