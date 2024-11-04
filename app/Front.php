@@ -84,6 +84,13 @@ class Front extends Base {
 		        Switch Back <?php echo htmlspecialchars($switch_to_user); ?>
 		    </a>
 		    <?php
+
+		    do_action('user-switcher-back', $user_id);
 		}		
+	}
+
+	public function clear_cookies( $user_id ){
+		us_remove_cookie( 'user_switch_data' );
+		
 	}
 }

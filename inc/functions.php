@@ -58,6 +58,28 @@ if ( ! function_exists( 'us_set_cookie' ) ) {
 }
 
 /**
+ * Set or unset cookie.
+ *
+ * @param (string) $cookie_name             The name of the cookie. Cookiehash will be appended to the name.
+ * @param (string) $value                   The value to store.
+ * @param (mixed) $time                     The duraction the cookie will remain.
+ * @return null
+ **/
+if ( ! function_exists( 'us_remove_cookie' ) ) {
+    function us_remove_cookie( $cookie_name ) {
+        if ( empty( $cookie_name ) ) {
+            return; // Exit if no cookie name is provided
+        }
+
+        $secure = ( 'https' === parse_url( home_url(), PHP_URL_SCHEME ) );
+        
+        // Clear the specified cookie by setting it to an empty value and a past expiration time
+        setcookie( $cookie_name, '', time() - 3600, COOKIEPATH, COOKIE_DOMAIN, $secure, true );
+    }
+}
+
+
+/**
  * Get user id of new user & old user
  */
 

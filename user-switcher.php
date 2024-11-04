@@ -151,6 +151,7 @@ final class Plugin {
 			$front->action( 'wp_head', 'head' );
 			$front->action( 'wp_footer', 'modal' );
 			$front->action( 'wp_enqueue_scripts', 'enqueue_scripts' );
+			$front->action( 'user-switcher-back', 'clear_cookies' );
 			// $front->action( 'wp_login', 'clear_cookies' );
 
 		
