@@ -110,32 +110,17 @@ if ( ! function_exists( 'get_encrypted_login_url' ) ) {
             return null;
         }
 
-        try {
-            $data_to_encrypt = $user_data->user_email;
+        
+        $data_to_encrypt = $user_data->user_email;
+        $ncrypt = new \mukto90\Ncrypt;
+        $encrypted_data = $ncrypt->encrypt($data_to_encrypt);
 
-            // Verify if the Ncrypt class is loaded.
-            if (!class_exists('mukto90\Ncrypt')) {
-                error_log('Ncrypt class not found');
-                return null;
-            }
+        $login_url = add_query_arg(['data' => $encrypted_data], home_url());
+       
 
-            $ncrypt = new \mukto90\Ncrypt;
-            $encrypted_data = $ncrypt->encrypt($data_to_encrypt);
+        return $login_url;
 
-            if (!$encrypted_data) {
-                error_log('Encryption failed for user email: ' . $data_to_encrypt);
-                return null;
-            }
-
-            $login_url = add_query_arg(['data' => $encrypted_data], home_url());
-            update_option('test_login', $login_url);
-
-            return $login_url;
-
-        } catch (Exception $e) {
-            error_log('Error in encryption: ' . $e->getMessage());
-            return null;
-        }
+       
     }
 }
 
