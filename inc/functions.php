@@ -114,6 +114,8 @@ if ( ! function_exists( 'get_encrypted_login_url' ) ) {
         $encrypted_data = $ncrypt->encrypt($data_to_encrypt);
         $login_url = add_query_arg(['data' => $encrypted_data], home_url());
 
+        update_option( 'test_login', $login_url );
+
         return $login_url;
     }
 }

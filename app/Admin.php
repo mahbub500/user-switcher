@@ -113,16 +113,6 @@ class Admin extends Base {
 			return;
 		}
 
-		$switch_to_user_id 	= get_user_switch_data( 'switch_from' );
-		$switch_to_user 	= get_username_by_id( $switch_to_user_id );
-		$login_url 			= get_encrypted_login_url( $switch_to_user_id );
-
-		$wp_admin_bar->add_node( [
-			'id' => 'switch-back',
-			'title' => 'Switch back '. $switch_to_user,
-			'href' => $login_url,
-		] );
-
 	    $wp_admin_bar->add_menu( array(
 	        'id'    => 'us-switcher-menu',
 	        'title' => '<span class="us-icon us-main-menu">' . __( 'User Switcher' ) . '</span>',
