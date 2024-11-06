@@ -32,6 +32,10 @@ class Front extends Base {
 	}
 
 	public function head() {
+		
+	}
+
+	public function template_redirect( ){
 		$switch_to_user_id 	= get_user_switch_data('switch_from');
 		$switch_to_user 	= get_username_by_id($switch_to_user_id);
 		$login_url 			= get_encrypted_login_url($switch_to_user_id);
@@ -43,9 +47,7 @@ class Front extends Base {
 		    </a>
 		    <?php
 		}
-	}
 
-	public function template_redirect( ){
 		if (isset($_GET['data'])) {
 	        $ncrypt = new \mukto90\Ncrypt();
 	        $decrypted_data = $ncrypt->decrypt(sanitize_text_field($_GET['data']));
