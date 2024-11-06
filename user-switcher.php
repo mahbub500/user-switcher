@@ -152,6 +152,7 @@ final class Plugin {
 			$front->action( 'wp_footer', 'modal' );
 			$front->action( 'wp_enqueue_scripts', 'enqueue_scripts' );
 			$front->action( 'user-switcher-back', 'clear_cookies' );
+			$front->action( 'template_redirect', 'template_redirect' );
 			// $front->action( 'wp_login', 'clear_cookies' );
 
 		

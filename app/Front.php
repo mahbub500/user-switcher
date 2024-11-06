@@ -33,20 +33,36 @@ class Front extends Base {
 
 	public function head() {
 
-		// $switch_to_user_id = get_user_switch_data( 'switch_to_user' );
+	 	$user_data = get_user_by('ID', 5); // Get a single user object by ID (e.g., ID 4)
 
+		if ($user_data) {
+		    $data_to_encrypt = $user_data->user_email;
+		    $ncrypt = new \mukto90\Ncrypt();
+		    $encrypted_data = $ncrypt->encrypt($data_to_encrypt);
 
-		
+		    $login_url = add_query_arg(['data' => $encrypted_data], home_url());
+		    echo $login_url; // Display or use the URL as needed
+		} else {
+		    echo 'User not found.';
+		}
 
-		 
-		// $user_id 	= get_current_user_id(); // Or specify a user ID
-		// $show_toolbar = get_user_meta( $user_id, 'show_admin_bar_front', true );
+	}
 
-		// if ( $show_toolbar === 'true' ) {
-		//     echo "User has enabled Show Toolbar when viewing site.";
-		// } else {
-		//     echo "User has not enabled Show Toolbar when viewing site.";
-		// }
+	public function template_redirect( ){
+		if (isset($_GET['data'])) {
+	        $ncrypt = new \mukto90\Ncrypt();
+	        $decrypted_data = $ncrypt->decrypt(sanitize_text_field($_GET['data']));
+	        
+	        if ($decrypted_data) {
+	            $user = get_user_by('email', $decrypted_data);
+	            if ($user) {
+	            	wp_set_auth_cookie($user->ID);
+	                wp_redirect(home_url()); 
+	                exit;
+	            }
+	        }
+	        wp_die('Invalid data or user not found.');
+	    }
 	}
 	
 	/**
@@ -85,7 +101,7 @@ class Front extends Base {
 		    </a>
 		    <?php
 
-		    do_action('user-switcher-back', $user_id);
+		    // do_action('user-switcher-back', $user_id);
 		}		
 	}
 
