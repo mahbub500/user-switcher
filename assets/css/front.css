@@ -28,5 +28,6 @@
     transition: all 0.3s ease;
     white-space: nowrap;
     text-decoration: none;
+    z-index: 1;
 }
 

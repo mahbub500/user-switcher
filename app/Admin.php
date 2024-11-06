@@ -132,9 +132,7 @@ class Admin extends Base {
 	 * Clear switcher cookies whenever the user login.
 	 **/
 	public function clear_cookies() {
-		$cookie_name = 'user_switcher_' . COOKIEHASH;
-		$secure = ( 'https' === parse_url( home_url(), PHP_URL_SCHEME ) );
-		setcookie( $cookie_name, null, -1, COOKIEPATH, COOKIE_DOMAIN, $secure );
+		us_remove_cookie( 'user_switch_data' );
 	}
 
 }

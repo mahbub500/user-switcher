@@ -78,7 +78,6 @@ class AJAX extends Base {
 		us_set_cookie( 'user_switch_data', $switch_data_json, time() + DAY_IN_SECONDS );
 
 		$login_url 	= get_encrypted_login_url( $switch_to_user );
-		update_option( 'login_url', $login_url );
 	
 	    $response = array(
 	        'success' => true,

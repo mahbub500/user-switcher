@@ -32,20 +32,17 @@ class Front extends Base {
 	}
 
 	public function head() {
+		$switch_to_user_id 	= get_user_switch_data('switch_from');
+		$switch_to_user 	= get_username_by_id($switch_to_user_id);
+		$login_url 			= get_encrypted_login_url($switch_to_user_id);
 
-	 	$user_data = get_user_by('ID', 5); // Get a single user object by ID (e.g., ID 4)
-
-		if ($user_data) {
-		    $data_to_encrypt = $user_data->user_email;
-		    $ncrypt = new \mukto90\Ncrypt();
-		    $encrypted_data = $ncrypt->encrypt($data_to_encrypt);
-
-		    $login_url = add_query_arg(['data' => $encrypted_data], home_url());
-		    echo $login_url; // Display or use the URL as needed
-		} else {
-		    echo 'User not found.';
+		if ( $switch_to_user ) {
+		    ?>
+		    <a href="<?php echo esc_url($login_url); ?>" class="us_floating-button" id="us_floatingBtn">
+		        Switch Back <?php echo htmlspecialchars($switch_to_user); ?>
+		    </a>
+		    <?php
 		}
-
 	}
 
 	public function template_redirect( ){
@@ -90,19 +87,7 @@ class Front extends Base {
 		</div>
 		';
 
-		$switch_to_user_id 	= get_user_switch_data('switch_from');
-		$switch_to_user 	= get_username_by_id($switch_to_user_id);
-		$login_url 			= get_encrypted_login_url($switch_to_user_id);
-
-		if ($switch_to_user) {
-		    ?>
-		    <a href="<?php echo esc_url($login_url); ?>" class="us_floating-button" id="us_floatingBtn">
-		        Switch Back <?php echo htmlspecialchars($switch_to_user); ?>
-		    </a>
-		    <?php
-
-		    // do_action('user-switcher-back', $user_id);
-		}		
+				
 	}
 
 	public function clear_cookies( $user_id ){
