@@ -31,8 +31,7 @@ class Front extends Base {
 		$this->version	= $this->plugin['Version'];
 	}
 
-	public function head() {
-	}
+	public function head() {}
 
 	public function template_redirect( ){
 		$switch_to_user_id 	= get_user_switch_data('switch_from');
