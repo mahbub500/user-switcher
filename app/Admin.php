@@ -109,8 +109,9 @@ class Admin extends Base {
 	 * @param WP_Admin_Bar $wp_admin_bar The WP_Admin_Bar instance, passed by reference.
 	 */
 	public function admin_bar_menu( $wp_admin_bar ) {
-		if ( ! is_admin_bar_showing() ) {
-			return;
+		
+		if ( ! is_admin_bar_showing() || ! current_user_can( 'manage_options' ) ) {
+		    return;
 		}
 
 	    $wp_admin_bar->add_menu( array(

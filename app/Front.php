@@ -32,7 +32,6 @@ class Front extends Base {
 	}
 
 	public function head() {
-		
 	}
 
 	public function template_redirect( ){
