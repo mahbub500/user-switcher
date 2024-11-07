@@ -89,5 +89,21 @@ class AJAX extends Base {
 	    
 	}
 
+	public function remove_cookie(){
+		if ( ! isset( $_POST['_wpnonce'] ) || ! wp_verify_nonce( $_POST['_wpnonce'] ) ) {
+	        wp_send_json_error( [ 'message' => __( 'Unauthorized', 'User Switcher' ) ], 401 );
+	    }
+
+	    us_remove_cookie( 'user_switch_data' );
+
+	    $response = array(
+	        'success' => true,
+	        'message' => 'Cookie Removed',
+	    );
+	    
+	    wp_send_json_success( $response );
+
+	}
+
 
 }

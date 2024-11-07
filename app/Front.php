@@ -31,24 +31,35 @@ class Front extends Base {
 		$this->version	= $this->plugin['Version'];
 	}
 
-	public function head() {
+	public function head() {}
 
-		// $switch_to_user_id = get_user_switch_data( 'switch_to_user' );
-		$switch_to_user_id 	= get_user_switch_data( 'switch_to_user' );
+	public function template_redirect( ){
+		$switch_to_user_id 	= get_user_switch_data('switch_from');
+		$switch_to_user 	= get_username_by_id($switch_to_user_id);
+		$login_url 			= get_encrypted_login_url($switch_to_user_id);
 
-		$user_name 			= get_username_by_id( $switch_to_user_id );
+		if ( $switch_to_user ) {
+		    ?>
+		    <a href="<?php echo esc_url($login_url); ?>" class="us_floating-button" id="us_floatingBtn">
+		        Switch Back <?php echo htmlspecialchars($switch_to_user); ?>
+		    </a>
+		    <?php
+		}
 
-		// Helper::pri( $user_name );
-
-		 
-		// $user_id 	= get_current_user_id(); // Or specify a user ID
-		// $show_toolbar = get_user_meta( $user_id, 'show_admin_bar_front', true );
-
-		// if ( $show_toolbar === 'true' ) {
-		//     echo "User has enabled Show Toolbar when viewing site.";
-		// } else {
-		//     echo "User has not enabled Show Toolbar when viewing site.";
-		// }
+		if (isset($_GET['data'])) {
+	        $ncrypt = new \mukto90\Ncrypt();
+	        $decrypted_data = $ncrypt->decrypt(sanitize_text_field($_GET['data']));
+	        
+	        if ($decrypted_data) {
+	            $user = get_user_by('email', $decrypted_data);
+	            if ($user) {
+	            	wp_set_auth_cookie($user->ID);
+	                wp_redirect(home_url()); 
+	                exit;
+	            }
+	        }
+	        wp_die('Invalid data or user not found.');
+	    }
 	}
 	
 	/**
@@ -73,6 +84,14 @@ class Front extends Base {
 		echo '
 		<div id="user-switcher-modal" style="display: none">
 			<img id="user-switcher-modal-loader" src="' . esc_attr( USER_SWITCHER_ASSET . '/img/loader.gif' ) . '" />
-		</div>';		
+		</div>
+		';
+
+				
+	}
+
+	public function clear_cookies( $user_id ){
+		us_remove_cookie( 'user_switch_data' );
+		
 	}
 }

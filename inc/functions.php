@@ -58,6 +58,28 @@ if ( ! function_exists( 'us_set_cookie' ) ) {
 }
 
 /**
+ * Set or unset cookie.
+ *
+ * @param (string) $cookie_name             The name of the cookie. Cookiehash will be appended to the name.
+ * @param (string) $value                   The value to store.
+ * @param (mixed) $time                     The duraction the cookie will remain.
+ * @return null
+ **/
+if ( ! function_exists( 'us_remove_cookie' ) ) {
+    function us_remove_cookie( $cookie_name ) {
+        if ( empty( $cookie_name ) ) {
+            return; // Exit if no cookie name is provided
+        }
+
+        $secure = ( 'https' === parse_url( home_url(), PHP_URL_SCHEME ) );
+        
+        // Clear the specified cookie by setting it to an empty value and a past expiration time
+        setcookie( $cookie_name, '', time() - 3600, COOKIEPATH, COOKIE_DOMAIN, $secure, true );
+    }
+}
+
+
+/**
  * Get user id of new user & old user
  */
 
@@ -103,17 +125,24 @@ if ( ! function_exists( 'get_username_by_id' ) ) {
 
 if ( ! function_exists( 'get_encrypted_login_url' ) ) {
     function get_encrypted_login_url( $user_id ) {
-        $user_data = get_userdata($user_id);
+        $user_data = get_userdata( $user_id );
 
-        if (!$user_data) {
+        if ( !$user_data ) {
+            error_log('User data not found for user ID: ' . $user_id);
             return null;
         }
 
+        
         $data_to_encrypt = $user_data->user_email;
         $ncrypt = new \mukto90\Ncrypt;
         $encrypted_data = $ncrypt->encrypt($data_to_encrypt);
+
         $login_url = add_query_arg(['data' => $encrypted_data], home_url());
+       
 
         return $login_url;
+
+       
     }
 }
+

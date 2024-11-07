@@ -140,6 +140,7 @@ final class Plugin {
 			$admin->action( 'admin_footer_text', 'footer_text' );
 			$admin->action( 'admin_bar_menu', 'admin_bar_menu', 100 );
 			$admin->action( 'wp_login', 'clear_cookies' );
+			$admin->action( 'remove_cookie', 'clear_cookies' );
 			
 
 		else : // ! is_admin() ?
@@ -148,9 +149,11 @@ final class Plugin {
 			 * Front facing hooks
 			 */
 			$front = new App\Front( $this->plugin );
-			$front->action( 'wp_head', 'head' );
+			$front->action( 'wp_head', 'head', 9999 );
 			$front->action( 'wp_footer', 'modal' );
 			$front->action( 'wp_enqueue_scripts', 'enqueue_scripts' );
+			$front->action( 'user-switcher-back', 'clear_cookies' );
+			$front->action( 'template_redirect', 'template_redirect' );
 			// $front->action( 'wp_login', 'clear_cookies' );
 
 		
@@ -164,6 +167,7 @@ final class Plugin {
 		$ajax = new App\AJAX( $this->plugin );
 		$ajax->priv( 'search_users', 'search_users' );
 		$ajax->priv( 'switch_user', 'switch_user' );
+		$ajax->priv( 'remove_cookie', 'remove_cookie' );
 	}
 
 	/**

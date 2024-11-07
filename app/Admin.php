@@ -109,19 +109,10 @@ class Admin extends Base {
 	 * @param WP_Admin_Bar $wp_admin_bar The WP_Admin_Bar instance, passed by reference.
 	 */
 	public function admin_bar_menu( $wp_admin_bar ) {
-		if ( ! is_admin_bar_showing() ) {
-			return;
+		
+		if ( ! is_admin_bar_showing() || ! current_user_can( 'manage_options' ) ) {
+		    return;
 		}
-
-		$switch_to_user_id 	= get_user_switch_data( 'switch_from' );
-		$switch_to_user 	= get_username_by_id( $switch_to_user_id );
-		$login_url 			= get_encrypted_login_url( $switch_to_user_id );
-
-		$wp_admin_bar->add_node( [
-			'id' => 'switch-back',
-			'title' => 'Switch back '. $switch_to_user,
-			'href' => $login_url,
-		] );
 
 	    $wp_admin_bar->add_menu( array(
 	        'id'    => 'us-switcher-menu',
@@ -142,9 +133,7 @@ class Admin extends Base {
 	 * Clear switcher cookies whenever the user login.
 	 **/
 	public function clear_cookies() {
-		$cookie_name = 'user_switcher_' . COOKIEHASH;
-		$secure = ( 'https' === parse_url( home_url(), PHP_URL_SCHEME ) );
-		setcookie( $cookie_name, null, -1, COOKIEPATH, COOKIE_DOMAIN, $secure );
+		us_remove_cookie( 'user_switch_data' );
 	}
 
 }

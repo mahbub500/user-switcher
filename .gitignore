@@ -3,4 +3,4 @@
 /spa/*/package-lock.json
 composer.lock
 package-lock.json
-/vendor
+/vendor/
