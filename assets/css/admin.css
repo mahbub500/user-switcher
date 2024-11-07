@@ -26,6 +26,33 @@
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.4);
 }
+/* Styling for the "Switch to User" button */
+#switch-to-user-button {
+    background-color: #0073aa; 
+    color: #ffffff;
+    padding: 0px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 5px;
+}
+
+#switch-to-user-button:hover {
+    background-color: #005a8c; /* Darker blue for hover effect */
+}
+
+/* Styling the icon */
+#switch-to-user-button .us-icon.us-user {
+    display: inline-block;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
 
 .us-switcher-modal-content {
     background-color: #fefefe;
