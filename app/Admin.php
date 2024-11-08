@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * @package Plugin
  * @subpackage Admin
- * @author wppluginhub <hi@codexpert.io>
+ * @author wppluginhub <mahbubmr500@gmail.com>
  */
 class Admin extends Base {
 

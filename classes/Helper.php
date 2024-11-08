@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * @package Plugin
  * @subpackage Helper
- * @author Codexpert <hi@codexpert.io>
+ * @author Codexpert <mahbubmr500@gmail.com>
  */
 class Helper {
 

@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Main class for the plugin
  * @package Plugin
- * @author wppluginhub <hi@codexpert.io>
+ * @author wppluginhub <mahbubmr500@gmail.com>
  */
 final class Plugin {
 	

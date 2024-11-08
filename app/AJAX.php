@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * @package Plugin
  * @subpackage AJAX
- * @author wppluginhub <hi@codexpert.io>
+ * @author wppluginhub <mahbubmr500@gmail.com>
  */
 class AJAX extends Base {
 
