@@ -66,7 +66,7 @@ class Helper {
 			wp_cache_add( "us_{$_args['post_type']}", $posts, 'us', 3600 );
 		}
 
-		$posts = $show_heading ? [ '' => sprintf( __( '- Choose a %s -', 'us' ), $_args['post_type'] ) ] + $posts : $posts;
+		$posts = $show_heading ? [ '' => sprintf( __( '- Choose a %s -', 'user-switch' ), $_args['post_type'] ) ] + $posts : $posts;
 
 		return apply_filters( 'us_get_posts', $posts, $_args );
 	}
