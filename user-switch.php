@@ -1,7 +1,7 @@
 <?php
 /**
- * Plugin Name: User Switcher
- * Description: Using this plugin you can switch to another user.
+ * Plugin Name: User Switch
+ * Description: Using this plugin you can switch to any user.
  * Plugin URI: https://wordpress.org/plugins/user-switcher/
  * Author: Codexpert, Inc
  * Author URI: https://profiles.wordpress.org/mahbubmr500/
