@@ -33,7 +33,7 @@ class AJAX extends Base {
 
 	function search_users() {
 	    if ( ! isset( $_GET['_wpnonce'] ) || ! wp_verify_nonce( $_GET['_wpnonce'] ) ) {
-	        wp_send_json_error( [ 'message' => __( 'Unauthorized', 'User Switcher' ) ], 401 );
+	        wp_send_json_error( [ 'message' => __( 'Unauthorized', 'user-switcher' ) ], 401 );
 	    }
 
 	    $current_user_id = get_current_user_id();
@@ -55,13 +55,13 @@ class AJAX extends Base {
 	        }
 	        wp_send_json_success( $user_array );
 	    } else {
-	        wp_send_json_error( [ 'message' => __( 'No users found', 'User Switcher' ) ] );
+	        wp_send_json_error( [ 'message' => __( 'No users found', 'user-switcher' ) ] );
 	    }
 	}
 
 	public function switch_user() {
 	    if ( ! isset( $_POST['_wpnonce'] ) || ! wp_verify_nonce( $_POST['_wpnonce'] ) ) {
-	        wp_send_json_error( [ 'message' => __( 'Unauthorized', 'User Switcher' ) ], 401 );
+	        wp_send_json_error( [ 'message' => __( 'Unauthorized', 'user-switcher' ) ], 401 );
 	    }
 
 	    $switch_from 	= get_current_user_id();
@@ -91,7 +91,7 @@ class AJAX extends Base {
 
 	public function remove_cookie(){
 		if ( ! isset( $_POST['_wpnonce'] ) || ! wp_verify_nonce( $_POST['_wpnonce'] ) ) {
-	        wp_send_json_error( [ 'message' => __( 'Unauthorized', 'User Switcher' ) ], 401 );
+	        wp_send_json_error( [ 'message' => __( 'Unauthorized', 'user-switcher' ) ], 401 );
 	    }
 
 	    us_remove_cookie( 'user_switch_data' );
