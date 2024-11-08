@@ -91,7 +91,9 @@ class Admin extends Base {
 	public function footer_text( $text ) {
 		if( get_current_screen()->parent_base != $this->slug ) return $text;
 
-		return sprintf( __( 'Built with %1$s by the folks at <a href="%2$s" target="_blank">Codexpert, Inc</a>.' ), '&hearts;', 'https://codexpert.io' );
+		return sprintf( __( 'Built with %1$s by the folks at <a href="%2$s" target="_blank">Codexpert, Inc</a>.', 'user-switcher' ), '&hearts;', 'https://codexpert.io' );
+
+
 	}
 
 	public function modal() {
@@ -116,13 +118,13 @@ class Admin extends Base {
 
 	    $wp_admin_bar->add_menu( array(
 	        'id'    => 'us-switcher-menu',
-	        'title' => '<span class="us-icon us-main-menu">' . __( 'User Switch' ) . '</span>',
+	        'title' => '<span class="us-icon us-main-menu">' . __( 'User Switch', 'user-switch' ) . '</span>',
 	    ) );
 
 	    $wp_admin_bar->add_menu(array(
 	        'parent' => 'us-switcher-menu',
 	        'id'     => 'us-to-user',
-	        'title'  => '<button id="switch-to-user-button"><span class="us-icon us-user">' . __('Switch to User') . '</span></button>',
+	        'title'  => '<button id="switch-to-user-button"><span class="us-icon us-user">' . __('Switch to User', 'user-switch') . '</span></button>',
 	        'meta'   => array(
 	            'html' => '',
 	        ),
