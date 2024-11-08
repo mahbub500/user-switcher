@@ -3,8 +3,8 @@
  * All admin facing functions
  */
 namespace Codexpert\User_Switcher\App;
-use Codexpert\Plugin\Base;
-use Codexpert\Plugin\Metabox;
+use WpPluginHub\Plugin\Base;
+use WpPluginHub\Plugin\Metabox;
 
 use Codexpert\User_Switcher\Helper;
 

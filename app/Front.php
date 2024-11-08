@@ -3,8 +3,8 @@
  * All public facing functions
  */
 namespace Codexpert\User_Switcher\App;
-use Codexpert\Plugin\Base;
-use Codexpert\User_Switcher\Helper;
+use WpPluginHub\Plugin\Base;
+use WpPluginHub\User_Switcher\Helper;
 /**
  * if accessed directly, exit.
  */

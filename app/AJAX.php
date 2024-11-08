@@ -3,7 +3,7 @@
  * All AJAX related functions
  */
 namespace Codexpert\User_Switcher\App;
-use Codexpert\Plugin\Base;
+use WpPluginHub\Plugin\Base;
 
 /**
  * if accessed directly, exit.
