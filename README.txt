@@ -1,4 +1,4 @@
-=== User Switcher ===
+=== User Switch ===
 Contributors: @mahbubmr500
 Tags: optimize-database, autoloader
 Requires at least: 5.0 or higher
