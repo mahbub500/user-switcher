@@ -2,11 +2,11 @@
 /**
  * Plugin Name: User Switch
  * Description: Using this plugin you can switch to any user.
- * Plugin URI: https://wordpress.org/plugins/user-switcher/
+ * Plugin URI: https://wordpress.org/plugins/user-switch/
  * Author: Codexpert, Inc
  * Author URI: https://profiles.wordpress.org/mahbubmr500/
  * Version: 1.0.0
- * Text Domain: user-switcher
+ * Text Domain: user-switch
  * Domain Path: /languages
  * License:           GPL v2 or later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html

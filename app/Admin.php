@@ -116,7 +116,7 @@ class Admin extends Base {
 
 	    $wp_admin_bar->add_menu( array(
 	        'id'    => 'us-switcher-menu',
-	        'title' => '<span class="us-icon us-main-menu">' . __( 'User Switcher' ) . '</span>',
+	        'title' => '<span class="us-icon us-main-menu">' . __( 'User Switch' ) . '</span>',
 	    ) );
 
 	    $wp_admin_bar->add_menu(array(
