@@ -2,7 +2,7 @@
 /**
  * All AJAX related functions
  */
-namespace Codexpert\User_Switcher\App;
+namespace wppluginhub\User_Switcher\App;
 use WpPluginHub\Plugin\Base;
 
 /**
@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * @package Plugin
  * @subpackage AJAX
- * @author Codexpert <hi@codexpert.io>
+ * @author wppluginhub <hi@codexpert.io>
  */
 class AJAX extends Base {
 

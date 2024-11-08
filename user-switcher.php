@@ -10,8 +10,8 @@
  * Domain Path: /languages
  */
 
-namespace Codexpert\User_Switcher;
-use Codexpert\Plugin\Notice;
+namespace wppluginhub\User_Switcher;
+use wppluginhub\Plugin\Notice;
 
 /**
  * if accessed directly, exit.
@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Main class for the plugin
  * @package Plugin
- * @author Codexpert <hi@codexpert.io>
+ * @author wppluginhub <hi@codexpert.io>
  */
 final class Plugin {
 	

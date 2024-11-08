@@ -2,7 +2,7 @@
 /**
  * All helpers functions
  */
-namespace Codexpert\User_Switcher;
+namespace WpPluginHub\User_Switcher;
 
 /**
  * if accessed directly, exit.

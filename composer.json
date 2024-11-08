@@ -6,13 +6,13 @@
         }
     ],
     "require": {
-        "codexpert/plugin": "dev-master",
+        "wppluginhub/plugin": "dev-master",
         "mukto90/ncrypt": "^1.0"
     },
     "autoload": {
         "psr-4": {
-            "Codexpert\\User_Switcher\\" : "classes/",
-            "Codexpert\\User_Switcher\\App\\" : "app/"
+            "WpPluginHub\\User_Switcher\\" : "classes/",
+            "wppluginhub\\User_Switcher\\App\\" : "app/"
         }
     }
 }

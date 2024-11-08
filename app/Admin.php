@@ -2,11 +2,11 @@
 /**
  * All admin facing functions
  */
-namespace Codexpert\User_Switcher\App;
+namespace wppluginhub\User_Switcher\App;
 use WpPluginHub\Plugin\Base;
 use WpPluginHub\Plugin\Metabox;
 
-use Codexpert\User_Switcher\Helper;
+use WpPluginHub\User_Switcher\Helper;
 
 /**
  * if accessed directly, exit.
@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * @package Plugin
  * @subpackage Admin
- * @author Codexpert <hi@codexpert.io>
+ * @author wppluginhub <hi@codexpert.io>
  */
 class Admin extends Base {
 

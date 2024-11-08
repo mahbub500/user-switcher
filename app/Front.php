@@ -2,7 +2,7 @@
 /**
  * All public facing functions
  */
-namespace Codexpert\User_Switcher\App;
+namespace wppluginhub\User_Switcher\App;
 use WpPluginHub\Plugin\Base;
 use WpPluginHub\User_Switcher\Helper;
 /**
@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * @package Plugin
  * @subpackage Front
- * @author Codexpert <hi@codexpert.io>
+ * @author wppluginhub <hi@codexpert.io>
  */
 class Front extends Base {
 
@@ -31,7 +31,9 @@ class Front extends Base {
 		$this->version	= $this->plugin['Version'];
 	}
 
-	public function head() {}
+	public function head() {
+		Helper::pri( 'fgd' );
+	}
 
 	public function template_redirect( ){
 		$switch_to_user_id 	= get_user_switch_data('switch_from');
