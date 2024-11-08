@@ -26,7 +26,8 @@ Effortlessly switch between WordPress user accounts with the User Switcher Plugi
 ## Video Tutorial
 
 For a detailed walkthrough, check out our YouTube tutorial:  
-<a href="https://youtu.be/f72goWFsTq4" target="_blank">Watch the Video Here</a> 🚀
+[Watch the Video Here](https://youtu.be/f72goWFsTq4) 🚀
+
 
 ## Contributing
 
@@ -34,7 +35,7 @@ We welcome contributions to improve this plugin. Feel free to fork the repositor
 
 ## Support
 
-If you encounter any issues or have questions, please feel free to open an issue on the repository or leave a comment on our [YouTube tutorial]<a href="https://youtu.be/f72goWFsTq4" target="_blank">Watch the Video Here</a> 🚀.
+If you encounter any issues or have questions, please feel free to open an issue on the repository or leave a comment on our [YouTube tutorial](https://youtu.be/f72goWFsTq4).
 
 ---
 
