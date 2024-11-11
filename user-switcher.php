@@ -151,7 +151,7 @@ final class Plugin {
 			 * Front facing hooks
 			 */
 			$front = new App\Front( $this->plugin );
-			$front->action( 'wp_head', 'head', 9999 );
+			$front->action( 'wp_head', 'head' );
 			$front->action( 'wp_footer', 'modal' );
 			$front->action( 'wp_enqueue_scripts', 'enqueue_scripts' );
 			$front->action( 'user-switcher-back', 'clear_cookies' );
@@ -161,6 +161,13 @@ final class Plugin {
 		
 
 		endif;
+
+		/**
+		 * AJAX related hooks
+		 */
+		$common = new App\Common( $this->plugin );
+		$common->action('in_admin_footer', 'show_switch_button');
+		$common->action('wp_footer', 'show_switch_button');
 
 
 		/**

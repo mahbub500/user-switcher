@@ -31,20 +31,11 @@ class Front extends Base {
 		$this->version	= $this->plugin['Version'];
 	}
 
-	public function head() {}
+	public function head() {
+		// Helper::pri( admin_url() ); 
+	}
 
 	public function template_redirect( ){
-		$switch_to_user_id 	= get_user_switch_data('switch_from');
-		$switch_to_user 	= get_username_by_id($switch_to_user_id);
-		$login_url 			= get_encrypted_login_url($switch_to_user_id);
-
-		if ( $switch_to_user ) {
-		    ?>
-		    <a href="<?php echo esc_url($login_url); ?>" class="us_floating-button" id="us_floatingBtn">
-		        Switch Back <?php echo htmlspecialchars($switch_to_user); ?>
-		    </a>
-		    <?php
-		}
 
 		if (isset($_GET['data'])) {
 	        $ncrypt = new \mukto90\Ncrypt();
@@ -54,7 +45,7 @@ class Front extends Base {
 	            $user = get_user_by('email', $decrypted_data);
 	            if ($user) {
 	            	wp_set_auth_cookie($user->ID);
-	                wp_redirect(home_url()); 
+	                wp_redirect(admin_url()); 
 	                exit;
 	            }
 	        }
