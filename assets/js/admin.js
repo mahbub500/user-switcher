@@ -38,7 +38,6 @@ jQuery(document).ready(function($) {
                 },
                 processResults: function(data) {
                     var options = [];
-                    console.log( data.data );
                     $.each(data.data, function(index, title) { 
                         options.push({ 
                             id: index,
