@@ -31,9 +31,7 @@ class Front extends Base {
 		$this->version	= $this->plugin['Version'];
 	}
 
-	public function head() {
-		// Helper::pri( admin_url() ); 
-	}
+	public function head() {}
 
 	public function template_redirect( ){
 

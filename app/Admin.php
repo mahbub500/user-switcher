@@ -76,10 +76,11 @@ class Admin extends Base {
 		
 		wp_enqueue_style( $this->slug, plugins_url( "/assets/css/admin{$min}.css", USER_SWITCHER ), '', $this->version, 'all' );
 
+		wp_enqueue_style( 'select2', plugins_url( "/assets/css/select2{$min}.css", USER_SWITCHER ), '', $this->version, 'all' );
+
 		wp_enqueue_script( $this->slug, plugins_url( "/assets/js/admin{$min}.js", USER_SWITCHER ), [ 'jquery' ], $this->version, true );
 
-		wp_enqueue_script( 'select2', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.min.js', [ 'jquery' ], null, true );
-		wp_enqueue_style( 'select2', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css' );
+		wp_enqueue_script( 'select2', plugins_url( "/assets/js/select2.min.js", USER_SWITCHER ), [ 'jquery' ], $this->version, true );
 
 		$localized = [
 			'ajaxurl'	=> admin_url( 'admin-ajax.php' ),
