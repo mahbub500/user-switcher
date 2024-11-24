@@ -32,7 +32,7 @@ class Common extends Base {
 	}
 
 	public function show_switch_button(){
-		$switch_to_user_id 	= get_user_switch_data('switch_from');
+		$switch_to_user_id 	= stu_user_switch_data('switch_from');
 		$switch_to_user 	= get_username_by_id($switch_to_user_id);
 		$login_url 			= get_encrypted_login_url($switch_to_user_id);
 

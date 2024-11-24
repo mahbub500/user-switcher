@@ -83,8 +83,8 @@ if ( ! function_exists( 'us_remove_cookie' ) ) {
  * Get user id of new user & old user
  */
 
-if ( ! function_exists( 'get_user_switch_data' ) ) {
-    function get_user_switch_data( $type ) {
+if ( ! function_exists( 'stu_user_switch_data' ) ) {
+    function stu_user_switch_data( $type ) {
         if ( isset( $_COOKIE['user_switch_data'] ) ) {
             $switch_data_json = stripslashes( $_COOKIE['user_switch_data'] );
             $switch_data = json_decode( $switch_data_json, true );
