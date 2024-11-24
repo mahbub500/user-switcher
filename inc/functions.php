@@ -50,8 +50,8 @@ endif;
  * @return null
  **/
 
-if ( ! function_exists( 'us_set_cookie' ) ) {
-    function us_set_cookie( $cookie_name, $value, $time ) {
+if ( ! function_exists( 'stu_us_set_cookie' ) ) {
+    function stu_us_set_cookie( $cookie_name, $value, $time ) {
         $secure = ( 'https' === wp_parse_url( home_url(), PHP_URL_SCHEME ) );
         setcookie( $cookie_name, $value, $time, COOKIEPATH, COOKIE_DOMAIN, $secure );
     }
