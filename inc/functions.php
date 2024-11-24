@@ -107,8 +107,8 @@ if ( ! function_exists( 'stu_user_switch_data' ) ) {
  * Get user name by user id
  */
 
-if ( ! function_exists( 'get_username_by_id' ) ) {
-    function get_username_by_id( $user_id ) {
+if ( ! function_exists( 'stu_username_by_id' ) ) {
+    function stu_username_by_id( $user_id ) {
         $user_data = get_userdata($user_id);
         
         if ($user_data) {
@@ -123,8 +123,8 @@ if ( ! function_exists( 'get_username_by_id' ) ) {
  * Get encrypted log in url
  */
 
-if ( ! function_exists( 'get_encrypted_login_url' ) ) {
-    function get_encrypted_login_url( $user_id ) {
+if ( ! function_exists( 'stu_encrypted_login_url' ) ) {
+    function stu_encrypted_login_url( $user_id ) {
         $user_data = get_userdata( $user_id );
 
         if ( !$user_data ) {

@@ -32,13 +32,13 @@ class AJAX extends Base {
 	}
 
 	function search_users() {
-	    if ( ! isset( $_GET['_wpnonce'] ) || ! wp_verify_nonce( $_GET['_wpnonce'] ) ) {
+	    if ( ! isset( sanitize_text_field( $_GET['_wpnonce'] )) || ! wp_verify_nonce( sanitize_text_field( $_GET['_wpnonce'] ) ) ) {
 	        wp_send_json_error( [ 'message' => __( 'Unauthorized', 'switch-to-user' ) ], 401 );
 	    }
 
 	    $current_user_id = get_current_user_id();
 
-	    $keyword = isset( $_GET['keyword'] ) ? sanitize_text_field( $_GET['keyword'] ) : '';
+	    $keyword = isset( sanitize_text_field ( $_GET['keyword'] ) ) ? sanitize_text_field( $_GET['keyword'] ) : '';
 
 	    $args = [
 	        'search'         => '*' . esc_attr( $keyword ) . '*',
@@ -77,7 +77,7 @@ class AJAX extends Base {
 
 		stu_us_set_cookie( 'user_switch_data', $switch_data_json, time() + DAY_IN_SECONDS );
 
-		$login_url 	= get_encrypted_login_url( $switch_to_user );
+		$login_url 	= stu_encrypted_login_url( $switch_to_user );
 	
 	    $response = array(
 	        'success' => true,
