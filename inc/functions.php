@@ -65,13 +65,13 @@ if ( ! function_exists( 'stu_us_set_cookie' ) ) {
  * @param (mixed) $time                     The duraction the cookie will remain.
  * @return null
  **/
-if ( ! function_exists( 'us_remove_cookie' ) ) {
-    function us_remove_cookie( $cookie_name ) {
+if ( ! function_exists( 'stu_remove_cookie' ) ) {
+    function stu_remove_cookie( $cookie_name ) {
         if ( empty( $cookie_name ) ) {
             return; // Exit if no cookie name is provided
         }
 
-        $secure = ( 'https' === parse_url( home_url(), PHP_URL_SCHEME ) );
+        $secure = ( 'https' === wp_parse_url( home_url(), PHP_URL_SCHEME ) );
         
         // Clear the specified cookie by setting it to an empty value and a past expiration time
         setcookie( $cookie_name, '', time() - 3600, COOKIEPATH, COOKIE_DOMAIN, $secure, true );
