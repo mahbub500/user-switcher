@@ -86,8 +86,8 @@ if ( ! function_exists( 'stu_remove_cookie' ) ) {
 if ( ! function_exists( 'stu_user_switch_data' ) ) {
     function stu_user_switch_data( $type ) {
         if ( isset( $_COOKIE['user_switch_data'] ) ) {
-            $switch_data_json = stripslashes( $_COOKIE['user_switch_data'] );
-            $switch_data = json_decode( $switch_data_json, true );
+            $switch_data_json   = sanitize_text_field ( wp_unslash( $_COOKIE['user_switch_data'] ));
+            $switch_data        = json_decode( $switch_data_json, true );
             
             $switch_from = $switch_data['switch_from'] ?? null;
             $switch_to_user = $switch_data['switch_to_user'] ?? null;
