@@ -9,7 +9,7 @@
             <select class="us-user-name qlfv-user-onchange" id="user-info">
                 </select>
 			<p>
-				<input type="submit" id="us-switcher-button" value="<?php _e( 'Go', 'switch-to-user' ); ?>" class="button button-primary " />
+				<input type="submit" id="us-switcher-button" value="<?php esc_html_e( 'Go', 'switch-to-user' ); ?>" class="button button-primary " />
             </p>
 		</form>
         <div id="us-switcher-results"></div>

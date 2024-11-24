@@ -6,7 +6,7 @@
  * Author: https://techwithmahbub.com/
  * Author URI: https://profiles.wordpress.org/mahbubmr500/
  * Version: 1.0.0
- * Text Domain: switch-to-user
+ * Text Domain: switch-to-user 
  * Domain Path: /languages
  * License:           GPL v2 or later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
