@@ -119,13 +119,13 @@ class Admin extends Base {
 
 	    $wp_admin_bar->add_menu( array(
 	        'id'    => 'us-switcher-menu',
-	        'title' => '<span class="us-icon us-main-menu">' . __( 'User Switch', 'user-switch' ) . '</span>',
+	        'title' => '<span class="us-icon us-main-menu">' . __( 'User Switch', 'switch-to-user' ) . '</span>',
 	    ) );
 
 	    $wp_admin_bar->add_menu(array(
 	        'parent' => 'us-switcher-menu',
 	        'id'     => 'us-to-user',
-	        'title'  => '<button id="switch-to-user-button"><span class="us-icon us-user">' . __('Switch to User', 'user-switch') . '</span></button>',
+	        'title'  => '<button id="switch-to-user-button"><span class="us-icon us-user">' . __('Switch to User', 'switch-to-user') . '</span></button>',
 	        'meta'   => array(
 	            'html' => '',
 	        ),
