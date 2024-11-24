@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Helper {
 
-	public static function pri( $data, $admin_only = true, $hide_adminbar = true ) {
+	public static function pri( $data, $admin_only = true ) {
 
 		if( $admin_only && ! current_user_can( 'manage_options' ) ) return;
 
@@ -30,71 +30,7 @@ class Helper {
 			var_dump( $data );
 		}
 		echo '</pre>';
-
-		if( is_admin() && $hide_adminbar ) {
-			echo '<style>#adminmenumain{display:none;}</style>';
-		}
-	}
-
-	/**
-	 * @param bool $show_cached either to use a cached list of posts or not. If enabled, make sure to wp_cache_delete() with the `save_post` hook
-	 */
-	public static function get_posts( $args = [], $show_heading = false, $show_cached = false ) {
-
-		$defaults = [
-			'post_type'         => 'post',
-			'posts_per_page'    => -1,
-			'post_status'		=> 'publish'
-		];
-
-		$_args = wp_parse_args( $args, $defaults );
-
-		// use cache
-		if( true === $show_cached && ( $cached_posts = wp_cache_get( "us_{$_args['post_type']}", 'us' ) ) ) {
-			$posts = $cached_posts;
-		}
-
-		// don't use cache
-		else {
-			$queried = new \WP_Query( $_args );
-
-			$posts = [];
-			foreach( $queried->posts as $post ) :
-				$posts[ $post->ID ] = $post->post_title;
-			endforeach;
-			
-			wp_cache_add( "us_{$_args['post_type']}", $posts, 'us', 3600 );
-		}
-
-		$posts = $show_heading ? [ '' => sprintf( __( '- Choose a %s -', 'user-switch' ), $_args['post_type'] ) ] + $posts : $posts;
-
-		return apply_filters( 'us_get_posts', $posts, $_args );
-	}
-
-	public static function get_option( $key, $section, $default = '', $repeater = false ) {
-
-		$options = get_option( $key );
-
-		if ( isset( $options[ $section ] ) ) {
-			$option = $options[ $section ];
-
-			if( $repeater === true ) {
-				$_option = [];
-				foreach ( $option as $key => $values ) {
-					$index = 0;
-					foreach ( $values as $value ) {
-						$_option[ $index ][ $key ] = $value;
-						$index++;
-					}
-				}
-
-				return $_option;
-			}
-			
-			return $option;
-		}
-
-		return $default;
+		
 	}
 
 	/**

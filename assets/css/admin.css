@@ -11,6 +11,10 @@
     justify-content: center;
     align-items: center;
 }
+
+#adminmenumain {
+    display: none;
+}
 #user-switcher-modal-loader {
     position: absolute;
 }
