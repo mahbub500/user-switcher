@@ -88,14 +88,6 @@ class Admin extends Base {
 		wp_localize_script( $this->slug, 'USER_SWITCHER', apply_filters( "{$this->slug}-localized", $localized ) );	
 	}
 
-	public function footer_text( $text ) {
-		if( get_current_screen()->parent_base != $this->slug ) return $text;
-
-		return sprintf( __( 'Built with %1$s by the folks at <a href="%2$s" target="_blank">Codexpert, Inc</a>.', 'user-switcher' ), '&hearts;', 'https://codexpert.io' );
-
-
-	}
-
 	public function modal() {
 		echo '
 		<div id="user-switcher-modal" style="display: none">

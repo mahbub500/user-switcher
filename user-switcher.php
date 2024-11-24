@@ -139,7 +139,6 @@ final class Plugin {
 			$admin->action( 'admin_footer', 'modal' );
 			$admin->action( 'plugins_loaded', 'i18n' );
 			$admin->action( 'admin_enqueue_scripts', 'enqueue_scripts' );
-			$admin->action( 'admin_footer_text', 'footer_text' );
 			$admin->action( 'admin_bar_menu', 'admin_bar_menu', 100 );
 			$admin->action( 'wp_login', 'clear_cookies' );
 			$admin->action( 'remove_cookie', 'clear_cookies' );
