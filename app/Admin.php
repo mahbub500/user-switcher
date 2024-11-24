@@ -43,10 +43,9 @@ class Admin extends Base {
 	public function i18n() {
 		load_plugin_textdomain( 'user-switcher', false, USER_SWITCHER_DIR . '/languages/' );
 
-		$cookie = $_COOKIE;
 		$cookie_name = 'user_switcher_' . COOKIEHASH;
 
-		if ( ! empty( $cookie[ $cookie_name ] ) ) {
+		if ( ! empty( $_COOKIE[ $cookie_name ] ) ) {
 			$this->user_switch_id = $cookie[ $cookie_name ];
 		}
 	}
