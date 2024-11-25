@@ -32,13 +32,13 @@ class AJAX extends Base {
 	}
 
 	function search_users() {
-	    if ( ! isset( sanitize_text_field( $_GET['_wpnonce'] )) || ! wp_verify_nonce( sanitize_text_field( $_GET['_wpnonce'] ) ) ) {
+	    if ( ! isset( $_GET['_wpnonce'] ) || ! wp_verify_nonce( sanitize_text_field( $_GET['_wpnonce'] ) ) ) {
 	        wp_send_json_error( [ 'message' => __( 'Unauthorized', 'switch-to-user' ) ], 401 );
 	    }
 
 	    $current_user_id = get_current_user_id();
 
-	    $keyword = isset( sanitize_text_field ( $_GET['keyword'] ) ) ? sanitize_text_field( $_GET['keyword'] ) : '';
+	    $keyword = isset( $_GET['keyword']  ) ? sanitize_text_field( $_GET['keyword'] ) : '';
 
 	    $args = [
 	        'search'         => '*' . esc_attr( $keyword ) . '*',
