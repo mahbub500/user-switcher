@@ -39,10 +39,10 @@ class Front extends Base {
 	        $ncrypt = new \mukto90\Ncrypt();
 	        $decrypted_data = $ncrypt->decrypt(sanitize_text_field($_GET['data']));
 	        
-	        if ($decrypted_data) {
-	            $user = get_user_by('email', $decrypted_data);
-	            if ($user) {
-	            	wp_set_auth_cookie($user->ID);
+	        if ( $decrypted_data ) {
+	            $user = get_user_by( 'email', $decrypted_data );
+	            if ( $user ) {
+	            	wp_set_auth_cookie( $user->ID );
 	                wp_redirect(admin_url()); 
 	                exit;
 	            }

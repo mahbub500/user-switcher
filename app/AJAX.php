@@ -65,7 +65,7 @@ class AJAX extends Base {
 	    }
 
 	    $switch_from 	= get_current_user_id();
-	    $switch_to_user = intval($_POST['user_id']);
+	    $switch_to_user = intval( sanitize_text_field( $_POST['user_id'] ));
 
 	    $switch_data = [
 		    'switch_from' => $switch_from,
