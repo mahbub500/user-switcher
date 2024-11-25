@@ -33,7 +33,7 @@ class AJAX extends Base {
 
 	function search_users() {
 	    if ( ! isset( $_GET['_wpnonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['_wpnonce'] )))) {
-	        wp_send_json_error( [ 'message' => __( 'Unauthorized', 'switch-to-user' ) ], 401 );
+	        wp_send_json_error( [ 'message' => __( 'Unauthorized', 'user-switcher' ) ], 401 );
 	    }
 
 	    $current_user_id = get_current_user_id();
@@ -55,13 +55,13 @@ class AJAX extends Base {
 	        }
 	        wp_send_json_success( $user_array );
 	    } else {
-	        wp_send_json_error( [ 'message' => __( 'No users found', 'switch-to-user' ) ] );
+	        wp_send_json_error( [ 'message' => __( 'No users found', 'user-switcher' ) ] );
 	    }
 	}
 
 	public function switch_user() {
 	    if ( ! isset( $_POST['_wpnonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_wpnonce'] )))) {
-	        wp_send_json_error( [ 'message' => __( 'Unauthorized', 'switch-to-user' ) ], 401 );
+	        wp_send_json_error( [ 'message' => __( 'Unauthorized', 'user-switcher' ) ], 401 );
 	    }
 
 	    $switch_from 	= get_current_user_id();
@@ -82,7 +82,7 @@ class AJAX extends Base {
 	    $response = array(
 	        'success' => true,
 	        'url' => $login_url,
-	        'message' => __( 'User switched successfully!', 'switch-to-user' ) ,
+	        'message' => __( 'User switched successfully!', 'user-switcher' ) ,
 	    );
 	    
 	    wp_send_json_success( $response );
@@ -91,14 +91,14 @@ class AJAX extends Base {
 
 	public function remove_cookie(){
 		if ( ! isset( $_POST['_wpnonce'] ) || ! wp_verify_nonce( $_POST['_wpnonce'] ) ) {
-	        wp_send_json_error( [ 'message' => __( 'Unauthorized', 'switch-to-user' ) ], 401 );
+	        wp_send_json_error( [ 'message' => __( 'Unauthorized', 'user-switcher' ) ], 401 );
 	    }
 
 	    stu_remove_cookie( 'user_switch_data' );
 
 	    $response = array(
 	        'success' => true,
-	        'message' => __( 'Cookie Removed', 'switch-to-user' ) ,
+	        'message' => __( 'Cookie Removed', 'user-switcher' ) ,
 	    );
 	    
 	    wp_send_json_success( $response );
