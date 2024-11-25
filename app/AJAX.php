@@ -43,7 +43,7 @@ class AJAX extends Base {
 	    $args = [
 	        'search'         => '*' . esc_attr( $keyword ) . '*',
 	        'search_columns' => ['user_login', 'user_nicename', 'display_name', 'user_email'],
-	        'exclude'        => [$current_user_id],
+	        'exclude'        => [ $current_user_id ],
 	    ];
 
 	    $user_query = new \WP_User_Query( $args );
@@ -51,7 +51,7 @@ class AJAX extends Base {
 	    if ( ! empty( $users ) ) {
 	        $user_array = [];
 	        foreach ( $users as $user ) {
-	            $user_array[$user->ID] = $user->user_login;
+	            $user_array[ $user->ID ] = $user->user_login;
 	        }
 	        wp_send_json_success( $user_array );
 	    } else {
@@ -68,11 +68,11 @@ class AJAX extends Base {
 	    $switch_to_user = intval( sanitize_text_field( $_POST['user_id'] ));
 
 	    $switch_data = [
-		    'switch_from' => $switch_from,
-		    'switch_to_user' => $switch_to_user,
+		    'switch_from' 		=> $switch_from,
+		    'switch_to_user' 	=> $switch_to_user,
 		];
 
-		$switch_data_json = json_encode($switch_data);
+		$switch_data_json = json_encode( $switch_data );
 
 
 		stu_us_set_cookie( 'user_switch_data', $switch_data_json, time() + DAY_IN_SECONDS );
