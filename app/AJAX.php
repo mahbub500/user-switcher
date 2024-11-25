@@ -32,13 +32,13 @@ class AJAX extends Base {
 	}
 
 	function search_users() {
-	    if ( ! isset( $_GET['_wpnonce'] ) || ! wp_verify_nonce( sanitize_text_field( $_GET['_wpnonce'] ) ) ) {
+	    if ( ! isset( $_GET['_wpnonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['_wpnonce'] )))) {
 	        wp_send_json_error( [ 'message' => __( 'Unauthorized', 'switch-to-user' ) ], 401 );
 	    }
 
 	    $current_user_id = get_current_user_id();
 
-	    $keyword = isset( $_GET['keyword']  ) ? sanitize_text_field( $_GET['keyword'] ) : '';
+	    $keyword = isset( $_GET['keyword']  ) ? sanitize_text_field( wp_unslash ( $_GET['keyword'] )) : '';
 
 	    $args = [
 	        'search'         => '*' . esc_attr( $keyword ) . '*',
@@ -60,7 +60,7 @@ class AJAX extends Base {
 	}
 
 	public function switch_user() {
-	    if ( ! isset( $_POST['_wpnonce'] ) || ! wp_verify_nonce( $_POST['_wpnonce'] ) ) {
+	    if ( ! isset( $_POST['_wpnonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_wpnonce'] )))) {
 	        wp_send_json_error( [ 'message' => __( 'Unauthorized', 'switch-to-user' ) ], 401 );
 	    }
 
