@@ -24,8 +24,6 @@ class Admin extends Base {
 
 	public $plugin;
 
-	// private $user_switch_id = 0;
-
 	/**
 	 * Constructor function
 	 */
@@ -34,7 +32,6 @@ class Admin extends Base {
 		$this->slug		= $this->plugin['TextDomain'];
 		$this->name		= $this->plugin['Name'];
 		$this->version	= $this->plugin['Version'];
-		$this->user_switch_id	= $this->plugin['user_switch_id'];
 	}
 
 	/**

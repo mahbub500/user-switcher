@@ -107,9 +107,7 @@ final class Plugin {
 		$this->plugin['min_php']		= '5.6';
 		$this->plugin['min_wp']			= '4.0';
 		$this->plugin['icon']			= USER_SWITCHER_ASSET . '/img/icon.png';
-		// $this->plugin['server']			= apply_filters( 'user-switcher_server', 'https://codexpert.io/dashboard' );
-		$this->plugin['user_switch_id']	= 0;
-		
+			
 	}
 
 	/**
