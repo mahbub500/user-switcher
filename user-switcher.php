@@ -5,7 +5,7 @@
  * Plugin URI: https://wordpress.org/plugins/user-switcher/
  * Author: Mahbub
  * Author URI: https://profiles.wordpress.org/mahbubmr500/
- * Version: 1.0.1
+ * Version: 1.0.2
  * Text Domain: user-switcher 
  * Domain Path: /languages
  * License:           GPL v2 or later
