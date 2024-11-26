@@ -124,7 +124,7 @@ class Admin extends Base {
 	 * Clear switcher cookies whenever the user login.
 	 **/
 	public function clear_cookies() {
-		us_remove_cookie( 'user_switch_data' );
+		stu_remove_cookie( 'user_switch_data' );
 	}
 
 }
