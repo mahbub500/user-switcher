@@ -1,6 +1,6 @@
 <?php
 if( ! function_exists( 'get_plugin_data' ) ) {
-	require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+    require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 }
 
 /**
@@ -12,9 +12,9 @@ if( ! function_exists( 'get_plugin_data' ) ) {
  */
 if( ! function_exists( 'us_site_url' ) ) :
 function us_site_url() {
-	$url = get_bloginfo( 'url' );
+    $url = get_bloginfo( 'url' );
 
-	return $url;
+    return $url;
 }
 endif;
 
@@ -27,8 +27,8 @@ endif;
 if( ! function_exists( 'get_all_users_with_names_and_ids' ) ) :
  function get_all_users_with_names_and_ids() {
     
-    $users 		= get_users();
-    $user_data 	= array();
+    $users      = get_users();
+    $user_data  = array();
     
     foreach ($users as $user) {
         $user_data[] = array(
@@ -128,7 +128,6 @@ if ( ! function_exists( 'stu_encrypted_login_url' ) ) {
         $user_data = get_userdata( $user_id );
 
         if ( !$user_data ) {
-            error_log('User data not found for user ID: ' . $user_id);
             return null;
         }
 
@@ -145,4 +144,3 @@ if ( ! function_exists( 'stu_encrypted_login_url' ) ) {
        
     }
 }
-
