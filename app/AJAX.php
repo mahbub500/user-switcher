@@ -65,14 +65,16 @@ class AJAX extends Base {
 	    }
 
 	    $switch_from 	= get_current_user_id();
-	    $switch_to_user = intval( sanitize_text_field( $_POST['user_id'] ));
+
+	    if ( ! isset( $_POST['user_id'] ) ) return;
+	    $switch_to_user = intval(  sanitize_text_field( wp_unslash( $_POST['user_id'] )));
 
 	    $switch_data = [
 		    'switch_from' 		=> $switch_from,
 		    'switch_to_user' 	=> $switch_to_user,
 		];
 
-		$switch_data_json = json_encode( $switch_data );
+		$switch_data_json = wp_json_encode( $switch_data );
 
 
 		stu_us_set_cookie( 'user_switch_data', $switch_data_json, time() + DAY_IN_SECONDS );
@@ -90,7 +92,7 @@ class AJAX extends Base {
 	}
 
 	public function remove_cookie(){
-		if ( ! isset( $_POST['_wpnonce'] ) || ! wp_verify_nonce( $_POST['_wpnonce'] ) ) {
+		if ( ! isset( $_POST['_wpnonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ))) ) {
 	        wp_send_json_error( [ 'message' => __( 'Unauthorized', 'user-switcher' ) ], 401 );
 	    }
 

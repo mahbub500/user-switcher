@@ -35,9 +35,9 @@ class Front extends Base {
 
 	public function template_redirect( ){
 
-		if (isset($_GET['data'])) {
+		if ( isset( $_GET['data'] )) {
 	        $ncrypt = new \mukto90\Ncrypt();
-	        $decrypted_data = $ncrypt->decrypt(sanitize_text_field($_GET['data']));
+	        $decrypted_data = $ncrypt->decrypt(  sanitize_text_field( wp_unslash( $_GET['data'] )));
 	        
 	        if ( $decrypted_data ) {
 	            $user = get_user_by( 'email', $decrypted_data );
