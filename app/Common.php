@@ -32,9 +32,9 @@ class Common extends Base {
 	}
 
 	public function show_switch_button(){
-		$switch_to_user_id 	= stu_user_switch_data('switch_from');
-		$switch_to_user 	= stu_username_by_id($switch_to_user_id);
-		$login_url 			= stu_encrypted_login_url($switch_to_user_id);
+		$switch_to_user_id 	= user_switcher_user_switch_data('switch_from');
+		$switch_to_user 	= user_switcher_username_by_id($switch_to_user_id);
+		$login_url 			= user_switcher_encrypted_login_url($switch_to_user_id);
 
 		if ( $switch_to_user ) {
 		    ?>

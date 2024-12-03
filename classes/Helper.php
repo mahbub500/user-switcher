@@ -47,7 +47,7 @@ class Helper {
 	public static function get_template( $slug, $base = 'views', $args = null ) {
 
 		// templates can be placed in this directory
-		$overwrite_template_dir = apply_filters( 'us_template_overwrite_dir', get_stylesheet_directory() . '/user-switcher/', $slug, $base, $args );
+		$overwrite_template_dir = apply_filters( 'user_switcher_template_overwrite_dir', get_stylesheet_directory() . '/user-switcher/', $slug, $base, $args );
 		
 		// default template directory
 		$plugin_template_dir = dirname( USER_SWITCHER ) . "/{$base}/";
