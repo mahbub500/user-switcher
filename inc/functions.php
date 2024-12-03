@@ -3,43 +3,7 @@ if( ! function_exists( 'get_plugin_data' ) ) {
 	require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 }
 
-/**
- * Gets the site's base URL
- * 
- * @uses get_bloginfo()
- * 
- * @return string $url the site URL
- */
-if( ! function_exists( 'us_site_url' ) ) :
-function us_site_url() {
-	$url = get_bloginfo( 'url' );
 
-	return $url;
-}
-endif;
-
-/**
- * Get all users with their names and IDs.
- *
- * @return array Array of users with 'ID' and 'display_name'.
- */
-
-if( ! function_exists( 'get_all_users_with_names_and_ids' ) ) :
- function get_all_users_with_names_and_ids() {
-    
-    $users 		= get_users();
-    $user_data 	= array();
-    
-    foreach ($users as $user) {
-        $user_data[] = array(
-            'ID' => $user->ID,
-            'display_name' => $user->display_name,
-        );
-    }
-    
-    return $user_data;
-}
-endif;
 
 /**
  * Set or unset cookie.
@@ -50,8 +14,8 @@ endif;
  * @return null
  **/
 
-if ( ! function_exists( 'stu_us_set_cookie' ) ) {
-    function stu_us_set_cookie( $cookie_name, $value, $time ) {
+if ( ! function_exists( 'user_switcher_us_set_cookie' ) ) {
+    function user_switcher_us_set_cookie( $cookie_name, $value, $time ) {
         $secure = ( 'https' === wp_parse_url( home_url(), PHP_URL_SCHEME ) );
         setcookie( $cookie_name, $value, $time, COOKIEPATH, COOKIE_DOMAIN, $secure );
     }
@@ -65,8 +29,8 @@ if ( ! function_exists( 'stu_us_set_cookie' ) ) {
  * @param (mixed) $time                     The duraction the cookie will remain.
  * @return null
  **/
-if ( ! function_exists( 'stu_remove_cookie' ) ) {
-    function stu_remove_cookie( $cookie_name ) {
+if ( ! function_exists( 'user_switcher_remove_cookie' ) ) {
+    function user_switcher_remove_cookie( $cookie_name ) {
         if ( empty( $cookie_name ) ) {
             return; // Exit if no cookie name is provided
         }
@@ -83,8 +47,8 @@ if ( ! function_exists( 'stu_remove_cookie' ) ) {
  * Get user id of new user & old user
  */
 
-if ( ! function_exists( 'stu_user_switch_data' ) ) {
-    function stu_user_switch_data( $type ) {
+if ( ! function_exists( 'user_switcher_user_switch_data' ) ) {
+    function user_switcher_user_switch_data( $type ) {
         if ( isset( $_COOKIE['user_switch_data'] ) ) {
             $switch_data_json   = sanitize_text_field ( wp_unslash( $_COOKIE['user_switch_data'] ));
             $switch_data        = json_decode( $switch_data_json, true );
@@ -107,8 +71,8 @@ if ( ! function_exists( 'stu_user_switch_data' ) ) {
  * Get user name by user id
  */
 
-if ( ! function_exists( 'stu_username_by_id' ) ) {
-    function stu_username_by_id( $user_id ) {
+if ( ! function_exists( 'user_switcher_username_by_id' ) ) {
+    function user_switcher_username_by_id( $user_id ) {
         $user_data = get_userdata($user_id);
         
         if ($user_data) {
@@ -123,8 +87,8 @@ if ( ! function_exists( 'stu_username_by_id' ) ) {
  * Get encrypted log in url
  */
 
-if ( ! function_exists( 'stu_encrypted_login_url' ) ) {
-    function stu_encrypted_login_url( $user_id ) {
+if ( ! function_exists( 'user_switcher_encrypted_login_url' ) ) {
+    function user_switcher_encrypted_login_url( $user_id ) {
         $user_data = get_userdata( $user_id );
 
         if ( !$user_data ) {

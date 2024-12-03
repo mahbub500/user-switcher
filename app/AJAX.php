@@ -75,9 +75,9 @@ class AJAX extends Base {
 		$switch_data_json = json_encode( $switch_data );
 
 
-		stu_us_set_cookie( 'user_switch_data', $switch_data_json, time() + DAY_IN_SECONDS );
+		user_switcher_us_set_cookie( 'user_switch_data', $switch_data_json, time() + DAY_IN_SECONDS );
 
-		$login_url 	= stu_encrypted_login_url( $switch_to_user );
+		$login_url 	= user_switcher_encrypted_login_url( $switch_to_user );
 	
 	    $response = array(
 	        'success' => true,
@@ -94,7 +94,7 @@ class AJAX extends Base {
 	        wp_send_json_error( [ 'message' => __( 'Unauthorized', 'user-switcher' ) ], 401 );
 	    }
 
-	    stu_remove_cookie( 'user_switch_data' );
+	    user_switcher_remove_cookie( 'user_switch_data' );
 
 	    $response = array(
 	        'success' => true,

@@ -80,7 +80,7 @@ class Front extends Base {
 	}
 
 	public function clear_cookies( $user_id ){
-		stu_remove_cookie( 'user_switch_data' );
+		user_switcher_remove_cookie( 'user_switch_data' );
 		
 	}
 }
