@@ -1,10 +1,10 @@
 === Switch To User ===
 Contributors: @mahbubmr500
-Tags: optimize-database, autoloader
+Tags: user, user-switch
 Requires at least: 5.0 or higher
 Tested up to: 6.7.1
 Requires PHP: 7.0 or higher
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
