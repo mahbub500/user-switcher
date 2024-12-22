@@ -71,7 +71,7 @@ class Helper {
 			return ob_get_clean();
 		}
 		else {
-			return __( 'Template not found!', 'switch-to-user' );
+			return __( 'Template not found!', 'user-switcher' );
 		}
 	}
 }

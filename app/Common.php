@@ -39,7 +39,7 @@ class Common extends Base {
 		if ( $switch_to_user ) {
 		    ?>
 		    <a href="<?php echo esc_url( $login_url ); ?>" class="us_floating-button" id="us_floatingBtn">
-		        <?php echo esc_html__( 'Switch Back', 'switch-to-user' ) . ' ' . esc_html( $switch_to_user ); ?>
+		        <?php echo esc_html__( 'Switch Back', 'user-switcher' ) . ' ' . esc_html( $switch_to_user ); ?>
 		    </a>
 		    <?php
 		}

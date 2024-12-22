@@ -38,7 +38,7 @@ class Admin extends Base {
 	 * Internationalization
 	 */
 	public function i18n() {
-		load_plugin_textdomain( 'switch-to-user', false, USER_SWITCHER_DIR . '/languages/' );
+		load_plugin_textdomain( 'user-switcher', false, USER_SWITCHER_DIR . '/languages/' );
 
 		$cookie_name = 'user_switcher_' . COOKIEHASH;
 
@@ -107,13 +107,13 @@ class Admin extends Base {
 
 	    $wp_admin_bar->add_menu( array(
 	        'id'    => 'us-switcher-menu',
-	        'title' => '<span class="us-icon us-main-menu">' . __( 'User Switch', 'switch-to-user' ) . '</span>',
+	        'title' => '<span class="us-icon us-main-menu">' . __( 'User Switch', 'user-switcher' ) . '</span>',
 	    ) );
 
 	    $wp_admin_bar->add_menu(array(
 	        'parent' => 'us-switcher-menu',
 	        'id'     => 'us-to-user',
-	        'title'  => '<button id="switch-to-user-button"><span class="us-icon us-user">' . __('Switch to User', 'switch-to-user') . '</span></button>',
+	        'title'  => '<button id="switch-to-user-button"><span class="us-icon us-user">' . __('Switch to User', 'user-switcher') . '</span></button>',
 	        'meta'   => array(
 	            'html' => '',
 	        ),
