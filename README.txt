@@ -1,52 +1,56 @@
-=== Switch To User ===
+=== User Switcher ===
 Contributors: @mahbubmr500
-Tags: user, user-switch
-Requires at least: 5.0 or higher
+Tags: user switch, WordPress users, user role management, admin tools, debugging
+Requires at least: 5.0
 Tested up to: 6.7.1
-Requires PHP: 7.0 or higher
-Stable tag: 1.0.3
+Requires PHP: 7.0
+Stable tag: 1.0.1
 License: GPLv2 or later
-License URI: https://www.gnu.org/licenses/gpl-2.0.html
+License URI: [https://www.gnu.org/licenses/gpl-2.0.html](https://www.gnu.org/licenses/gpl-2.0.html)
 
-# WordPress User Switcher Plugin
+== Short Description ==
+Switch between WordPress user accounts with ease. Perfect for developers and administrators to test, debug, and manage user roles efficiently.
 
-Effortlessly switch between WordPress user accounts with the User Switcher Plugin! Ideal for developers, administrators, and site managers, this plugin simplifies testing, troubleshooting, and managing user roles.
+== Description ==
+Effortlessly switch between WordPress user accounts for testing, debugging, and managing user roles. The **User Switcher** plugin is an essential tool for developers, site administrators, and anyone managing multiple user accounts.
 
-## Features
+This plugin allows you to quickly switch to any user account without logging out, saving time and streamlining your workflow. Ideal for testing various user roles, permissions, and functionalities within your WordPress site.
 
-- Quickly switch between different WordPress user accounts
-- Ideal for testing and troubleshooting with various user roles
-- Streamlines user role management for administrators and developers
+### Key Benefits:
 
-## Installation
+- Simplify role management for administrators.
+- Test and debug user-specific features without multiple logins.
+- Improve development workflows by quickly toggling between accounts.
 
-1. Download the plugin ZIP file.
-2. Log in to your WordPress admin dashboard.
-3. Go to **Plugins** > **Add New**.
-4. Click **Upload Plugin** and select the downloaded ZIP file.
-5. Click **Install Now** and then **Activate**.
+== Usage ==
 
-## Usage
+1. Go to the Admin Bar and locate the **User Switcher** option.
+2. Click the **Switch To User** button next to the desired user.
+3. Use the popup to search for a user by name or email. Select the user and click **Go** to switch instantly.
+4. Enjoy seamless switching without the need to log out or enter passwords.
 
-1. Navigate to the plugin's Admin bar and click User Switcher.
-2. Click on the Switch To User button next to the desired user.
-3. A popup will appear, allowing you to search for a user by name or email. After selecting the user, click Go to sign in as that user.
-4. Instantly switch and manage different accounts without logging out.
+== Features ==
 
-## Video Tutorial
+- **Quick User Switching**: Switch to any WordPress user account in seconds.
+- **User Role Testing**: Verify permissions and access levels for different roles.
+- **Developer-Friendly**: Ideal for debugging and testing user-specific functionality.
+- **Secure Switching**: Ensures that only authorized administrators can use this feature.
+- **Effortless Role Management**: Perfect for multi-user WordPress sites.
 
-For a detailed walkthrough, check out our YouTube tutorial:  
-[Watch the Video Here](https://youtu.be/f72goWFsTq4) 🚀
+== Contributing ==
+We welcome contributions to improve this plugin! Whether you’re fixing bugs, adding features, or improving documentation, your input is valuable. Feel free to fork the repository, implement your changes, and submit a pull request.
 
+== Support ==
+Need help? Encountered an issue? We’ve got you covered. Reach out by:
 
-## Contributing
+- Opening an issue on our plugin’s GitHub repository.
+- Leaving a comment on our [YouTube tutorial](https://youtu.be/f72goWFsTq4){:target="_blank"}.
 
-We welcome contributions to improve this plugin. Feel free to fork the repository and submit a pull request!
-
-## Support
-
-If you encounter any issues or have questions, please feel free to open an issue on the repository or leave a comment on our [YouTube tutorial](https://youtu.be/f72goWFsTq4).
+== Video Tutorial ==
+Want to see the plugin in action? Check out our step-by-step video guide:
+[Watch the Video Here](https://youtu.be/f72goWFsTq4){:target="_blank"} 🚀
 
 ---
 
 **Happy Switching!** 🔄
+
