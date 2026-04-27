@@ -12,6 +12,10 @@ Switch between any WordPress user account in one click — no password needed. B
 
 == Description ==
 
+A quick demo of User Switcher in action:
+
+![User Switcher Demo](https://ps.w.org/user-switcher/assets/img/demo.gif)
+
 **User Switcher** lets administrators instantly switch to any WordPress user account without logging out or knowing their password. Search, filter, and switch in seconds — then jump back to your admin account with one click.
 
 Whether you are debugging a permissions issue, testing a new user flow, checking how content looks for a specific role, or managing accounts for a client — User Switcher gives you a faster, cleaner way to do it.
