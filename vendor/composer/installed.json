@@ -1,0 +1,109 @@
+{
+    "packages": [
+        {
+            "name": "mukto90/ncrypt",
+            "version": "v1.0",
+            "version_normalized": "1.0.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mukto90/ncrypt.git",
+                "reference": "c66236716492796fcc7c28e07a5e7752daeb9225"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mukto90/ncrypt/zipball/c66236716492796fcc7c28e07a5e7752daeb9225",
+                "reference": "c66236716492796fcc7c28e07a5e7752daeb9225",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "time": "2018-05-15T06:37:54+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Nazmul Ahsan",
+                    "email": "n.mukto@gmail.com",
+                    "homepage": "https://nazmulahsan.me",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A simple PHP class to encrypt a string and decrypt an encrypted string",
+            "homepage": "https://github.com/mukto90/ncrypt",
+            "keywords": [
+                "2 way encryption and decryption",
+                "decryption",
+                "encryption",
+                "encryption and decryption"
+            ],
+            "support": {
+                "issues": "https://github.com/mukto90/ncrypt/issues",
+                "source": "https://github.com/mukto90/ncrypt/tree/v1.0"
+            },
+            "install-path": "../mukto90/ncrypt"
+        },
+        {
+            "name": "wppluginhub/plugin",
+            "version": "dev-master",
+            "version_normalized": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mahbub500/wp_pakage.git",
+                "reference": "7bc0833e669c5c242e491f22b0b7e30c19621d3d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mahbub500/wp_pakage/zipball/7bc0833e669c5c242e491f22b0b7e30c19621d3d",
+                "reference": "7bc0833e669c5c242e491f22b0b7e30c19621d3d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "time": "2024-09-08T15:20:34+00:00",
+            "default-branch": true,
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Wppluginhub",
+                    "email": "mahbubmr500@gmail.com",
+                    "homepage": "http://wppluginhub.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Plugin tools for WpPluginHub",
+            "homepage": "https://github.com/mahbub500/wp_pakage.git",
+            "keywords": [
+                "mahbub",
+                "plugin"
+            ],
+            "support": {
+                "issues": "https://github.com/mahbub500/wp_pakage/issues",
+                "source": "https://github.com/mahbub500/wp_pakage/tree/master"
+            },
+            "install-path": "../wppluginhub/plugin"
+        }
+    ],
+    "dev": true,
+    "dev-package-names": []
+}

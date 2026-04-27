@@ -1,0 +1,22 @@
+{
+    "name": "wppluginhub/plugin",
+    "type": "library",
+    "description": "Plugin tools for WpPluginHub",
+    "keywords": ["plugin","mahbub"],
+    "homepage": "https://github.com/mahbub500/wp_pakage.git",
+    "license": "GPL-3.0-or-later",
+    "authors": [
+        {
+            "name": "Wppluginhub",
+            "email": "mahbubmr500@gmail.com",
+            "homepage": "http://wppluginhub.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0"
+    },
+    "autoload": {
+        "classmap": ["src/"]
+    }
+}

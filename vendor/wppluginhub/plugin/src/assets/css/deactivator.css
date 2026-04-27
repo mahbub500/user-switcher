@@ -1,0 +1,86 @@
+.wph-plugin-deactivation-survey-overlay {
+	background: rgba(0,0,0,.5);
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100vh;
+	width: 100%;
+	z-index: 10000;
+	display: none;
+	align-items: center;
+	justify-content: center;
+}
+.wph-plugin-deactivation-survey-modal {
+    width: 50%;
+    background: #fff;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+}
+.wph-plugin-deactivation-survey-img > img {
+    max-width: 100%;
+}
+.wph-plugin-deactivation-survey-modal .wph-plugin-dsm-header {
+	padding: 0px 15px;
+}
+.wph-plugin-deactivation-survey-modal .wph-plugin-dsm-body {
+    padding: 20px 15px;
+}
+.wph-plugin-deactivation-survey-modal .wph-plugin-deactivation-reasons {
+    display: grid;
+    gap: 10px;
+    margin-bottom: 15px;
+    grid-template-columns: repeat(3, 1fr);
+}
+.wph-plugin-dsm-header .wph-title {
+    margin-top: 0;
+    float: left;
+}
+.wph-plugin-deactivation-survey-modal .wph-plugin-deactivation-reasons .wph-plugin-deactivation-reason label {
+	display: block;
+	border: 1px solid #ccc;
+	padding: 10px;
+	text-align: center;
+	height: 40px;
+	border-radius: 4px;
+}
+.wph-plugin-dsm-footer .button:not(.button-primary):not(:hover) {
+    border-color: #dee0e1;
+    color: #949799;
+}
+.wph-plugin-deactivation-survey-modal .wph-plugin-deactivation-reasons .wph-plugin-deactivation-reason label.active {
+	background: #007cba;
+	color: #fff;
+	border-color: #007cba;
+}
+.wph-plugin-deactivation-survey-modal .wph-plugin-deactivation-reasons .wph-plugin-deactivation-reason input{
+	display: none;
+}
+.wph-plugin-deactivation-survey-modal .wph-plugin-dsm-reason-details-input {
+	width: 100%;
+	border: 1px solid #ccc;
+	display: none;
+}
+.wph-plugin-deactivation-survey-modal .wph-plugin-dsm-footer {
+    border-top: 1px solid #f1f1f1;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 10px 10px 10px;
+}
+.wph-heading {
+	font-weight: normal;
+	text-align: center;
+	overflow: hidden;
+}
+.wph-desc {
+	color: #d7d7d7;
+	font-style: italic;
+	text-align: right;
+	margin: 0 auto 5px auto;
+}
+.wph-consent-label {
+	float: right;
+	font-size: 12px;
+	padding-right: 5px;
+	cursor: pointer;
+}

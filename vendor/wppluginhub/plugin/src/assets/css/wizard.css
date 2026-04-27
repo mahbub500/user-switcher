@@ -1,0 +1,172 @@
+.wph-setup.wp-core-ui.wph-wizard-body-panel {
+	background: #f0f0f0;
+	font-family: sans-serif;
+}
+.wph-wizard-wrap {
+    padding: 5px 0 40px 0;
+    width: 800px;
+    margin: 0 auto;
+    max-width: 100%;
+}
+.wph-wizard-container {
+	margin: auto;
+	background: #fff;
+	padding: 24px;
+	border-radius: 3px;
+	box-shadow: rgb(9 30 66 / 25%) 0px 8px 16px -4px, rgb(9 30 66 / 31%) 0px 0px 1px;
+}
+.wph-setup.wp-core-ui.wph-wizard-body-panel {
+	background: #f1f1f1;
+	justify-content: center;
+	align-items: center;
+}
+.wph-wizard-heading {
+	text-align: center;
+	color: #4b4c4e;
+}
+.wph-wizard-heading.hide_title {
+	display: none;
+}
+.wph-wizard-heading a{
+	color: #000;
+	text-decoration: none;
+}
+.wph-wizard-icon {
+	max-height: 32px;
+}
+/*Step design start*/
+.wph-wizard-stepper-wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.wph-wizard-stepper-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+.wph-wizard-stepper-item::before {
+  position: absolute;
+  content: "";
+  border-bottom: 4px solid #ccc;
+  width: 100%;
+  top: 34px;
+  left: 0;
+  z-index: 2;
+}
+.wph-wizard-stepper-item.passed-step::before {
+  border-bottom: 4px solid #35bca2;
+}
+.wph-wizard-stepper-item::after {
+  position: absolute;
+  content: "";
+  border-bottom: 4px solid #ccc;
+  width: 100%;
+  top: 34px;
+  left: 50%;
+  z-index: 2;
+}
+.wph-wizard-stepper-item .wph-wizard-step-counter {
+    position: relative;
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #ccc;
+    margin-bottom: 6px;
+    margin-top: 9px;
+}
+.wph-wizard-stepper-item.current-step {
+  font-weight: bold;
+}
+.wph-wizard-stepper-item .wph-wizard-step-counter {
+    background-color: #fff;
+    color: #cccccc;
+    border: 4px solid #cccccc;
+}
+.wph-wizard-stepper-item.passed-step .wph-wizard-step-counter {
+	background-color: #fff;
+	color: #fff;
+	border: 4px solid #35bca2;
+}
+.wph-wizard-stepper-item.passed-step::after {
+	position: absolute;
+	content: "";
+	border-bottom: 4px solid #35bca2;
+	width: 100%;
+	top: 34px;
+	left: 0;
+	z-index: 3;
+}
+.wph-wizard-stepper-item:first-child::before {
+  content: none;
+}
+.wph-wizard-stepper-item:last-child::after {
+  content: none;
+}
+.wph-wizard-step-name a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #bdbdbd;
+}
+.passed-step .wph-wizard-step-name a {
+    color: #00b492;
+}
+/*Step design end*/
+
+/*Footer button style start*/
+.wph-wizard-btns {
+	width: 500px;
+	margin: auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 20px;
+	padding-top: 30px;
+}
+.wph-wizard-btn {
+	vertical-align: baseline;
+	color: #2271b1;
+	border-color: #2271b1;
+	background: #f6f7f7;
+	display: inline-block;
+	text-decoration: none;
+	font-size: 13px;
+	line-height: 2.15384615;
+	min-height: 30px;
+	margin: 0;
+	padding: 0 10px;
+	cursor: pointer;
+	border-width: 1px;
+	border-style: solid;
+	-webkit-appearance: none;
+	border-radius: 3px;
+	white-space: nowrap;
+	box-sizing: border-box;
+	font-weight: 500;
+}
+.wph-wizard-btn.btn-primary {
+	    background: #2271b1;
+    border-color: #2271b1;
+    color: #fff;
+    text-decoration: none;
+    text-shadow: none;
+}
+.wph-wizard-btn.btn-hero {
+	font-size: 14px;
+	min-height: 46px;
+	line-height: 3.14285714;
+	padding: 0 34px;
+}
+button.wph-wizard-btn {
+	font-weight: 400;
+}
+.wph-wizard-btn.disabled {
+	/*display: none;*/
+}
+/*Footer button style end*/

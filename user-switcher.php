@@ -1,11 +1,11 @@
 <?php
 /**
- * Plugin Name: Switch To User
+ * Plugin Name: User Switcher
  * Description: Using this plugin you can switch to any user.
  * Plugin URI: https://wordpress.org/plugins/user-switcher/
  * Author: Mahbub
  * Author URI: https://profiles.wordpress.org/mahbubmr500/
- * Version: 1.0.1
+ * Version: 1.0
  * Text Domain: user-switcher 
  * Domain Path: /languages
  * License:           GPL v2 or later
@@ -137,6 +137,7 @@ final class Plugin {
 			$admin->action( 'admin_footer', 'modal' );
 			$admin->action( 'plugins_loaded', 'i18n' );
 			$admin->action( 'admin_enqueue_scripts', 'enqueue_scripts' );
+			$admin->action( 'admin_enqueue_scripts', 'register_pointer' );
 			$admin->action( 'admin_bar_menu', 'admin_bar_menu', 100 );
 			$admin->action( 'wp_login', 'clear_cookies' );
 			$admin->action( 'remove_cookie', 'clear_cookies' );
@@ -172,6 +173,8 @@ final class Plugin {
 		 */
 		$ajax = new App\AJAX( $this->plugin );
 		$ajax->priv( 'search_users', 'search_users' );
+		$ajax->priv( 'get_roles', 'get_roles' );
+		$ajax->priv( 'get_user_info', 'get_user_info' );
 		$ajax->priv( 'switch_user', 'switch_user' );
 		$ajax->priv( 'remove_cookie', 'remove_cookie' );
 	}
